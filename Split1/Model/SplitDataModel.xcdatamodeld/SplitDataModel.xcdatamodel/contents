@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Consumption" representedClassName="Consumption" syncable="YES" codeGenerationType="class">
+        <attribute name="foodSpend" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="foodType" attributeType="String" syncable="YES"/>
+        <attribute name="splitterName" attributeType="String" syncable="YES"/>
+        <relationship name="consumesFood" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Splitter" inverseName="ordersFood" inverseEntity="Splitter" syncable="YES"/>
+        <relationship name="isConsumed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Food" inverseName="foodConsumed" inverseEntity="Food" syncable="YES"/>
+    </entity>
+    <entity name="Food" representedClassName=".Food" syncable="YES" codeGenerationType="class">
+        <attribute name="foodType" attributeType="String" syncable="YES"/>
+        <relationship name="foodConsumed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Consumption" inverseName="isConsumed" inverseEntity="Consumption" syncable="YES"/>
+    </entity>
+    <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
+        <attribute name="attribute" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="25" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Splitter" representedClassName="Splitter" syncable="YES" codeGenerationType="class">
+        <attribute name="splitterBill" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="splitterName" attributeType="String" syncable="YES"/>
+        <relationship name="ordersFood" toMany="YES" deletionRule="Nullify" destinationEntity="Consumption" inverseName="consumesFood" inverseEntity="Consumption" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Food" positionX="123.05078125" positionY="53.53515625" width="128" height="73"/>
+        <element name="Splitter" positionX="-257.890625" positionY="45.41015625" width="128" height="88"/>
+        <element name="Consumption" positionX="-63.03125" positionY="38.515625" width="128" height="118"/>
+        <element name="Settings" positionX="-254.421875" positionY="-81.16796875" width="128" height="60"/>
+    </elements>
+</model>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Consumption" representedClassName="Consumption" syncable="YES" codeGenerationType="class">
+        <attribute name="dinersName" attributeType="String" syncable="YES"/>
+        <attribute name="foodItem" attributeType="String" syncable="YES"/>
+        <attribute name="spend" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="consumedBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Diners" inverseName="consume" inverseEntity="Diners" syncable="YES"/>
+        <relationship name="whatConsumed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Food" inverseName="foodConsumed" inverseEntity="Food" syncable="YES"/>
+    </entity>
+    <entity name="Diners" representedClassName="Diners" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="totalSpend" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="consume" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Consumption" inverseName="consumedBy" inverseEntity="Consumption" syncable="YES"/>
+    </entity>
+    <entity name="Food" representedClassName=".Food" syncable="YES" codeGenerationType="class">
+        <attribute name="foodType" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="foodConsumed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Consumption" inverseName="whatConsumed" inverseEntity="Consumption" syncable="YES"/>
+    </entity>
+    <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
+        <attribute name="gratuity" optional="YES" attributeType="Float" minValueString="0" maxValueString="25" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Consumption" positionX="-265.28125" positionY="-26.91796875" width="128" height="118"/>
+        <element name="Diners" positionX="-480.4453125" positionY="-10.07421875" width="128" height="88"/>
+        <element name="Food" positionX="-38.9296875" positionY="6.9140625" width="128" height="73"/>
+        <element name="Settings" positionX="-477.55859375" positionY="-114.93359375" width="128" height="43"/>
+    </elements>
+</model>
