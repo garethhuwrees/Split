@@ -36,30 +36,46 @@ class SplitViewController: UIViewController {
     var currencyPrefix: String = ""
     var iphoneType: String = ""
 
-    @IBOutlet weak var showTotalBill: UITextField!
-    @IBOutlet weak var showTip: UIButton!
-    @IBOutlet weak var showBillWithTip: UITextField!
-    @IBOutlet weak var showCurrency: UIBarButtonItem!
-    @IBOutlet weak var messageText: UITextField!
+   
+    
     @IBOutlet weak var totalBillText: UILabel!
-    @IBOutlet weak var gratuityText: UILabel!
     @IBOutlet weak var totalToPayText: UILabel!
-    @IBOutlet weak var selectSplitterText: UIButton!
-    @IBOutlet weak var selectMenuText: UIButton!
-    @IBOutlet weak var selectResetText: UIButton!
+    @IBOutlet weak var roundedBillText: UILabel!
+    
+    @IBOutlet weak var showTotalBill: UITextField!
+    @IBOutlet weak var showBillWithTip: UITextField!
+    @IBOutlet weak var showRoundedBill: UITextField!
+    
+    @IBOutlet weak var gratuityText: UILabel!
+    @IBOutlet weak var setCurrencyText: UILabel!
+    @IBOutlet weak var setRoundingText: UILabel!
+    
+    @IBOutlet weak var showTip: UIButton!
+    @IBOutlet weak var showCurrency: UIButton!
+    @IBOutlet weak var showRounding: UIButton!
+    
+    
+    
+    @IBAction func setRoundedBill(_ sender: Any) {
+    }
     
     
     @IBAction func chooseTipButton(_ sender: Any) {
         tipDropdown.show()
     }
     
+
+    @IBAction func selectCurrency(_ sender: Any) {
+        currencyDropDown.show()
+    }
+    
+    @IBAction func selectRounding(_ sender: Any) {
+    }
+    
     @IBAction func resetButtonPressed(_ sender: Any) {
         resetDropdown.show()
     }
     
-    @IBAction func selectCurrency(_ sender: UIBarButtonItem) {
-        currencyDropDown.show()
-    }
     
     //---------------VIEW DID LOAD & APPEAR ----------------------------
 
@@ -72,7 +88,6 @@ class SplitViewController: UIViewController {
         
         setTextSize()
         
-        setButtonStyle()
         
         //initialised to 0 so must be reset before further function calls
         //TODO: Can this move to loadTables()?
@@ -123,16 +138,25 @@ class SplitViewController: UIViewController {
     
     //-------------------- PERFORM SEQUE ----------------------
     
-    @IBAction func dinersSelected(_ sender: UIButton) {
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         
-        performSegue(withIdentifier: "goToDiners", sender: self)
+        if gesture.direction == .right {
+            //print("Swipe Right")
+            performSegue(withIdentifier: "goToFood", sender: self)
+        }
+            
+        else if gesture.direction == .left {
+            //print("Swipe Left")
+            performSegue(withIdentifier: "goToDiners", sender: self)
+        }
+        else if gesture.direction == .up {
+            
+        }
+        else if gesture.direction == .down {
+            
+        }
     }
-    
-    
-    @IBAction func foodSelected(_ sender: UIButton) {
-        
-        performSegue(withIdentifier: "goToFood", sender: self)
-    }
+
     
     // Must uncheck 'Animates' on the seque attribites for this to work
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -160,23 +184,9 @@ class SplitViewController: UIViewController {
         performSegue(withIdentifier: "goToIntro", sender: self)
     }
     
-    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+    
+    @IBAction func guideSelected(_ sender: Any) {
         
-        if gesture.direction == .right {
-            //print("Swipe Right")
-            performSegue(withIdentifier: "goToFood", sender: self)
-        }
-        
-        else if gesture.direction == .left {
-            //print("Swipe Left")
-            performSegue(withIdentifier: "goToDiners", sender: self)
-        }
-        else if gesture.direction == .up {
-            
-        }
-        else if gesture.direction == .down {
-            
-        }
     }
     
     
@@ -191,7 +201,7 @@ class SplitViewController: UIViewController {
         
         if numberOfRows == 0 {
             
-            showCurrency.title = "Currency"
+            showCurrency.setTitle("Currency", for: .normal)
             
             print("Initialising Settings")
             let initialSetting = Settings()
@@ -212,7 +222,7 @@ class SplitViewController: UIViewController {
         } // end if
         else {
             print("Settings Already Set")
-            showCurrency.title = settings?[0].currencySymbol
+            showCurrency.setTitle(settings?[0].currencySymbol, for: .normal)
             iphoneType = settings?[0].phoneType ?? ""
             if iphoneType == "" {
                 checkDeviceType()
@@ -317,40 +327,16 @@ class SplitViewController: UIViewController {
             textHeight = 22
         }
         
-        messageText.font = messageText.font?.withSize(textHeight-4)
+ 
         totalBillText.font = totalBillText.font.withSize(textHeight)
         gratuityText.font = gratuityText.font.withSize(textHeight)
         totalToPayText.font = totalToPayText.font.withSize(textHeight)
         showTotalBill.font = showTotalBill.font?.withSize(textHeight)
         showBillWithTip.font = showBillWithTip.font?.withSize(textHeight)
         showTip.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight)
-        selectSplitterText.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight+6)
-        selectMenuText.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight+6)
-        selectResetText.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight+2)
-        
-        messageText.text = ""
         
     }
     
-    func setButtonStyle() {
-        
-        let width: CGFloat = 2.0
-        let radius: CGFloat = 10.0
-        
-        selectSplitterText.layer.cornerRadius = radius
-        selectSplitterText.layer.borderColor = greyColour.cgColor
-        selectSplitterText.layer.borderWidth = width
-        
-        selectMenuText.layer.cornerRadius = radius
-        selectMenuText.layer.borderColor = greyColour.cgColor
-        selectMenuText.layer.borderWidth = width
-        
-        selectResetText.layer.cornerRadius = radius
-        selectResetText.layer.borderColor = orangeColour.cgColor
-        selectResetText.layer.borderWidth = width
-        
-        
-    }
     
     // MARK:-------------- RESET DATA FUNCTIONS --------------
     
@@ -511,7 +497,7 @@ class SplitViewController: UIViewController {
                 selectedCurrency = "Currency"
                 self!.currencyPrefix = ""
             }
-            self!.showCurrency.title = selectedCurrency
+            self!.showCurrency.setTitle(selectedCurrency, for: .normal)
             do{
                 try self!.realm.write {
                     self!.settings?[0].currencySymbol = selectedCurrency
