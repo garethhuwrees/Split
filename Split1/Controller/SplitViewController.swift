@@ -327,13 +327,23 @@ class SplitViewController: UIViewController {
             textHeight = 22
         }
         
- 
-        totalBillText.font = totalBillText.font.withSize(textHeight)
-        gratuityText.font = gratuityText.font.withSize(textHeight)
-        totalToPayText.font = totalToPayText.font.withSize(textHeight)
         showTotalBill.font = showTotalBill.font?.withSize(textHeight)
         showBillWithTip.font = showBillWithTip.font?.withSize(textHeight)
-        showTip.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight)
+        showRoundedBill.font = showRoundedBill.font?.withSize(textHeight)
+ 
+        totalBillText.font = totalBillText.font.withSize(textHeight)
+        totalToPayText.font = totalToPayText.font.withSize(textHeight)
+        roundedBillText.font = roundedBillText.font.withSize(textHeight)
+        
+        showTip.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-2)
+        showCurrency.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-2)
+        showRounding.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-2)
+        
+        gratuityText.font = gratuityText.font.withSize(textHeight-2)
+        setCurrencyText.font = setCurrencyText.font.withSize(textHeight-2)
+        setRoundingText.font = setRoundingText.font.withSize(textHeight-2)
+        
+        
         
     }
     

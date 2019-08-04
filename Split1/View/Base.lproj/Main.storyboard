@@ -28,59 +28,83 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lgf-tB-2eS" userLabel="Left">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="159.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bill - Total Spend" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oj4-4V-OWI">
-                                                <rect key="frame" x="20" y="8" width="155.5" height="28.5"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bill - With Tip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MZ-RT-Hq9">
-                                                <rect key="frame" x="20" y="57" width="127" height="28.5"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bill - Rounded" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qe7-4a-p41">
-                                                <rect key="frame" x="20" y="103" width="130" height="28.5"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="r9F-b8-td0">
+                                                <rect key="frame" x="20" y="10" width="220" height="139.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bill - Total Spend" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oj4-4V-OWI">
+                                                        <rect key="frame" x="0.0" y="0.0" width="155.5" height="34"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bill - With Tip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MZ-RT-Hq9">
+                                                        <rect key="frame" x="0.0" y="53" width="127" height="33.5"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bill - Rounded" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qe7-4a-p41">
+                                                        <rect key="frame" x="0.0" y="105.5" width="130" height="34"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="1MZ-RT-Hq9" firstAttribute="height" secondItem="oj4-4V-OWI" secondAttribute="height" id="fJV-Rx-gXT"/>
+                                                    <constraint firstItem="qe7-4a-p41" firstAttribute="height" secondItem="1MZ-RT-Hq9" secondAttribute="height" id="uo9-rA-1wS"/>
+                                                </constraints>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="r9F-b8-td0" firstAttribute="leading" secondItem="Lgf-tB-2eS" secondAttribute="leading" constant="20" id="132-5J-dEw"/>
+                                            <constraint firstAttribute="trailing" secondItem="r9F-b8-td0" secondAttribute="trailing" constant="10" id="QK4-Um-iv8"/>
+                                            <constraint firstAttribute="bottom" secondItem="r9F-b8-td0" secondAttribute="bottom" constant="10" id="aJn-fX-x3b"/>
+                                            <constraint firstItem="r9F-b8-td0" firstAttribute="top" secondItem="Lgf-tB-2eS" secondAttribute="top" constant="10" id="dMJ-tJ-bxn"/>
+                                        </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kO-Wh-Mgi" userLabel="Right">
                                         <rect key="frame" x="250" y="0.0" width="125" height="159.5"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BAT-zN-rBU">
-                                                <rect key="frame" x="8" y="8" width="44" height="29"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2pU-6v-WX7">
-                                                <rect key="frame" x="8" y="53" width="44" height="29"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZDJ-Ke-D1r">
-                                                <rect key="frame" x="8" y="105" width="44" height="29"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <action selector="setRoundedBill:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="RlP-iM-JZG"/>
-                                                </connections>
-                                            </textField>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="B7k-Kh-TUi">
+                                                <rect key="frame" x="10" y="10" width="105" height="139.5"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Whc-k1-SCP" userLabel="Show Total Spend">
+                                                        <rect key="frame" x="0.0" y="0.0" width="105" height="34"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2pU-6v-WX7">
+                                                        <rect key="frame" x="0.0" y="53" width="105" height="33.5"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZDJ-Ke-D1r">
+                                                        <rect key="frame" x="0.0" y="105.5" width="105" height="34"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="setRoundedBill:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="RlP-iM-JZG"/>
+                                                        </connections>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="ZDJ-Ke-D1r" firstAttribute="height" secondItem="2pU-6v-WX7" secondAttribute="height" id="5OX-Jh-hOX"/>
+                                                    <constraint firstItem="2pU-6v-WX7" firstAttribute="height" secondItem="Whc-k1-SCP" secondAttribute="height" id="cU1-mr-wKg"/>
+                                                </constraints>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="B7k-Kh-TUi" firstAttribute="leading" secondItem="6kO-Wh-Mgi" secondAttribute="leading" constant="10" id="Qoi-ZF-8Y7"/>
+                                            <constraint firstItem="B7k-Kh-TUi" firstAttribute="top" secondItem="6kO-Wh-Mgi" secondAttribute="top" constant="10" id="jOn-dP-MTQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="B7k-Kh-TUi" secondAttribute="trailing" constant="10" id="qH1-PG-iKW"/>
+                                            <constraint firstAttribute="bottom" secondItem="B7k-Kh-TUi" secondAttribute="bottom" constant="10" id="xK2-GF-5mb"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -228,7 +252,7 @@
                         <outlet property="showRoundedBill" destination="ZDJ-Ke-D1r" id="Jqp-ox-j5d"/>
                         <outlet property="showRounding" destination="1Yl-9a-Tup" id="l0i-0o-ro1"/>
                         <outlet property="showTip" destination="CeO-Em-C7R" id="vEP-Kj-5hM"/>
-                        <outlet property="showTotalBill" destination="BAT-zN-rBU" id="Q6D-jO-jEM"/>
+                        <outlet property="showTotalBill" destination="Whc-k1-SCP" id="OQf-ay-FaP"/>
                         <outlet property="totalBillText" destination="oj4-4V-OWI" id="9KH-i6-VTs"/>
                         <outlet property="totalToPayText" destination="1MZ-RT-Hq9" id="y3H-MT-9yw"/>
                         <segue destination="SBv-mN-KNp" kind="show" identifier="goToDiners" animates="NO" id="zG9-t5-hga"/>
