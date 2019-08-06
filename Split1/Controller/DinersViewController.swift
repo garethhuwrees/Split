@@ -103,8 +103,8 @@ class DinersViewController: UITableViewController {
             do {
                 //print(setSpendTotals.totalBill)
                 try realm.write {
-                    setSpendTotals.totalBill = totalBill
-                    setSpendTotals.billWithGratuity = billWithTip
+                    setSpendTotals.billTotalSpend = totalBill
+                    setSpendTotals.billWithTip = billWithTip
                 }
             }
             catch {

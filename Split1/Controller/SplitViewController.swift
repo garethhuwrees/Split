@@ -31,10 +31,13 @@ class SplitViewController: UIViewController {
     let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
     let greenColour = UIColor(red: 22/255, green: 160/255, blue: 132/255, alpha: 1)
    
-    
+    // Settings
     var percentageTip: Float = 0.0
     var currencyPrefix: String = ""
     var iphoneType: String = ""
+    var roundingOn: Bool = false
+    var billTotal: Float = 0.0
+    var billWithTip: Float = 0.0
 
    
     
@@ -44,7 +47,9 @@ class SplitViewController: UIViewController {
     
     @IBOutlet weak var showTotalBill: UITextField!
     @IBOutlet weak var showBillWithTip: UITextField!
-    @IBOutlet weak var showRoundedBill: UITextField!
+    @IBOutlet weak var showRoundedBill: UIButton!
+    //@IBOutlet weak var showRoundedBill: UITextField!
+    
     
     @IBOutlet weak var gratuityText: UILabel!
     @IBOutlet weak var setCurrencyText: UILabel!
@@ -55,10 +60,23 @@ class SplitViewController: UIViewController {
     @IBOutlet weak var showRounding: UIButton!
     
     
-    
     @IBAction func setRoundedBill(_ sender: Any) {
+
+        
+        print("Item Pressed")
+//
+//        let alert = UIAlertController(title: "Entre Bill", message: "Rounded Bill", preferredStyle: .alert)
+//
+//        let action = UIAlertAction(title: "Apply", style: .default) { (action) in
+//
+//            print("Alert Action")
+//        }
+//
+//        alert.addAction(action)
+//        present(alert, animated: true, completion: nil)
+        
     }
-    
+
     
     @IBAction func chooseTipButton(_ sender: Any) {
         tipDropdown.show()
@@ -70,12 +88,20 @@ class SplitViewController: UIViewController {
     }
     
     @IBAction func selectRounding(_ sender: Any) {
+        roundingOn = !roundingOn
+        
+        showBillTotals()
     }
     
     @IBAction func resetButtonPressed(_ sender: Any) {
         resetDropdown.show()
     }
     
+    // Solution found on stackoverflow to dismiss the keyboard when tapping on the screen
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        print(showRoundedBill!)
+    }
     
     //---------------VIEW DID LOAD & APPEAR ----------------------------
 
@@ -101,6 +127,7 @@ class SplitViewController: UIViewController {
 
         showTotalBill.isUserInteractionEnabled = false
         showBillWithTip.isUserInteractionEnabled = false
+        setRoundingText.isUserInteractionEnabled = false
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture))
         swipeLeft.direction = .left
@@ -133,6 +160,8 @@ class SplitViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         showBillTotals()
+        
+        updateSettings()
     }
 
     
@@ -205,8 +234,8 @@ class SplitViewController: UIViewController {
             
             print("Initialising Settings")
             let initialSetting = Settings()
-            initialSetting.totalBill = 0.0
-            initialSetting.billWithGratuity = 0.0
+            initialSetting.billTotalSpend = 0.0
+            initialSetting.billWithTip = 0.0
             initialSetting.gratuity = 0.0
             initialSetting.currencySymbol = "Currency"
             initialSetting.phoneType = ""
@@ -224,6 +253,13 @@ class SplitViewController: UIViewController {
             print("Settings Already Set")
             showCurrency.setTitle(settings?[0].currencySymbol, for: .normal)
             iphoneType = settings?[0].phoneType ?? ""
+            billTotal = settings?[0].billTotalSpend ?? 0.0
+            //billWithTip = settings?[0].billWithTip ?? 0.0
+            percentageTip = settings?[0].gratuity ?? 0.0
+            roundingOn = settings?[0].roundingOn ?? false
+            
+            billWithTip = billTotal * (1 + percentageTip/100)
+            
             if iphoneType == "" {
                 checkDeviceType()
             }
@@ -233,7 +269,12 @@ class SplitViewController: UIViewController {
     
     func showBillTotals() {
         
-//        setTextSize()
+        var numberOfDigits = 2
+        var roundingFactor: Float = 100
+        if roundingOn == true {
+            numberOfDigits = 0
+            roundingFactor = 1
+        }
         
         let currencySetting = settings![0].currencySymbol
         if currencySetting == "Currency" {
@@ -245,10 +286,10 @@ class SplitViewController: UIViewController {
             currencyPrefix = currencyPrefix.trimmingCharacters(in: cs) // removes the trailing characters
         }
 
-        let billTotal = settings?[0].totalBill ?? 0.0
-        let roundedBillTotal = (billTotal * 100).rounded() / 100
+        let billTotal = settings?[0].billTotalSpend ?? 0.0
+        let roundedBillTotal = (billTotal * roundingFactor).rounded() / roundingFactor
         
-        var displayedNumber = formatNumber(numberToFormat: roundedBillTotal, digits: 2)
+        var displayedNumber = formatNumber(numberToFormat: roundedBillTotal, digits: numberOfDigits)
         
         if currencyPrefix == "" {
             showTotalBill.text = displayedNumber
@@ -257,10 +298,10 @@ class SplitViewController: UIViewController {
             showTotalBill.text = currencyPrefix + displayedNumber
         }
         
-        let billwithTip = settings?[0].billWithGratuity ?? 0.0
-        let roundedBillWithTip = (billwithTip * 100).rounded() / 100
+        billWithTip = billTotal * (1 + percentageTip/100)
+        let roundedBillWithTip = (billWithTip * roundingFactor).rounded() / roundingFactor
         
-        displayedNumber = formatNumber(numberToFormat: roundedBillWithTip, digits: 2)
+        displayedNumber = formatNumber(numberToFormat: roundedBillWithTip, digits: numberOfDigits)
         
         if currencyPrefix == "" {
             showBillWithTip.text = displayedNumber
@@ -269,9 +310,16 @@ class SplitViewController: UIViewController {
             showBillWithTip.text = currencyPrefix + displayedNumber
         }
         
-        let selectedTip = settings?[0].gratuity ?? 0.0
-        let displayedTip = formatNumber(numberToFormat: selectedTip, digits: 0)
+        //let selectedTip = settings?[0].gratuity ?? 0.0
+        let displayedTip = formatNumber(numberToFormat: percentageTip, digits: 0)
         showTip.setTitle(displayedTip + "%", for: .normal)
+        
+        if roundingOn == true {
+            showRounding.setTitle("On", for: .normal)
+        }
+        else {
+            showRounding.setTitle("Off", for: .normal)
+        }
         
     }
     
@@ -329,7 +377,7 @@ class SplitViewController: UIViewController {
         
         showTotalBill.font = showTotalBill.font?.withSize(textHeight)
         showBillWithTip.font = showBillWithTip.font?.withSize(textHeight)
-        showRoundedBill.font = showRoundedBill.font?.withSize(textHeight)
+        showRoundedBill.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight)
  
         totalBillText.font = totalBillText.font.withSize(textHeight)
         totalToPayText.font = totalToPayText.font.withSize(textHeight)
@@ -343,8 +391,19 @@ class SplitViewController: UIViewController {
         setCurrencyText.font = setCurrencyText.font.withSize(textHeight-2)
         setRoundingText.font = setRoundingText.font.withSize(textHeight-2)
         
+    }
+    
+    func updateSettings() {
         
-        
+        do{
+            try realm.write {
+                settings?[0].gratuity = percentageTip
+                settings?[0].roundingOn = roundingOn
+                settings?[0].billWithTip = billWithTip
+            }
+        } catch {
+            print("Error saving settings, \(error)")
+        }
     }
     
     
@@ -410,13 +469,14 @@ class SplitViewController: UIViewController {
         if settings!.count > 0 {
             do {
                 try self.realm.write {
-                    settings?[0].totalBill = 0.0
-                    settings?[0].billWithGratuity = 0.0
+                    settings?[0].billTotalSpend = 0.0 // DELETE
+                    settings?[0].billWithTip = 0.0
                 }
             }
             catch {
                 print("Error updating cost")
             }
+        billWithTip = 0.0
         showBillTotals()
         }
         
@@ -544,21 +604,24 @@ class SplitViewController: UIViewController {
                 self?.percentageTip = 0.0
             }
             
-            self?.updateBillWithTip() // TODO: Move inside function
+            self?.billWithTip = self!.billTotal * (1 + self!.percentageTip/100)
+            
+            //self?.updateBillWithTip() // DELETE
             
             self?.showBillTotals()
         }
     }
     
-    func updateBillWithTip() {
+    func updateBillWithTip() { // DELETE FUNCTION
         
-        let billTotal = settings?[0].totalBill ?? 0.0
+        let billTotal = settings?[0].billTotalSpend ?? 0.0
         let billWithTip = billTotal * (1 + percentageTip/100)
         
         do{
             try realm.write {
                 settings?[0].gratuity = percentageTip
-                settings?[0].billWithGratuity = billWithTip
+                settings?[0].billWithTip = billWithTip
+                settings?[0].roundingOn = roundingOn
             }
         } catch {
             print("Error saving settings, \(error)")
