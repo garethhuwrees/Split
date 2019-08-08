@@ -25,28 +25,34 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sc7-Yf-e3h" userLabel="Top View">
                                 <rect key="frame" x="0.0" y="115" width="375" height="152.5"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Gh-ro-YHP" userLabel="Top Frame">
+                                        <rect key="frame" x="10" y="10" width="355" height="132.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lgf-tB-2eS" userLabel="Top Left">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="152.5"/>
+                                        <rect key="frame" x="20" y="20" width="223.5" height="112.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="r9F-b8-td0">
-                                                <rect key="frame" x="20" y="10" width="220" height="132.5"/>
+                                                <rect key="frame" x="20" y="10" width="193.5" height="92.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bill - Total Spend" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oj4-4V-OWI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="155.5" height="31.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="155.5" height="18"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bill - With Tip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MZ-RT-Hq9">
-                                                        <rect key="frame" x="0.0" y="50.5" width="127" height="31.5"/>
+                                                        <rect key="frame" x="0.0" y="37" width="127" height="18"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bill - Rounded" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qe7-4a-p41">
-                                                        <rect key="frame" x="0.0" y="101" width="130" height="31.5"/>
+                                                        <rect key="frame" x="0.0" y="74" width="130" height="18.5"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -65,27 +71,29 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kO-Wh-Mgi" userLabel="Top Right">
-                                        <rect key="frame" x="250" y="0.0" width="125" height="152.5"/>
+                                        <rect key="frame" x="243.5" y="20" width="111.5" height="112.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="B7k-Kh-TUi">
-                                                <rect key="frame" x="10" y="10" width="105" height="132.5"/>
+                                                <rect key="frame" x="10" y="10" width="91.5" height="92.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Whc-k1-SCP" userLabel="Show Total Spend">
-                                                        <rect key="frame" x="0.0" y="0.0" width="105" height="31.5"/>
-                                                        <nil key="textColor"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="91.5" height="18"/>
+                                                        <color key="textColor" red="0.17254901960784313" green="0.24313725490196078" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2pU-6v-WX7">
-                                                        <rect key="frame" x="0.0" y="50.5" width="105" height="31.5"/>
-                                                        <nil key="textColor"/>
+                                                        <rect key="frame" x="0.0" y="37" width="91.5" height="18"/>
+                                                        <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZb-Vz-3hk" userLabel="Show Rounded Bill">
-                                                        <rect key="frame" x="0.0" y="101" width="105" height="31.5"/>
+                                                        <rect key="frame" x="0.0" y="74" width="91.5" height="18.5"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
-                                                        <state key="normal" title="0.00"/>
+                                                        <state key="normal" title="0.00">
+                                                            <color key="titleColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
                                                         <connections>
                                                             <action selector="setRoundedBill:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cda-no-QaK"/>
                                                         </connections>
@@ -108,42 +116,52 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Lgf-tB-2eS" firstAttribute="leading" secondItem="sc7-Yf-e3h" secondAttribute="leading" id="3Vz-TH-s71"/>
-                                    <constraint firstAttribute="trailing" secondItem="6kO-Wh-Mgi" secondAttribute="trailing" id="62h-nI-Q7P"/>
+                                    <constraint firstItem="Lgf-tB-2eS" firstAttribute="leading" secondItem="sc7-Yf-e3h" secondAttribute="leading" constant="20" id="3Vz-TH-s71"/>
+                                    <constraint firstAttribute="trailing" secondItem="6kO-Wh-Mgi" secondAttribute="trailing" constant="20" id="62h-nI-Q7P"/>
                                     <constraint firstItem="6kO-Wh-Mgi" firstAttribute="leading" secondItem="Lgf-tB-2eS" secondAttribute="trailing" id="6fB-LF-uw6"/>
-                                    <constraint firstAttribute="bottom" secondItem="Lgf-tB-2eS" secondAttribute="bottom" id="DaZ-eH-wWn"/>
-                                    <constraint firstItem="6kO-Wh-Mgi" firstAttribute="top" secondItem="sc7-Yf-e3h" secondAttribute="top" id="Qb0-J1-sTe"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lgf-tB-2eS" secondAttribute="bottom" constant="20" id="DaZ-eH-wWn"/>
+                                    <constraint firstItem="2Gh-ro-YHP" firstAttribute="leading" secondItem="sc7-Yf-e3h" secondAttribute="leading" constant="10" id="Fvb-7A-FTb"/>
+                                    <constraint firstAttribute="bottom" secondItem="2Gh-ro-YHP" secondAttribute="bottom" constant="10" id="HjE-WP-V9c"/>
+                                    <constraint firstItem="6kO-Wh-Mgi" firstAttribute="top" secondItem="sc7-Yf-e3h" secondAttribute="top" constant="20" id="Qb0-J1-sTe"/>
                                     <constraint firstItem="6kO-Wh-Mgi" firstAttribute="width" secondItem="Lgf-tB-2eS" secondAttribute="width" multiplier="1:2" id="TCS-kh-J2j"/>
-                                    <constraint firstAttribute="bottom" secondItem="6kO-Wh-Mgi" secondAttribute="bottom" id="VfS-G7-wxA"/>
+                                    <constraint firstAttribute="bottom" secondItem="6kO-Wh-Mgi" secondAttribute="bottom" constant="20" id="VfS-G7-wxA"/>
                                     <constraint firstItem="6kO-Wh-Mgi" firstAttribute="leading" secondItem="Lgf-tB-2eS" secondAttribute="trailing" id="ZF1-tB-Igi"/>
-                                    <constraint firstItem="Lgf-tB-2eS" firstAttribute="top" secondItem="sc7-Yf-e3h" secondAttribute="top" id="svk-oG-4ek"/>
+                                    <constraint firstItem="2Gh-ro-YHP" firstAttribute="top" secondItem="sc7-Yf-e3h" secondAttribute="top" constant="10" id="bx7-FW-LSv"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Gh-ro-YHP" secondAttribute="trailing" constant="10" id="pKx-UF-qcl"/>
+                                    <constraint firstItem="Lgf-tB-2eS" firstAttribute="top" secondItem="sc7-Yf-e3h" secondAttribute="top" constant="20" id="svk-oG-4ek"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUt-YE-FBa" userLabel="Middle View">
                                 <rect key="frame" x="0.0" y="267.5" width="375" height="101.5"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6v-WS-x4c" userLabel="Middle Frame">
+                                        <rect key="frame" x="10" y="10" width="355" height="81.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRa-3d-5yY" userLabel="Mid Left">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="101.5"/>
+                                        <rect key="frame" x="20" y="20" width="223.5" height="61.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="j4X-da-0QU">
-                                                <rect key="frame" x="20" y="10" width="220" height="81.5"/>
+                                                <rect key="frame" x="20" y="10" width="193.5" height="41.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Tip/Graturity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDy-j1-eRC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="139" height="21.5"/>
-                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
-                                                        <nil key="textColor"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="131.5" height="8.5"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                                                        <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Currency Symbol" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYq-2X-grq">
-                                                        <rect key="frame" x="0.0" y="29.5" width="172.5" height="22"/>
-                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
-                                                        <nil key="textColor"/>
+                                                        <rect key="frame" x="0.0" y="16.5" width="163" height="8.5"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                                                        <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Rounding On" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bFt-Ql-on3">
-                                                        <rect key="frame" x="0.0" y="59.5" width="137" height="22"/>
-                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
-                                                        <nil key="textColor"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Rounding On/Off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bFt-Ql-on3">
+                                                        <rect key="frame" x="0.0" y="33" width="163.5" height="8.5"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                                                        <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -162,14 +180,14 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sUy-N1-NVf" userLabel="Mid Right">
-                                        <rect key="frame" x="250" y="0.0" width="125" height="101.5"/>
+                                        <rect key="frame" x="243.5" y="20" width="111.5" height="61.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1Oe-Cd-MeA">
-                                                <rect key="frame" x="10" y="10" width="105" height="81.5"/>
+                                                <rect key="frame" x="10" y="10" width="91.5" height="41.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeO-Em-C7R">
-                                                        <rect key="frame" x="0.0" y="0.0" width="105" height="23.5"/>
-                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="91.5" height="10.5"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                         <state key="normal" title="Select">
                                                             <color key="titleColor" red="0.086274509803921567" green="0.62745098039215685" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
@@ -178,8 +196,8 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Mj-uw-t4S">
-                                                        <rect key="frame" x="0.0" y="28.5" width="105" height="24"/>
-                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
+                                                        <rect key="frame" x="0.0" y="15.5" width="91.5" height="10.5"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                         <state key="normal" title="Select">
                                                             <color key="titleColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
@@ -188,8 +206,8 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Yl-9a-Tup">
-                                                        <rect key="frame" x="0.0" y="57.5" width="105" height="24"/>
-                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
+                                                        <rect key="frame" x="0.0" y="31" width="91.5" height="10.5"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                         <state key="normal" title="Off">
                                                             <color key="titleColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
@@ -222,13 +240,17 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="sUy-N1-NVf" firstAttribute="width" secondItem="YRa-3d-5yY" secondAttribute="width" multiplier="1:2" id="3JN-bh-3Ps"/>
-                                    <constraint firstItem="YRa-3d-5yY" firstAttribute="leading" secondItem="OUt-YE-FBa" secondAttribute="leading" id="7Pw-mD-67S"/>
-                                    <constraint firstAttribute="bottom" secondItem="sUy-N1-NVf" secondAttribute="bottom" id="AqB-P1-0hJ"/>
-                                    <constraint firstItem="YRa-3d-5yY" firstAttribute="top" secondItem="OUt-YE-FBa" secondAttribute="top" id="I7z-NJ-kMg"/>
+                                    <constraint firstItem="YRa-3d-5yY" firstAttribute="leading" secondItem="OUt-YE-FBa" secondAttribute="leading" constant="20" id="7Pw-mD-67S"/>
+                                    <constraint firstAttribute="bottom" secondItem="sUy-N1-NVf" secondAttribute="bottom" constant="20" id="AqB-P1-0hJ"/>
+                                    <constraint firstItem="YRa-3d-5yY" firstAttribute="top" secondItem="OUt-YE-FBa" secondAttribute="top" constant="20" id="I7z-NJ-kMg"/>
                                     <constraint firstItem="sUy-N1-NVf" firstAttribute="leading" secondItem="YRa-3d-5yY" secondAttribute="trailing" id="QBe-eo-i5O"/>
-                                    <constraint firstAttribute="bottom" secondItem="YRa-3d-5yY" secondAttribute="bottom" id="bQD-mE-ojc"/>
-                                    <constraint firstAttribute="trailing" secondItem="sUy-N1-NVf" secondAttribute="trailing" id="jCk-2B-MZb"/>
-                                    <constraint firstItem="sUy-N1-NVf" firstAttribute="top" secondItem="OUt-YE-FBa" secondAttribute="top" id="uIc-zx-pBJ"/>
+                                    <constraint firstItem="z6v-WS-x4c" firstAttribute="top" secondItem="OUt-YE-FBa" secondAttribute="top" constant="10" id="Uxw-Xr-AtP"/>
+                                    <constraint firstAttribute="bottom" secondItem="z6v-WS-x4c" secondAttribute="bottom" constant="10" id="aTB-Jb-Y7D"/>
+                                    <constraint firstAttribute="bottom" secondItem="YRa-3d-5yY" secondAttribute="bottom" constant="20" id="bQD-mE-ojc"/>
+                                    <constraint firstAttribute="trailing" secondItem="sUy-N1-NVf" secondAttribute="trailing" constant="20" id="jCk-2B-MZb"/>
+                                    <constraint firstAttribute="trailing" secondItem="z6v-WS-x4c" secondAttribute="trailing" constant="10" id="pf1-xS-688"/>
+                                    <constraint firstItem="sUy-N1-NVf" firstAttribute="top" secondItem="OUt-YE-FBa" secondAttribute="top" constant="20" id="uIc-zx-pBJ"/>
+                                    <constraint firstItem="z6v-WS-x4c" firstAttribute="leading" secondItem="OUt-YE-FBa" secondAttribute="leading" constant="10" id="x63-3G-Vzc"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Jv-EQ-54n" userLabel="Bottom View">
@@ -279,6 +301,8 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="frameMiddle" destination="z6v-WS-x4c" id="mDC-4f-3Lz"/>
+                        <outlet property="frameTop" destination="2Gh-ro-YHP" id="INV-9e-vSe"/>
                         <outlet property="gratuityText" destination="xDy-j1-eRC" id="tYc-df-Kns"/>
                         <outlet property="roundedBillText" destination="qe7-4a-p41" id="gom-0X-KLU"/>
                         <outlet property="setCurrencyText" destination="JYq-2X-grq" id="VwJ-I6-qY5"/>

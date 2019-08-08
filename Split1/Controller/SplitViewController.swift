@@ -30,6 +30,7 @@ class SplitViewController: UIViewController {
     let greyColour = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
     let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
     let greenColour = UIColor(red: 22/255, green: 160/255, blue: 132/255, alpha: 1)
+    let lightGreyColour = UIColor(red: 149/255, green: 165/255, blue: 166/255, alpha: 1)
    
     // Settings
     var percentageTip: Float = 0.0
@@ -59,23 +60,53 @@ class SplitViewController: UIViewController {
     @IBOutlet weak var showCurrency: UIButton!
     @IBOutlet weak var showRounding: UIButton!
     
+    @IBOutlet weak var frameTop: UILabel!
+    @IBOutlet weak var frameMiddle: UILabel!
     
     @IBAction func setRoundedBill(_ sender: Any) {
 
         
         print("Item Pressed")
-//
-//        let alert = UIAlertController(title: "Entre Bill", message: "Rounded Bill", preferredStyle: .alert)
-//
-//        let action = UIAlertAction(title: "Apply", style: .default) { (action) in
-//
-//            print("Alert Action")
-//        }
-//
-//        alert.addAction(action)
-//        present(alert, animated: true, completion: nil)
+
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Amount To Pay", message: "This muust be greater that the bill", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Enter", style: .default) { (action) in
+            
+            if textField.text!.isEmpty{
+                //Do nothing
+            }
+            else {
+                let roundedBill = (textField.text! as NSString).floatValue
+                
+                if let item = self.settings?[0] {
+                    do {
+                        try self.realm.write {
+                            item.billRounded = roundedBill
+                        }
+                    }
+                    catch {
+                        print("Error updating cost")
+                    }
+                } // end if
+                
+                self.showBillTotals()
+            }
+            
+        }
+        alert.addTextField { (alertTextField) in
+            
+            alertTextField.placeholder = "\(self.settings?[0].billRounded ?? 0.0)"
+            textField = alertTextField
+            textField.keyboardType = .decimalPad
+        } // end alert
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
         
     }
+    
 
     
     @IBAction func chooseTipButton(_ sender: Any) {
@@ -103,7 +134,7 @@ class SplitViewController: UIViewController {
         print(showRoundedBill!)
     }
     
-    //---------------VIEW DID LOAD & APPEAR ----------------------------
+    //MARK: ---------------VIEW DID LOAD & APPEAR ----------------------------
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +143,7 @@ class SplitViewController: UIViewController {
         
         checkDeviceType()
         
-        setTextSize()
+        applyUiSettings()
         
         
         //initialised to 0 so must be reset before further function calls
@@ -146,7 +177,7 @@ class SplitViewController: UIViewController {
         self.view.addGestureRecognizer(swipeDown)
         
         
-        //MARK:------------- NAVIGATION BAR APPEARANCE -----------------
+       // Set Navigation Bar Appearance
         // Bar colour
         navigationController?.navigationBar.barTintColor = greenColour
         // Navigation text colour
@@ -160,7 +191,10 @@ class SplitViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         showBillTotals()
-        
+
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
         updateSettings()
     }
 
@@ -285,7 +319,8 @@ class SplitViewController: UIViewController {
             let cs = CharacterSet.init(charactersIn: " -")
             currencyPrefix = currencyPrefix.trimmingCharacters(in: cs) // removes the trailing characters
         }
-
+        
+        //Set Bill Total
         let billTotal = settings?[0].billTotalSpend ?? 0.0
         let roundedBillTotal = (billTotal * roundingFactor).rounded() / roundingFactor
         
@@ -298,6 +333,7 @@ class SplitViewController: UIViewController {
             showTotalBill.text = currencyPrefix + displayedNumber
         }
         
+        //Set Bill With Tip
         billWithTip = billTotal * (1 + percentageTip/100)
         let roundedBillWithTip = (billWithTip * roundingFactor).rounded() / roundingFactor
         
@@ -310,9 +346,33 @@ class SplitViewController: UIViewController {
             showBillWithTip.text = currencyPrefix + displayedNumber
         }
         
+        // Set Bill Rounded
+        let billRounded = settings?[0].billRounded ?? 0.0
+        
+        let roundedBillRounded = (billRounded * roundingFactor).rounded() / roundingFactor
+        
+        displayedNumber = formatNumber(numberToFormat: roundedBillRounded, digits: numberOfDigits)
+        
+        if billRounded < billTotal {
+            showRoundedBill.setTitleColor(lightGreyColour, for: .normal)
+            print("Rounded Bill < Total Bill")
+        }
+        else {
+            showRoundedBill.setTitleColor(greyColour, for: .normal)
+        }
+        
+        if currencyPrefix == "" {
+            showRoundedBill.setTitle(displayedNumber, for: .normal)
+        }
+        else {
+            showRoundedBill.setTitle(currencyPrefix + displayedNumber, for: .normal)
+        }
+        
+        
         //let selectedTip = settings?[0].gratuity ?? 0.0
         let displayedTip = formatNumber(numberToFormat: percentageTip, digits: 0)
         showTip.setTitle(displayedTip + "%", for: .normal)
+        
         
         if roundingOn == true {
             showRounding.setTitle("On", for: .normal)
@@ -362,7 +422,7 @@ class SplitViewController: UIViewController {
     }
     
     //TODO
-    func setTextSize() {
+    func applyUiSettings() {
         
         var textHeight: CGFloat = 0.0
         
@@ -383,13 +443,21 @@ class SplitViewController: UIViewController {
         totalToPayText.font = totalToPayText.font.withSize(textHeight)
         roundedBillText.font = roundedBillText.font.withSize(textHeight)
         
-        showTip.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-2)
-        showCurrency.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-2)
-        showRounding.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-2)
+        showTip.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
+        showCurrency.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
+        showRounding.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
         
-        gratuityText.font = gratuityText.font.withSize(textHeight-2)
-        setCurrencyText.font = setCurrencyText.font.withSize(textHeight-2)
-        setRoundingText.font = setRoundingText.font.withSize(textHeight-2)
+        gratuityText.font = gratuityText.font.withSize(textHeight-3)
+        setCurrencyText.font = setCurrencyText.font.withSize(textHeight-3)
+        setRoundingText.font = setRoundingText.font.withSize(textHeight-3)
+        
+        frameTop.layer.cornerRadius = 10.0
+        frameTop.layer.borderColor = orangeColour.cgColor
+        frameTop.layer.borderWidth = 0.5
+        
+        frameMiddle.layer.cornerRadius = 10.0
+        frameMiddle.layer.borderColor = orangeColour.cgColor
+        frameMiddle.layer.borderWidth = 0.5
         
     }
     
