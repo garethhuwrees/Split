@@ -205,7 +205,6 @@ class DinersCostViewController: UITableViewController {
         
         if numberOfMenuItems > 0 {
             for index in 0...numberOfMenuItems-1 {
-                //print("MenuItem = \(item?[index].itemName ?? "No Name")")
                 menuItemToUpdate = item?[index].itemName ?? "No Name"
                 
                 menuItemRecords = costEntry?.filter("itemName == %@", menuItemToUpdate)
@@ -214,8 +213,6 @@ class DinersCostViewController: UITableViewController {
                 for x in 0...numberOfMenuItemRecords-1 {
                     menuSpend = menuSpend + (menuItemRecords?[x].itemSpend ?? 0.0)
                 }
-            
-                //print("Item Spend =\(menuSpend)")
                 
                 do {
                     try self.realm.write {

@@ -102,9 +102,7 @@ class FoodCostViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let selectedDiner = indexPath.row
-        
-        print("Selected Diner is \(selectedDiner)")
+        //let selectedDiner = indexPath.row
         
         var textField = UITextField()
         
@@ -186,8 +184,6 @@ class FoodCostViewController: UITableViewController {
                 menuSpend = menuSpend + (costEntry?[index].itemSpend ?? 0.0)
                 }
 
-                print("Item Spend =\(menuSpend)")
-
                 do {
                     try self.realm.write {
                         menuItemsFiltered![0].itemSpendNet = menuSpend
@@ -214,7 +210,6 @@ class FoodCostViewController: UITableViewController {
         
         if numberOfDiners > 0 {
             for index in 0...numberOfDiners-1 {
-                //print("MenuItem = \(menuItems?[index].menuItem ?? "No Name")")
                 dinerItemToUpdate = person?[index].personName ?? "No Name"
                 
                 dinerItemRecords = costEntry?.filter("personName == %@", dinerItemToUpdate)
@@ -223,8 +218,6 @@ class FoodCostViewController: UITableViewController {
                 for x in 0...numberOfDinerItemRecords-1 {
                     dinerSpend = dinerSpend + (dinerItemRecords?[x].itemSpend ?? 0.0)
                 }
-                
-                //print("Item Spend =\(menuSpend)")
                 
                 do {
                     try self.realm.write {
@@ -268,38 +261,6 @@ class FoodCostViewController: UITableViewController {
     
 } // end class
 
-// This was used to update individual diner spend and called from the ADD SPEND functio
-// It was replaced with an update all diner spend function called from ViewDidDisappear
-    
-//func updateDinerSpendOld(tableRow:Int) { // Tested OK
-//
-//    let diner = costEntry![tableRow].personName
-//
-//    print("Selected Diner Name is \(diner)")
-//
-//    //costEntry = realm.objects(CostEntry.self) // reset costEnrty
-//    //costEntryFiltered = realm.objects(CostEntry.self)
-//    costEntryFiltered = realm.objects(CostEntry.self) // reset costEntryFiltered
-//    costEntryFiltered = costEntryFiltered?.filter("personName == %@", diner)
-//    dinersFiltered = person?.filter("personName == %@", diner)
-//
-//    let numberOfRecords = self.costEntryFiltered?.count ?? 0
-//    var totalBill: Float = 0.0
-//    if numberOfRecords > 0 {
-//        for index in 0...(numberOfRecords-1) {
-//            totalBill = totalBill + (costEntryFiltered?[index].itemSpend)!
-//        } // end for
-//        do {
-//            try self.realm.write {
-//                let selectedDiner = dinersFiltered?[0]
-//                selectedDiner?.personSpendNet = totalBill
-//            } // end try
-//        } // end do
-//        catch {
-//            print("Error updating Diners Spend")
-//        }
-//    } // end if
-//}
 
 
 

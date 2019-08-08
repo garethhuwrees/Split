@@ -89,11 +89,9 @@ class FoodViewController: UITableViewController {
         // Update Total Spend (Settings)
         var totalBill: Float = 0.0
         let numberOfDiners = person?.count ?? 0
-        //        print("Number of Diners in Table: \(numberOfDiners)")
         
         if numberOfDiners > 0 {
             for n in 0...(numberOfDiners-1) {
-                //            print("Diner Spend \(diners![n].dinerNetSpend)")
                 totalBill = totalBill + person![n].personSpendNet
             } // end for
         }
@@ -104,11 +102,8 @@ class FoodViewController: UITableViewController {
         let  percentageTip = settings?[0].gratuity ?? 0.0
         let billWithTip = totalBill * (1 + percentageTip/100)
         
-        print("The Total Bill is \(totalBill)")
-        
         if let setSpendTotals = settings?[0] {
             do {
-                //print(setSpendTotals.totalBill)
                 try realm.write {
                     setSpendTotals.billTotalSpend = totalBill
                     setSpendTotals.billWithTip = billWithTip
@@ -167,8 +162,6 @@ class FoodViewController: UITableViewController {
         
         selectedFood = item?[indexPath.row].itemName ?? "No Name"
         
-        print(selectedFood)
-        
         performSegue(withIdentifier: "gotoFoodCostEntry", sender: self)
     }
     
@@ -194,15 +187,12 @@ class FoodViewController: UITableViewController {
                     try realm.write {
 
                         let recordsToDelete = costItems?.filter("itemName == %@", record.itemName)
-                        print("Deleting \(record.itemName)")
                         let numberOfRecords = recordsToDelete?.count ?? 0
-                        print("There are \(numberOfRecords) record to delete")
                         
                         // Delete Cost Entry Records
                         if numberOfRecords > 0 {
-                            for index in 0...(numberOfRecords-1) {
+                            for _ in 0...(numberOfRecords-1) {
                                 var costItemToDelete = recordsToDelete![0]
-                                print("Deleting \(index) Record, \(costItemToDelete.personName), \(costItemToDelete.itemName)")
                                 realm.delete(costItemToDelete)
                                 costItemToDelete = CostEntry()
                             }
@@ -325,7 +315,6 @@ class FoodViewController: UITableViewController {
         if (nunberOfDiners) > 0 {
         
             for index in 1...nunberOfDiners {
-                print("Index : \(index)")
                 newCostEntryName = person?[index-1].personName ?? "No Name"
                 
                 newCostEntry.personName = newCostEntryName
@@ -335,14 +324,12 @@ class FoodViewController: UITableViewController {
                 do{
                     try realm.write {
                         realm.add(newCostEntry)
-                        print("Write to \(newCostEntryName)")
                         newCostEntry = CostEntry()
                     }
                 } catch {
                     print("Error saving to Realm, \(error)")
                 }
             } // end for
-            printTableCount()
         } // end if
     } // end func
     
@@ -364,7 +351,6 @@ class FoodViewController: UITableViewController {
                     
                 } // end if
                 
-                print("\(person![n].personSpendNet) - \(dinersSpend)")
                 do{
                     try realm.write {
                         person![n].personSpendNet = dinersSpend

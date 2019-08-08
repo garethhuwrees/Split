@@ -97,11 +97,8 @@ class DinersViewController: UITableViewController {
         
         let billWithTip = totalBill * (1 + percentageTip/100)
         
-         print("The Total Bill is \(totalBill)")
-        
         if let setSpendTotals = settings?[0] {
             do {
-                //print(setSpendTotals.totalBill)
                 try realm.write {
                     setSpendTotals.billTotalSpend = totalBill
                     setSpendTotals.billWithTip = billWithTip
@@ -197,7 +194,6 @@ class DinersViewController: UITableViewController {
                     let recordsToDelete = costItems?.filter("personName == %@", record.personName)
 
                     let numberOfRecords = recordsToDelete?.count ?? 0
-                    //print("There are \(numberOfRecords) record to delete")
 
                     if numberOfRecords > 0 {
                         for _ in 0...(numberOfRecords-1) {
@@ -233,8 +229,6 @@ class DinersViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         selectedDiner = person?[indexPath.row].personName ?? "No Name"
-        
-        print(selectedDiner)
         
         performSegue(withIdentifier: "gotoDinerCostEntry", sender: self)
     }
@@ -334,12 +328,9 @@ class DinersViewController: UITableViewController {
         let nunberOfMenuItems = item?.count ?? 0
         var newCostEntryName : String = ""
         
-        print("Number of Diners = \(nunberOfMenuItems)")
-        
         if (nunberOfMenuItems) > 0 {
             
             for index in 1...nunberOfMenuItems {
-                print("Index : \(index)")
                 newCostEntryName = item?[index-1].itemName ?? "No Type"
                 
                 newCostEntry.personName = diner
@@ -349,14 +340,12 @@ class DinersViewController: UITableViewController {
                 do{
                     try realm.write {
                         realm.add(newCostEntry)
-                        print("Write to \(newCostEntryName)")
                         newCostEntry = CostEntry()
                     }
                 } catch {
                     print("Error saving to Realm, \(error)")
                 }
             } // end for
-            printTableCount()
         } // end if
     } // end func
     
@@ -404,8 +393,7 @@ class DinersViewController: UITableViewController {
                     }
                     
                 } // end if
-                
-                print("\(item![n].itemName) - \(menuItemSpend)")
+
                 do{
                     try realm.write {
                         item![n].itemSpendNet = menuItemSpend

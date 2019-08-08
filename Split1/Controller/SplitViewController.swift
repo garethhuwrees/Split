@@ -11,7 +11,7 @@ import RealmSwift
 import DropDown
 // import DeviceCheck // - is this needed?
 
-class SplitViewController: UIViewController {
+class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     let realm = try!Realm()
@@ -31,6 +31,8 @@ class SplitViewController: UIViewController {
     let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
     let greenColour = UIColor(red: 22/255, green: 160/255, blue: 132/255, alpha: 1)
     let lightGreyColour = UIColor(red: 149/255, green: 165/255, blue: 166/255, alpha: 1)
+    
+    let tableTextFont: UIFont = UIFont(name: "Chalkboard SE", size: 18) ?? UIFont(name: "Regular", size: 16)!
    
     // Settings
     var percentageTip: Float = 0.0
@@ -41,6 +43,7 @@ class SplitViewController: UIViewController {
     var billWithTip: Float = 0.0
 
    
+    @IBOutlet weak var splitterTableView: UITableView!
     
     @IBOutlet weak var totalBillText: UILabel!
     @IBOutlet weak var totalToPayText: UILabel!
@@ -64,9 +67,6 @@ class SplitViewController: UIViewController {
     @IBOutlet weak var frameMiddle: UILabel!
     
     @IBAction func setRoundedBill(_ sender: Any) {
-
-        
-        print("Item Pressed")
 
         var textField = UITextField()
         
@@ -128,16 +128,21 @@ class SplitViewController: UIViewController {
         resetDropdown.show()
     }
     
-    // Solution found on stackoverflow to dismiss the keyboard when tapping on the screen
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-        print(showRoundedBill!)
-    }
+//    // Solution found on stackoverflow to dismiss the keyboard when tapping on the screen
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        view.endEditing(true)
+//    }
     
     //MARK: ---------------VIEW DID LOAD & APPEAR ----------------------------
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        splitterTableView.delegate = self
+        splitterTableView.dataSource = self
+        splitterTableView.register(UINib(nibName: "SplitCustomCell", bundle: nil) , forCellReuseIdentifier: "splitTableCell")
+        splitterTableView.separatorColor = UIColor.clear
+        splitterTableView.rowHeight = 30
         
         loadTables()
         
@@ -191,6 +196,7 @@ class SplitViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         showBillTotals()
+        splitterTableView.reloadData()
 
     }
     
@@ -204,12 +210,10 @@ class SplitViewController: UIViewController {
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         
         if gesture.direction == .right {
-            //print("Swipe Right")
             performSegue(withIdentifier: "goToFood", sender: self)
         }
             
         else if gesture.direction == .left {
-            //print("Swipe Left")
             performSegue(withIdentifier: "goToDiners", sender: self)
         }
         else if gesture.direction == .up {
@@ -253,12 +257,58 @@ class SplitViewController: UIViewController {
     }
     
     
+    // MARK:------------------ TABLEVIEW METHODS -----------------
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return person?.count ?? 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "splitTableCell", for: indexPath) as! SplitTableCell
+        
+        var spend = (person?[indexPath.row].personSpendNet) ?? 0.0
+        spend = (spend * 100).rounded() / 100
+        let spendString = formatNumber(numberToFormat: spend, digits: 2)
+        
+//        var spendWithTip = spend * (1 + self.percentageTip/100)
+//        spendWithTip = (spendWithTip * 100).rounded() / 100
+//        let spendWithTipString = formatNumber(numberToFormat: spendWithTip, digits: 2)
+        
+        // Set font type and colour
+        cell.leftCellLabel.textColor = self.greyColour
+        cell.leftCellLabel.font = self.tableTextFont
+        cell.leftCellLabel.text = person?[indexPath.row].personName
+        //        cell.rightCellLabel.textColor = self.tableTextColour
+        cell.rightCellLabel.textColor = self.greyColour
+        cell.rightCellLabel.font = self.tableTextFont
+        cell.rightCellLabel.text = self.currencyPrefix + spendString // replace with if, else if
+        
+        
+//        if showWithTip == false {
+//            cell.rightCellLabel.textColor = self.greyColour
+//            cell.rightCellLabel.text = self.currencyPrefix + spendString
+//        }
+//        else {
+//            cell.rightCellLabel.textColor = self.orangeColour
+//            cell.rightCellLabel.text = self.currencyPrefix + spendWithTipString
+//        }
+//
+        return cell
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 30
+//    }
+    
     // MARK:------------ LOCAL FUNCTIONS -----------------------
     
     
     func loadTables() {
         
         settings = realm.objects(Settings.self)
+        person = realm.objects(Person.self)
+        person = person!.sorted(byKeyPath: "personName")
         
         let numberOfRows = settings?.count
         
@@ -284,7 +334,7 @@ class SplitViewController: UIViewController {
             
         } // end if
         else {
-            print("Settings Already Set")
+            // print("Settings Already Set")
             showCurrency.setTitle(settings?[0].currencySymbol, for: .normal)
             iphoneType = settings?[0].phoneType ?? ""
             billTotal = settings?[0].billTotalSpend ?? 0.0
@@ -355,7 +405,6 @@ class SplitViewController: UIViewController {
         
         if billRounded < billTotal {
             showRoundedBill.setTitleColor(lightGreyColour, for: .normal)
-            print("Rounded Bill < Total Bill")
         }
         else {
             showRoundedBill.setTitleColor(greyColour, for: .normal)
@@ -497,7 +546,7 @@ class SplitViewController: UIViewController {
             print("No records to delete")
             }
         
-        person = realm.objects(Person.self)
+//        person = realm.objects(Person.self) // Moved to Load Tables - can now be deleted??
         numberOfRecords = (person?.count)!
         if (numberOfRecords > 0) {
             for n in 0...(numberOfRecords - 1) {
@@ -539,6 +588,7 @@ class SplitViewController: UIViewController {
                 try self.realm.write {
                     settings?[0].billTotalSpend = 0.0 // DELETE
                     settings?[0].billWithTip = 0.0
+                    settings?[0].billRounded = 0.0
                 }
             }
             catch {
@@ -546,6 +596,7 @@ class SplitViewController: UIViewController {
             }
         billWithTip = 0.0
         showBillTotals()
+        splitterTableView.reloadData()
         }
         
     } // end func
@@ -569,6 +620,8 @@ class SplitViewController: UIViewController {
         else {
             print("No records to delete")
         }
+        
+        splitterTableView.reloadData()
     } // end func
 
     func deleteItems() {
