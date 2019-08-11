@@ -9,7 +9,13 @@
 import UIKit
 import RealmSwift
 import DropDown
-// import DeviceCheck // - is this needed?
+
+
+enum SpendType {
+    case TotalSpend
+    case SpendPlusTip
+    case FixedSpend
+}
 
 class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -41,7 +47,11 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var roundingOn: Bool = false
     var billTotal: Float = 0.0
     var billWithTip: Float = 0.0
-
+    var roundedBill: Float = 0.0
+    var taxRate: Float = 0.0
+    
+    var typeOfSpend: SpendType = .TotalSpend
+    var typeOfSpendLabel: String = ""
    
     @IBOutlet weak var splitterTableView: UITableView!
     
@@ -56,12 +66,17 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     @IBOutlet weak var gratuityText: UILabel!
-    @IBOutlet weak var setCurrencyText: UILabel!
-    @IBOutlet weak var setRoundingText: UILabel!
+    @IBOutlet weak var taxRateText: UILabel!
+    //@IBOutlet weak var setRoundingText: UILabel!
+    @IBOutlet weak var showSplitterName: UILabel!
     
     @IBOutlet weak var showTip: UIButton!
-    @IBOutlet weak var showCurrency: UIButton!
-    @IBOutlet weak var showRounding: UIButton!
+    @IBOutlet weak var showTax: UIButton!
+    
+    
+//    @IBOutlet weak var showCurrency: UIButton!
+//    @IBOutlet weak var showRounding: UIButton!
+    @IBOutlet weak var showSpendType: UIButton!
     
     @IBOutlet weak var frameTop: UILabel!
     @IBOutlet weak var frameMiddle: UILabel!
@@ -74,16 +89,17 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let action = UIAlertAction(title: "Enter", style: .default) { (action) in
             
+            //TODO:- check when writing to database (as defined or only at end)
             if textField.text!.isEmpty{
                 //Do nothing
             }
             else {
-                let roundedBill = (textField.text! as NSString).floatValue
+                self.roundedBill = (textField.text! as NSString).floatValue
                 
                 if let item = self.settings?[0] {
                     do {
                         try self.realm.write {
-                            item.billRounded = roundedBill
+                            item.billRounded = self.roundedBill
                         }
                     }
                     catch {
@@ -92,6 +108,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 } // end if
                 
                 self.showBillTotals()
+                self.splitterTableView.reloadData()
             }
             
         }
@@ -113,20 +130,78 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tipDropdown.show()
     }
     
-
-    @IBAction func selectCurrency(_ sender: Any) {
+    @IBAction func setTaxRate(_ sender: Any) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Rate of Tax", message: "Enter the local tax rate", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Enter", style: .default) { (action) in
+            
+            if textField.text!.isEmpty{
+                //Do nothing
+            }
+            else {
+                self.taxRate = (textField.text! as NSString).floatValue
+            }
+                
+            self.showBillTotals()
+            
+        }
+        alert.addTextField { (alertTextField) in
+            
+            alertTextField.placeholder = "\(self.settings?[0].billRounded ?? 0.0)"
+            textField = alertTextField
+            textField.keyboardType = .decimalPad
+        } // end alert
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+        
+    }
+    
+//    @IBAction func selectCurrency(_ sender: Any) {
+//        currencyDropDown.show()
+//    }
+    
+//    @IBAction func selectRounding(_ sender: Any) {
+//        roundingOn = !roundingOn
+//
+//        showBillTotals()
+//    }
+    
+    @IBAction func selectCurrency(_ sender: UIBarButtonItem) {
         currencyDropDown.show()
     }
     
-    @IBAction func selectRounding(_ sender: Any) {
+    @IBAction func selectRounding(_ sender: UIBarButtonItem) {
         roundingOn = !roundingOn
-        
         showBillTotals()
+        splitterTableView.reloadData()
     }
     
     @IBAction func resetButtonPressed(_ sender: Any) {
         resetDropdown.show()
     }
+    
+    @IBAction func selectSpendType(_ sender: Any) {
+        if typeOfSpend == .TotalSpend {
+            typeOfSpend = .SpendPlusTip
+            typeOfSpendLabel = "Spend + Tip"
+        }
+        else if typeOfSpend == .SpendPlusTip {
+            typeOfSpend = .FixedSpend
+            typeOfSpendLabel = "Fixed Amount"
+        }
+        else if typeOfSpend == .FixedSpend {
+            typeOfSpend = .TotalSpend
+            typeOfSpendLabel = "Spend (inc Tax)"
+        }
+        showSpendType.setTitle(typeOfSpendLabel, for: .normal)
+        splitterTableView.reloadData()
+    }
+    
     
 //    // Solution found on stackoverflow to dismiss the keyboard when tapping on the screen
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -148,7 +223,11 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         checkDeviceType()
         
-        applyUiSettings()
+        applyUISettings()
+        
+        applyUISettings()
+        
+        applyNavbarSettings()
         
         
         //initialised to 0 so must be reset before further function calls
@@ -156,6 +235,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         percentageTip = settings?[0].gratuity ?? 0.0
         
         showBillTotals()
+        splitterTableView.reloadData()
         
         setupTipDropdown()
         setupResetDropdown()
@@ -163,7 +243,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         showTotalBill.isUserInteractionEnabled = false
         showBillWithTip.isUserInteractionEnabled = false
-        setRoundingText.isUserInteractionEnabled = false
+//        setRoundingText.isUserInteractionEnabled = false
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture))
         swipeLeft.direction = .left
@@ -184,13 +264,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
        // Set Navigation Bar Appearance
         // Bar colour
-        navigationController?.navigationBar.barTintColor = greenColour
-        // Navigation text colour
-        navigationController?.navigationBar.tintColor = UIColor.white
-        //TODO - How to set navigation text font?
-        // Navigation title colour and font
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Chalkboard SE", size: 24)!]
+        
         
     }
     
@@ -214,9 +288,15 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
             
         else if gesture.direction == .left {
-            performSegue(withIdentifier: "goToDiners", sender: self)
+            if iphoneType == "5,SE" {
+                performSegue(withIdentifier: "goToDiners", sender: self)
+            }
+            else {
+                performSegue(withIdentifier: "gotoTable", sender: self)
+            }
         }
         else if gesture.direction == .up {
+            performSegue(withIdentifier: "gotoTable", sender: self)
             
         }
         else if gesture.direction == .down {
@@ -267,33 +347,48 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "splitTableCell", for: indexPath) as! SplitTableCell
         
+        let percentOfBill = (person?[indexPath.row].percentOfBill) ?? 0.0
         var spend = (person?[indexPath.row].personSpendNet) ?? 0.0
         spend = (spend * 100).rounded() / 100
-        let spendString = formatNumber(numberToFormat: spend, digits: 2)
+        let taxAmount = spend * taxRate / 100
+        let tipAmount = spend * percentageTip / 100
         
-//        var spendWithTip = spend * (1 + self.percentageTip/100)
-//        spendWithTip = (spendWithTip * 100).rounded() / 100
-//        let spendWithTipString = formatNumber(numberToFormat: spendWithTip, digits: 2)
         
-        // Set font type and colour
         cell.leftCellLabel.textColor = self.greyColour
         cell.leftCellLabel.font = self.tableTextFont
         cell.leftCellLabel.text = person?[indexPath.row].personName
-        //        cell.rightCellLabel.textColor = self.tableTextColour
-        cell.rightCellLabel.textColor = self.greyColour
         cell.rightCellLabel.font = self.tableTextFont
-        cell.rightCellLabel.text = self.currencyPrefix + spendString // replace with if, else if
+        cell.rightCellLabel.textColor = greyColour
         
+        if typeOfSpend == .TotalSpend {
+            spend = spend + taxAmount
+        }
+        if typeOfSpend == .SpendPlusTip {
+            spend = spend + taxAmount + tipAmount
+        }
+        if typeOfSpend == .FixedSpend {
+            spend = roundedBill * percentOfBill
+            
+            if roundedBill > (billTotal * (1 + taxRate / 100)) {
+                cell.rightCellLabel.textColor = greyColour
+            }
+            else {
+                cell.rightCellLabel.textColor = orangeColour
+            }
+            
+        }
+        var numberOfDigits = 2
+        var roundingFactor: Float = 100
+        if roundingOn {
+            numberOfDigits = 0
+            roundingFactor = 1
+        }
         
-//        if showWithTip == false {
-//            cell.rightCellLabel.textColor = self.greyColour
-//            cell.rightCellLabel.text = self.currencyPrefix + spendString
-//        }
-//        else {
-//            cell.rightCellLabel.textColor = self.orangeColour
-//            cell.rightCellLabel.text = self.currencyPrefix + spendWithTipString
-//        }
-//
+        spend = (spend * roundingFactor).rounded() / roundingFactor
+        let spendString = formatNumber(numberToFormat: spend, digits: numberOfDigits)
+        cell.rightCellLabel.text = self.currencyPrefix + spendString
+        
+
         return cell
     }
     
@@ -314,15 +409,17 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if numberOfRows == 0 {
             
-            showCurrency.setTitle("Currency", for: .normal)
+//            showCurrency.setTitle("Currency", for: .normal)
             
             print("Initialising Settings")
             let initialSetting = Settings()
             initialSetting.billTotalSpend = 0.0
             initialSetting.billWithTip = 0.0
             initialSetting.gratuity = 0.0
-            initialSetting.currencySymbol = "Currency"
+            initialSetting.currencySymbol = "None"
             initialSetting.phoneType = ""
+            initialSetting.taxRate = 0.0
+            initialSetting.spendType = "TotalSpend"
             
             do{
                 try realm.write {
@@ -335,12 +432,22 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } // end if
         else {
             // print("Settings Already Set")
-            showCurrency.setTitle(settings?[0].currencySymbol, for: .normal)
+//            showCurrency.setTitle(settings?[0].currencySymbol, for: .normal)
             iphoneType = settings?[0].phoneType ?? ""
             billTotal = settings?[0].billTotalSpend ?? 0.0
+            roundedBill = settings?[0].billRounded ?? 0/0
             //billWithTip = settings?[0].billWithTip ?? 0.0
             percentageTip = settings?[0].gratuity ?? 0.0
             roundingOn = settings?[0].roundingOn ?? false
+            taxRate = settings?[0].taxRate ?? 0.0
+            
+            
+            switch settings?[0].spendType {
+                case "TotalSpend" : typeOfSpend = .TotalSpend; typeOfSpendLabel = "Spend (inc Tax)"
+                case "SpendPlusTip" : typeOfSpend = .SpendPlusTip; typeOfSpendLabel = "Spend + Tip"
+                case "FixedSpend" : typeOfSpend = .FixedSpend; typeOfSpendLabel = "Fixed Amount"
+                default: typeOfSpend = .TotalSpend
+            }
             
             billWithTip = billTotal * (1 + percentageTip/100)
             
@@ -361,7 +468,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         let currencySetting = settings![0].currencySymbol
-        if currencySetting == "Currency" {
+        if currencySetting == "None" {
             currencyPrefix = ""
         }
         else {
@@ -370,9 +477,10 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             currencyPrefix = currencyPrefix.trimmingCharacters(in: cs) // removes the trailing characters
         }
         
-        //Set Bill Total
+        //TOTAL BILL (INC TAX)
         let billTotal = settings?[0].billTotalSpend ?? 0.0
-        let roundedBillTotal = (billTotal * roundingFactor).rounded() / roundingFactor
+        let taxAmount = billTotal * taxRate / 100
+        let roundedBillTotal = ((billTotal + taxAmount) * roundingFactor).rounded() / roundingFactor
         
         var displayedNumber = formatNumber(numberToFormat: roundedBillTotal, digits: numberOfDigits)
         
@@ -383,9 +491,9 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             showTotalBill.text = currencyPrefix + displayedNumber
         }
         
-        //Set Bill With Tip
-        billWithTip = billTotal * (1 + percentageTip/100)
-        let roundedBillWithTip = (billWithTip * roundingFactor).rounded() / roundingFactor
+        //BILL WITH TIP
+        let tipAmount = billTotal * percentageTip / 100
+        let roundedBillWithTip = ((billTotal + taxAmount + tipAmount) * roundingFactor).rounded() / roundingFactor
         
         displayedNumber = formatNumber(numberToFormat: roundedBillWithTip, digits: numberOfDigits)
         
@@ -396,15 +504,13 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             showBillWithTip.text = currencyPrefix + displayedNumber
         }
         
-        // Set Bill Rounded
-        let billRounded = settings?[0].billRounded ?? 0.0
-        
-        let roundedBillRounded = (billRounded * roundingFactor).rounded() / roundingFactor
-        
+        // FIXED AMOUNT
+        //let billRounded = settings?[0].billRounded ?? 0.0
+        let roundedBillRounded = (roundedBill * roundingFactor).rounded() / roundingFactor
         displayedNumber = formatNumber(numberToFormat: roundedBillRounded, digits: numberOfDigits)
         
-        if billRounded < billTotal {
-            showRoundedBill.setTitleColor(lightGreyColour, for: .normal)
+        if roundedBill < (billTotal + taxAmount) {
+            showRoundedBill.setTitleColor(orangeColour, for: .normal)
         }
         else {
             showRoundedBill.setTitleColor(greyColour, for: .normal)
@@ -419,16 +525,14 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         //let selectedTip = settings?[0].gratuity ?? 0.0
+        percentageTip = (percentageTip * 10).rounded() / 10
         let displayedTip = formatNumber(numberToFormat: percentageTip, digits: 0)
         showTip.setTitle(displayedTip + "%", for: .normal)
         
+        taxRate = (taxRate * 10).rounded() / 10
+        let displayedTax = formatNumber(numberToFormat: taxRate, digits: 0)
+        showTax.setTitle(displayedTax + "%", for: .normal)
         
-        if roundingOn == true {
-            showRounding.setTitle("On", for: .normal)
-        }
-        else {
-            showRounding.setTitle("Off", for: .normal)
-        }
         
     }
     
@@ -470,8 +574,26 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    //TODO
-    func applyUiSettings() {
+    func applyNavbarSettings() {
+        
+        var textHeight: CGFloat = 0.0
+        
+        switch iphoneType {
+        case "5,SE":
+            textHeight = 16
+        case "6,7,8":
+            textHeight = 20
+        default:
+            textHeight = 22
+        }
+        navigationController?.navigationBar.barTintColor = greenColour
+        navigationController?.navigationBar.tintColor = UIColor.white
+        //TODO - How to set navigation text font?
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Chalkboard SE", size: textHeight)!]
+    }
+    
+    func applyUISettings() {
         
         var textHeight: CGFloat = 0.0
         
@@ -493,12 +615,17 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         roundedBillText.font = roundedBillText.font.withSize(textHeight)
         
         showTip.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
-        showCurrency.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
-        showRounding.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
+        showTax.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
+//        showRounding.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
         
         gratuityText.font = gratuityText.font.withSize(textHeight-3)
-        setCurrencyText.font = setCurrencyText.font.withSize(textHeight-3)
-        setRoundingText.font = setRoundingText.font.withSize(textHeight-3)
+        taxRateText.font = taxRateText.font.withSize(textHeight-3)
+        //setRoundingText.font = setRoundingText.font.withSize(textHeight-3)
+        
+        
+        showSplitterName.font = showSplitterName.font.withSize(textHeight-3)
+        showSpendType.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
+        showSpendType.setTitle(settings?[0].spendType, for: .normal)
         
         frameTop.layer.cornerRadius = 10.0
         frameTop.layer.borderColor = orangeColour.cgColor
@@ -508,15 +635,27 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         frameMiddle.layer.borderColor = orangeColour.cgColor
         frameMiddle.layer.borderWidth = 0.5
         
+        
+        
     }
     
     func updateSettings() {
+        
+        var spendType = ""
+        switch typeOfSpend {
+        case .TotalSpend : spendType = "TotalSpend"
+        case .SpendPlusTip : spendType = "SpendPlusTip"
+        case .FixedSpend : spendType = "FixedSpend"
+         }
+        
         
         do{
             try realm.write {
                 settings?[0].gratuity = percentageTip
                 settings?[0].roundingOn = roundingOn
                 settings?[0].billWithTip = billWithTip
+                settings?[0].taxRate = taxRate
+                settings?[0].spendType = spendType
             }
         } catch {
             print("Error saving settings, \(error)")
@@ -670,7 +809,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK:---------- SET UP DRORDOWNS ---------------------
     
     func setupCurrencyDropdown() {
-        currencyDropDown.dataSource = ["$ - Dollar", "€ - Euro", "£ - Pound", "¥ - Yen/Yuan", "kr - Krona", "CHF - Franc", "Ft - Florint", "R - Rand", "R$ - Real", "Null"]
+        currencyDropDown.dataSource = ["$ - Dollar", "€ - Euro", "£ - Pound", "¥ - Yen/Yuan", "kr - Krona", "CHF - Franc", "Ft - Florint", "R - Rand", "R$ - Real", "None"]
         currencyDropDown.width = 130
         
         customiseDropDown()
@@ -685,10 +824,10 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self!.currencyPrefix = self!.currencyPrefix.trimmingCharacters(in: cs) // removes any trailing characters
             }
             else {
-                selectedCurrency = "Currency"
+                selectedCurrency = "None"
                 self!.currencyPrefix = ""
             }
-            self!.showCurrency.setTitle(selectedCurrency, for: .normal)
+//            self!.showCurrency.setTitle(selectedCurrency, for: .normal)
             do{
                 try self!.realm.write {
                     self!.settings?[0].currencySymbol = selectedCurrency
@@ -699,6 +838,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             
             self!.showBillTotals()
+            self!.splitterTableView.reloadData()
         }
     } // end func
     

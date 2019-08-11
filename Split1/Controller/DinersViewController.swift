@@ -363,18 +363,18 @@ class DinersViewController: UITableViewController {
         tableView.reloadData()
     } // end func
     
-    func printTableCount() {
-        
-        let dinerCount = person?.count ?? 0
-        print ("Number of Diners: \(dinerCount)")
-        
-        let foodCount = person?.count ?? 0
-        print ("Number of Food Items: \(foodCount)")
-        
-        let associateCount = costItems?.count ?? 0
-        print ("Number of Cost Entry Items: \(associateCount)")
-        
-    } //end func
+//    func printTableCount() {
+//
+//        let dinerCount = person?.count ?? 0
+//        print ("Number of Diners: \(dinerCount)")
+//
+//        let foodCount = person?.count ?? 0
+//        print ("Number of Food Items: \(foodCount)")
+//
+//        let associateCount = costItems?.count ?? 0
+//        print ("Number of Cost Entry Items: \(associateCount)")
+//
+//    } //end func
     
     func updateMenuItemSpend() {
         

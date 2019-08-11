@@ -11,6 +11,7 @@
 		7F6B0FD922E8B1D30078C23D /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B0FD822E8B1D30078C23D /* IntroViewController.swift */; };
 		7F73AEEF22BC87630087A4DA /* SplitCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */; };
 		7F7E42B022C674F9001A43F9 /* DinersCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */; };
+		7F9CAEB622FEFE50000CE91B /* DinerFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */; };
 		7FAB647E22DF68E700EB440E /* SplitTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73AEEC22BC87630087A4DA /* SplitTableCell.swift */; };
 		7FAB648022DF6E2B00EB440E /* FoodCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB647F22DF6E2B00EB440E /* FoodCostViewController.swift */; };
 		7FB47CFE22B5BF8E00BFBFEE /* DinersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB47CFD22B5BF8E00BFBFEE /* DinersViewController.swift */; };
@@ -37,6 +38,7 @@
 		7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplitCustomCell.xib; sourceTree = "<group>"; };
 		7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinersCostViewController.swift; sourceTree = "<group>"; };
 		7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
+		7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinerFoodViewController.swift; sourceTree = "<group>"; };
 		7FAB647F22DF6E2B00EB440E /* FoodCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCostViewController.swift; sourceTree = "<group>"; };
 		7FB47CFD22B5BF8E00BFBFEE /* DinersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinersViewController.swift; sourceTree = "<group>"; };
 		7FB7C0ED22B44F52003C03F4 /* SPLIT!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPLIT!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				7FB7C0F222B44F52003C03F4 /* SplitViewController.swift */,
+				7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */,
 				7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */,
 				7FAB647F22DF6E2B00EB440E /* FoodCostViewController.swift */,
 				7FB47CFD22B5BF8E00BFBFEE /* DinersViewController.swift */,
@@ -290,6 +293,7 @@
 				7F7E42B022C674F9001A43F9 /* DinersCostViewController.swift in Sources */,
 				7FAB647E22DF68E700EB440E /* SplitTableCell.swift in Sources */,
 				7FF21BE322C690BE00BBCDA3 /* FoodViewController.swift in Sources */,
+				7F9CAEB622FEFE50000CE91B /* DinerFoodViewController.swift in Sources */,
 				7FAB648022DF6E2B00EB440E /* FoodCostViewController.swift in Sources */,
 				7FB7C0F922B44F52003C03F4 /* Split1.xcdatamodeld in Sources */,
 				7F07F31722C85F03008410C6 /* Settings.swift in Sources */,
