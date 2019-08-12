@@ -80,6 +80,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var frameTop: UILabel!
     @IBOutlet weak var frameMiddle: UILabel!
+    @IBOutlet weak var frameBotton: UILabel!
     
     @IBAction func setRoundedBill(_ sender: Any) {
 
@@ -146,11 +147,12 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
                 
             self.showBillTotals()
+            self.splitterTableView.reloadData()
             
         }
         alert.addTextField { (alertTextField) in
             
-            alertTextField.placeholder = "\(self.settings?[0].billRounded ?? 0.0)"
+            alertTextField.placeholder = "\(self.taxRate)"
             textField = alertTextField
             textField.keyboardType = .decimalPad
         } // end alert
@@ -158,18 +160,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
         
-        
     }
-    
-//    @IBAction func selectCurrency(_ sender: Any) {
-//        currencyDropDown.show()
-//    }
-    
-//    @IBAction func selectRounding(_ sender: Any) {
-//        roundingOn = !roundingOn
-//
-//        showBillTotals()
-//    }
     
     @IBAction func selectCurrency(_ sender: UIBarButtonItem) {
         currencyDropDown.show()
@@ -369,11 +360,11 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if typeOfSpend == .FixedSpend {
             spend = roundedBill * percentOfBill
             
-            if roundedBill > (billTotal * (1 + taxRate / 100)) {
-                cell.rightCellLabel.textColor = greyColour
+            if roundedBill < (billTotal * (1 + taxRate / 100)) {
+                cell.rightCellLabel.textColor = orangeColour
             }
             else {
-                cell.rightCellLabel.textColor = orangeColour
+                cell.rightCellLabel.textColor = greyColour
             }
             
         }
@@ -635,6 +626,9 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         frameMiddle.layer.borderColor = orangeColour.cgColor
         frameMiddle.layer.borderWidth = 0.5
         
+        frameBotton.layer.cornerRadius = 10.0
+        frameBotton.layer.borderColor = orangeColour.cgColor
+        frameBotton.layer.borderWidth = 0.5
         
         
     }

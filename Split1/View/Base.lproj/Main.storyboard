@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--SPLIT!-->
+        <!--Your Spend-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SplitViewController" customModule="SPLIT_" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,7 +20,18 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmT-V3-8QX" userLabel="Logo View">
                                 <rect key="frame" x="0.0" y="64" width="375" height="51"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplitLogo1024" translatesAutoresizingMaskIntoConstraints="NO" id="FJh-x4-Z79">
+                                        <rect key="frame" x="100" y="0.0" width="175" height="51"/>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="FJh-x4-Z79" firstAttribute="leading" secondItem="kmT-V3-8QX" secondAttribute="leading" constant="100" id="Ffg-hN-XgZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="FJh-x4-Z79" secondAttribute="bottom" id="JRp-pQ-KiT"/>
+                                    <constraint firstAttribute="trailing" secondItem="FJh-x4-Z79" secondAttribute="trailing" constant="100" id="pL7-7S-KZj"/>
+                                    <constraint firstItem="FJh-x4-Z79" firstAttribute="top" secondItem="kmT-V3-8QX" secondAttribute="top" id="y5F-bM-1iJ"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sc7-Yf-e3h" userLabel="Top View">
                                 <rect key="frame" x="0.0" y="115" width="375" height="152.5"/>
@@ -236,11 +247,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Jv-EQ-54n" userLabel="Bottom View">
                                 <rect key="frame" x="0.0" y="369" width="375" height="254"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhv-yP-Q55" userLabel="Bottom Frame">
+                                        <rect key="frame" x="10" y="10" width="355" height="224"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVG-dQ-dA8" userLabel="Header View">
-                                        <rect key="frame" x="25" y="0.0" width="325" height="35"/>
+                                        <rect key="frame" x="25" y="15" width="325" height="30.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Odt-M1-X0E">
-                                                <rect key="frame" x="172.5" y="0.0" width="152.5" height="35"/>
+                                                <rect key="frame" x="172.5" y="0.0" width="152.5" height="30.5"/>
                                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                 <state key="normal" title="Spend Type">
                                                     <color key="titleColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -250,7 +267,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Splitter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJN-DV-3bx">
-                                                <rect key="frame" x="20" y="0.0" width="152.5" height="35"/>
+                                                <rect key="frame" x="20" y="0.0" width="152.5" height="30.5"/>
                                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                 <color key="textColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -270,7 +287,7 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nwv-vc-sGb">
-                                        <rect key="frame" x="25" y="35" width="325" height="209"/>
+                                        <rect key="frame" x="25" y="45.5" width="325" height="183.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                 </subviews>
@@ -278,13 +295,17 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="sVG-dQ-dA8" secondAttribute="trailing" constant="25" id="0CL-4Q-XtC"/>
                                     <constraint firstItem="nwv-vc-sGb" firstAttribute="leading" secondItem="0Jv-EQ-54n" secondAttribute="leading" constant="25" id="D89-Sg-E5c"/>
+                                    <constraint firstAttribute="bottom" secondItem="nhv-yP-Q55" secondAttribute="bottom" constant="20" id="EKI-V9-8UT"/>
+                                    <constraint firstAttribute="trailing" secondItem="nhv-yP-Q55" secondAttribute="trailing" constant="10" id="G5q-0j-e6E"/>
                                     <constraint firstItem="nwv-vc-sGb" firstAttribute="top" secondItem="sVG-dQ-dA8" secondAttribute="bottom" id="MaW-cy-UWP"/>
                                     <constraint firstItem="sVG-dQ-dA8" firstAttribute="leading" secondItem="0Jv-EQ-54n" secondAttribute="leading" constant="25" id="QHZ-Tm-3xt"/>
                                     <constraint firstItem="nwv-vc-sGb" firstAttribute="height" secondItem="sVG-dQ-dA8" secondAttribute="height" multiplier="6:1" id="b0x-jG-KAb"/>
+                                    <constraint firstItem="nhv-yP-Q55" firstAttribute="leading" secondItem="0Jv-EQ-54n" secondAttribute="leading" constant="10" id="bMW-Bl-vJE"/>
                                     <constraint firstItem="nwv-vc-sGb" firstAttribute="top" secondItem="sVG-dQ-dA8" secondAttribute="bottom" id="eab-MJ-gtw"/>
-                                    <constraint firstItem="sVG-dQ-dA8" firstAttribute="top" secondItem="0Jv-EQ-54n" secondAttribute="top" id="p8E-UH-TAz"/>
+                                    <constraint firstItem="nhv-yP-Q55" firstAttribute="top" secondItem="0Jv-EQ-54n" secondAttribute="top" constant="10" id="lit-ts-83Q"/>
+                                    <constraint firstItem="sVG-dQ-dA8" firstAttribute="top" secondItem="0Jv-EQ-54n" secondAttribute="top" constant="15" id="p8E-UH-TAz"/>
                                     <constraint firstAttribute="trailing" secondItem="nwv-vc-sGb" secondAttribute="trailing" constant="25" id="wyn-ks-dtM"/>
-                                    <constraint firstAttribute="bottom" secondItem="nwv-vc-sGb" secondAttribute="bottom" constant="10" id="zKg-lp-eOP"/>
+                                    <constraint firstAttribute="bottom" secondItem="nwv-vc-sGb" secondAttribute="bottom" constant="25" id="zKg-lp-eOP"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -328,7 +349,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="SPLIT!" id="CqX-p8-iUo">
+                    <navigationItem key="navigationItem" title="Your Spend" id="CqX-p8-iUo">
                         <barButtonItem key="leftBarButtonItem" title="Intro" id="TGj-IF-a31">
                             <connections>
                                 <action selector="introSelected:" destination="BYZ-38-t0r" id="EL9-Ka-bvl"/>
@@ -342,6 +363,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="frameBotton" destination="nhv-yP-Q55" id="TJ4-ya-EFT"/>
                         <outlet property="frameMiddle" destination="z6v-WS-x4c" id="mDC-4f-3Lz"/>
                         <outlet property="frameTop" destination="2Gh-ro-YHP" id="INV-9e-vSe"/>
                         <outlet property="gratuityText" destination="xDy-j1-eRC" id="tYc-df-Kns"/>
@@ -624,7 +646,7 @@
                         <viewLayoutGuide key="safeArea" id="Vny-eg-ev7"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Add Splitter" id="H8s-Sh-RyH">
+                        <barButtonItem title="Add Splitter" image="AddSplitter60" id="H8s-Sh-RyH">
                             <connections>
                                 <action selector="addPerson:" destination="Nsv-iG-bKB" id="kWO-bO-dBc"/>
                             </connections>
@@ -640,6 +662,7 @@
                     <connections>
                         <outlet property="foodTableView" destination="g14-BL-XJL" id="K6p-KV-5HZ"/>
                         <outlet property="splitterTableView" destination="Im0-LS-Xpz" id="9di-Ko-Xh7"/>
+                        <segue destination="NXp-uA-dM4" kind="show" identifier="gotoDinerCostEntry" id="557-lP-Rga"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o6R-f9-bo5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -717,4 +740,11 @@
             <point key="canvasLocation" x="36" y="26.53673163418291"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AddSplitter60" width="40" height="40"/>
+        <image name="SplitLogo1024" width="512" height="128"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="557-lP-Rga"/>
+    </inferredMetricsTieBreakers>
 </document>

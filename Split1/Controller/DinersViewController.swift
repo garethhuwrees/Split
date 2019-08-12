@@ -224,7 +224,7 @@ class DinersViewController: UITableViewController {
 
     } // end override function
     
-    //---------------------- SEGUE TO COST ENTRY ------------------------------
+    //MARK:---------------------- SEGUE TO COST ENTRY ------------------------------
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
