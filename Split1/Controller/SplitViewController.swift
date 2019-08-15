@@ -38,7 +38,9 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let greenColour = UIColor(red: 22/255, green: 160/255, blue: 132/255, alpha: 1)
     let lightGreyColour = UIColor(red: 149/255, green: 165/255, blue: 166/255, alpha: 1)
     
-    let tableTextFont: UIFont = UIFont(name: "Chalkboard SE", size: 18) ?? UIFont(name: "Regular", size: 16)!
+    let fontSize: CGFloat = 20
+    let fontName: String = "ChalkboardSE-Regular"
+    let secondFontName = "Lemon-Regular"
    
     // Settings
     var percentageTip: Float = 0.0
@@ -52,6 +54,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var typeOfSpend: SpendType = .TotalSpend
     var typeOfSpendLabel: String = ""
+    var introType: String = "guide"
    
     @IBOutlet weak var splitterTableView: UITableView!
     
@@ -62,21 +65,15 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var showTotalBill: UITextField!
     @IBOutlet weak var showBillWithTip: UITextField!
     @IBOutlet weak var showRoundedBill: UIButton!
-    //@IBOutlet weak var showRoundedBill: UITextField!
-    
     
     @IBOutlet weak var gratuityText: UILabel!
     @IBOutlet weak var taxRateText: UILabel!
-    //@IBOutlet weak var setRoundingText: UILabel!
-    @IBOutlet weak var showSplitterName: UILabel!
-    
+  
     @IBOutlet weak var showTip: UIButton!
     @IBOutlet weak var showTax: UIButton!
     
-    
-//    @IBOutlet weak var showCurrency: UIButton!
-//    @IBOutlet weak var showRounding: UIButton!
     @IBOutlet weak var showSpendType: UIButton!
+    @IBOutlet weak var showSplitterName: UILabel!
     
     @IBOutlet weak var frameTop: UILabel!
     @IBOutlet weak var frameMiddle: UILabel!
@@ -220,7 +217,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         applyNavbarSettings()
         
-//        printFontss()
+//        printFonts()
         
         
         //initialised to 0 so must be reset before further function calls
@@ -277,7 +274,12 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         
         if gesture.direction == .right {
-            performSegue(withIdentifier: "goToFood", sender: self)
+            if iphoneType == "5,SE" {
+                performSegue(withIdentifier: "goToFood", sender: self)
+            }
+            else {
+                performSegue(withIdentifier: "gotoGuide", sender: self)
+            }
         }
             
         else if gesture.direction == .left {
@@ -316,18 +318,45 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.navigationController?.view.layer.add(trans, forKey: nil)
         }
         
+        if segue.identifier == "gotoIntro" {
+            let destinationVC = segue.destination as! IntroViewController
+            let trans = CATransition()
+            trans.type = CATransitionType.push
+            trans.subtype = CATransitionSubtype.fromLeft
+            //trans.timingFunction = ??
+            trans.duration = 0.35
+            self.navigationController?.view.layer.add(trans, forKey: nil)
+            destinationVC.introType = introType
+        }
+        
+        if segue.identifier == "gotoGuide" {
+            let destinationVC = segue.destination as! IntroViewController
+            let trans = CATransition()
+            trans.type = CATransitionType.push
+            trans.subtype = CATransitionSubtype.fromLeft
+            //trans.timingFunction = ??
+            trans.duration = 0.35
+            self.navigationController?.view.layer.add(trans, forKey: nil)
+            destinationVC.introType = "guide"
+        }
+        
     }
     
     
     @IBAction func introSelected(_ sender: UIBarButtonItem) {
         
-        performSegue(withIdentifier: "goToIntro", sender: self)
+        introType = "story"
+        performSegue(withIdentifier: "gotoIntro", sender: self)
     }
     
     
     @IBAction func guideSelected(_ sender: Any) {
         
+        introType = "guide"
+        performSegue(withIdentifier: "gotoIntro", sender: self)
+        
     }
+    
     
     
     // MARK:------------------ TABLEVIEW METHODS -----------------
@@ -337,6 +366,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let tableTextFont: UIFont = UIFont(name: self.fontName, size: self.fontSize-2) ?? UIFont(name: "Regular", size: self.fontSize-2)!
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "splitTableCell", for: indexPath) as! SplitTableCell
         
@@ -348,9 +379,9 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         cell.leftCellLabel.textColor = self.greyColour
-        cell.leftCellLabel.font = self.tableTextFont
+        cell.leftCellLabel.font = tableTextFont
         cell.leftCellLabel.text = person?[indexPath.row].personName
-        cell.rightCellLabel.font = self.tableTextFont
+        cell.rightCellLabel.font = tableTextFont
         cell.rightCellLabel.textColor = greyColour
         
         if typeOfSpend == .TotalSpend {
@@ -572,17 +603,17 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         switch iphoneType {
         case "5,SE":
-            textHeight = 16
+            textHeight = fontSize-2
         case "6,7,8":
-            textHeight = 20
+            textHeight = fontSize
         default:
-            textHeight = 22
+            textHeight = fontSize+2
         }
         navigationController?.navigationBar.barTintColor = greenColour
         navigationController?.navigationBar.tintColor = UIColor.white
         //TODO - How to set navigation text font?
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Chalkboard SE", size: textHeight)!]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: fontName, size: textHeight)!]
     }
     
     func applyUISettings() {
@@ -591,24 +622,24 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         switch iphoneType {
         case "5,SE":
-            textHeight = 16
+            textHeight = fontSize-2
         case "6,7,8":
-            textHeight = 20
+            textHeight = fontSize
         default:
-            textHeight = 22
+            textHeight = fontSize+2
         }
         
         showTotalBill.font = showTotalBill.font?.withSize(textHeight)
         showBillWithTip.font = showBillWithTip.font?.withSize(textHeight)
-        showRoundedBill.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight)
+        showRoundedBill.titleLabel?.font = UIFont(name: fontName, size: textHeight)
  
 //        totalBillText.font = totalBillText.font.withSize(textHeight)
-        totalBillText.font = UIFont(name: "ConcertOne-Regular", size: textHeight)
+        totalBillText.font = UIFont(name: fontName, size: textHeight)
         totalToPayText.font = totalToPayText.font.withSize(textHeight)
         roundedBillText.font = roundedBillText.font.withSize(textHeight)
         
-        showTip.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
-        showTax.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
+        showTip.titleLabel?.font = UIFont(name: fontName, size: textHeight-3)
+        showTax.titleLabel?.font = UIFont(name: fontName, size: textHeight-3)
 //        showRounding.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
         
         gratuityText.font = gratuityText.font.withSize(textHeight-3)
@@ -616,8 +647,9 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //setRoundingText.font = setRoundingText.font.withSize(textHeight-3)
         
         
-        showSplitterName.font = showSplitterName.font.withSize(textHeight-3)
-        showSpendType.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
+//        showSplitterName.font = showSplitterName.font.withSize(textHeight-3)
+        showSplitterName.font = UIFont(name: secondFontName, size: textHeight-4)
+        showSpendType.titleLabel?.font = UIFont(name: secondFontName, size: textHeight-4)
         showSpendType.setTitle(settings?[0].spendType, for: .normal)
         
         frameTop.layer.cornerRadius = 10.0
@@ -841,7 +873,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func setupTipDropdown() {
         
-        tipDropdown.dataSource = ["Select", "0%","10%","15%","18%","20%"]
+        tipDropdown.dataSource = ["0%","10%","15%","18%","20%","Custom"]
         tipDropdown.width = 150
         
         customiseDropDown()
@@ -852,11 +884,11 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             switch index {
             case 0: self?.percentageTip = 0.0
-            case 1: self?.percentageTip = 0.0
-            case 2: self?.percentageTip = 10.0
-            case 3: self?.percentageTip = 15.0
-            case 4: self?.percentageTip = 18.0
-            case 5: self?.percentageTip = 20.0
+            case 1: self?.percentageTip = 10.0
+            case 2: self?.percentageTip = 15.0
+            case 3: self?.percentageTip = 18.0
+            case 4: self?.percentageTip = 20.0
+            case 5: self?.setCustomTip()
                 
             default:
                 self?.percentageTip = 0.0
@@ -868,6 +900,39 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             self?.showBillTotals()
         }
+    }
+    
+    func setCustomTip(){
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Set Percentage Tip", message: "Enter a tip greater than 1%", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Enter", style: .default) { (action) in
+            
+            if textField.text!.isEmpty{
+                //Do nothing
+            }
+            else {
+                let customTip = (textField.text! as NSString).floatValue
+                if customTip > 1 {
+                    self.percentageTip = customTip
+                    self.billWithTip = self.billTotal * (1 + self.percentageTip/100)
+                    self.showBillTotals()
+                }
+            } // end else
+        } //end action
+        
+        alert.addTextField { (alertTextField) in
+            
+            alertTextField.placeholder = "\(self.percentageTip)"
+            textField = alertTextField
+            textField.keyboardType = .decimalPad
+        } // end alert
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
     }
     
     func updateBillWithTip() { // DELETE FUNCTION
@@ -951,7 +1016,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    func printFontss() {
+    func printFonts() {
         for family in UIFont.familyNames.sorted() {
             let names = UIFont.fontNames(forFamilyName: family)
             print("Family: \(family) Font names: \(names)")

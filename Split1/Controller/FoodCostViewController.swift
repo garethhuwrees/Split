@@ -33,7 +33,7 @@ class FoodCostViewController: UITableViewController {
     var currencyPrefix: String = ""
     
     let greyText: UIColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
-    let tableTextFont: UIFont = UIFont(name: "Chalkboard SE", size: 18) ?? UIFont(name: "Regular", size: 18)!
+    let tableTextFont: UIFont = UIFont(name: "ChalkboardSE-Regular", size: 20) ?? UIFont(name: "Regular", size: 20)!
  
     //MARK:------------------ VIEW DID LOAD & DISAPPEAR ----------------------------------
 
