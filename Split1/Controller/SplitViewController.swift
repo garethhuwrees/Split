@@ -220,6 +220,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         applyNavbarSettings()
         
+//        printFontss()
+        
         
         //initialised to 0 so must be reset before further function calls
         //TODO: Can this move to loadTables()?
@@ -496,7 +498,6 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         // FIXED AMOUNT
-        //let billRounded = settings?[0].billRounded ?? 0.0
         let roundedBillRounded = (roundedBill * roundingFactor).rounded() / roundingFactor
         displayedNumber = formatNumber(numberToFormat: roundedBillRounded, digits: numberOfDigits)
         
@@ -515,7 +516,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         
-        //let selectedTip = settings?[0].gratuity ?? 0.0
+       // TAX RATE & PERCENTAGE TIP
         percentageTip = (percentageTip * 10).rounded() / 10
         let displayedTip = formatNumber(numberToFormat: percentageTip, digits: 0)
         showTip.setTitle(displayedTip + "%", for: .normal)
@@ -601,7 +602,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         showBillWithTip.font = showBillWithTip.font?.withSize(textHeight)
         showRoundedBill.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight)
  
-        totalBillText.font = totalBillText.font.withSize(textHeight)
+//        totalBillText.font = totalBillText.font.withSize(textHeight)
+        totalBillText.font = UIFont(name: "ConcertOne-Regular", size: textHeight)
         totalToPayText.font = totalToPayText.font.withSize(textHeight)
         roundedBillText.font = roundedBillText.font.withSize(textHeight)
         
@@ -728,6 +730,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 print("Error updating cost")
             }
         billWithTip = 0.0
+        roundedBill = 0.0
         showBillTotals()
         splitterTableView.reloadData()
         }
@@ -945,6 +948,13 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if #available(iOS 11.0, *) {
             appearance.setupMaskedCorners([.layerMaxXMaxYCorner, .layerMinXMaxYCorner])
+        }
+    }
+    
+    func printFontss() {
+        for family in UIFont.familyNames.sorted() {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family) Font names: \(names)")
         }
     }
 

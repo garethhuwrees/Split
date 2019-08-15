@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Your Spend-->
+        <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SplitViewController" customModule="SPLIT_" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmT-V3-8QX" userLabel="Logo View">
-                                <rect key="frame" x="0.0" y="64" width="375" height="51"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="63.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplitLogo1024" translatesAutoresizingMaskIntoConstraints="NO" id="FJh-x4-Z79">
-                                        <rect key="frame" x="100" y="0.0" width="175" height="51"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Split_Logo_Orange" translatesAutoresizingMaskIntoConstraints="NO" id="FJh-x4-Z79">
+                                        <rect key="frame" x="100" y="10" width="175" height="53.5"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -30,38 +30,38 @@
                                     <constraint firstItem="FJh-x4-Z79" firstAttribute="leading" secondItem="kmT-V3-8QX" secondAttribute="leading" constant="100" id="Ffg-hN-XgZ"/>
                                     <constraint firstAttribute="bottom" secondItem="FJh-x4-Z79" secondAttribute="bottom" id="JRp-pQ-KiT"/>
                                     <constraint firstAttribute="trailing" secondItem="FJh-x4-Z79" secondAttribute="trailing" constant="100" id="pL7-7S-KZj"/>
-                                    <constraint firstItem="FJh-x4-Z79" firstAttribute="top" secondItem="kmT-V3-8QX" secondAttribute="top" id="y5F-bM-1iJ"/>
+                                    <constraint firstItem="FJh-x4-Z79" firstAttribute="top" secondItem="kmT-V3-8QX" secondAttribute="top" constant="10" id="y5F-bM-1iJ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sc7-Yf-e3h" userLabel="Top View">
-                                <rect key="frame" x="0.0" y="115" width="375" height="152.5"/>
+                                <rect key="frame" x="0.0" y="127.5" width="375" height="158.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Gh-ro-YHP" userLabel="Top Frame">
-                                        <rect key="frame" x="10" y="10" width="355" height="132.5"/>
+                                        <rect key="frame" x="10" y="10" width="355" height="138.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lgf-tB-2eS" userLabel="Top Left">
-                                        <rect key="frame" x="15" y="15" width="230" height="122.5"/>
+                                        <rect key="frame" x="15" y="15" width="230" height="128.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="r9F-b8-td0">
-                                                <rect key="frame" x="20" y="10" width="200" height="102.5"/>
+                                                <rect key="frame" x="20" y="10" width="200" height="108.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Spend (inc Tax)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oj4-4V-OWI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="186" height="21.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="186" height="23.5"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
                                                         <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Spend + Tip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MZ-RT-Hq9">
-                                                        <rect key="frame" x="0.0" y="40.5" width="154.5" height="21.5"/>
+                                                        <rect key="frame" x="0.0" y="42.5" width="154.5" height="23.5"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
                                                         <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay Fixed Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qe7-4a-p41">
-                                                        <rect key="frame" x="0.0" y="81" width="161" height="21.5"/>
+                                                        <rect key="frame" x="0.0" y="85" width="161" height="23.5"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
                                                         <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -82,25 +82,25 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kO-Wh-Mgi" userLabel="Top Right">
-                                        <rect key="frame" x="245" y="15" width="115" height="122.5"/>
+                                        <rect key="frame" x="245" y="15" width="115" height="128.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="B7k-Kh-TUi">
-                                                <rect key="frame" x="10" y="10" width="95" height="102.5"/>
+                                                <rect key="frame" x="10" y="10" width="95" height="108.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Whc-k1-SCP" userLabel="Show Total Spend">
-                                                        <rect key="frame" x="0.0" y="0.0" width="95" height="21.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="95" height="23.5"/>
                                                         <color key="textColor" red="0.17254901960784313" green="0.24313725490196078" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2pU-6v-WX7">
-                                                        <rect key="frame" x="0.0" y="40.5" width="95" height="21.5"/>
+                                                        <rect key="frame" x="0.0" y="42.5" width="95" height="23.5"/>
                                                         <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZb-Vz-3hk" userLabel="Show Rounded Bill">
-                                                        <rect key="frame" x="0.0" y="81" width="95" height="21.5"/>
+                                                        <rect key="frame" x="0.0" y="85" width="95" height="23.5"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
                                                         <state key="normal" title="0.00">
                                                             <color key="titleColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -143,28 +143,28 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUt-YE-FBa" userLabel="Middle View">
-                                <rect key="frame" x="0.0" y="267.5" width="375" height="101.5"/>
+                                <rect key="frame" x="0.0" y="286" width="375" height="99"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6v-WS-x4c" userLabel="Middle Frame">
-                                        <rect key="frame" x="10" y="10" width="355" height="81.5"/>
+                                        <rect key="frame" x="10" y="10" width="355" height="79"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRa-3d-5yY" userLabel="Mid Left">
-                                        <rect key="frame" x="15" y="15" width="230" height="71.5"/>
+                                        <rect key="frame" x="15" y="15" width="230" height="69"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="j4X-da-0QU">
-                                                <rect key="frame" x="20" y="10" width="200" height="51.5"/>
+                                                <rect key="frame" x="20" y="10" width="200" height="49"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Tip/Graturity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDy-j1-eRC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="131.5" height="21.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="131.5" height="20.5"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                         <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Tax Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYq-2X-grq">
-                                                        <rect key="frame" x="0.0" y="29.5" width="99" height="22"/>
+                                                        <rect key="frame" x="0.0" y="28.5" width="99" height="20.5"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                         <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -184,13 +184,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sUy-N1-NVf" userLabel="Mid Right">
-                                        <rect key="frame" x="245" y="15" width="115" height="71.5"/>
+                                        <rect key="frame" x="245" y="15" width="115" height="69"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1Oe-Cd-MeA">
-                                                <rect key="frame" x="10" y="10" width="95" height="51.5"/>
+                                                <rect key="frame" x="10" y="10" width="95" height="49"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeO-Em-C7R">
-                                                        <rect key="frame" x="0.0" y="0.0" width="95" height="23"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="95" height="22"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                         <state key="normal" title="Select">
                                                             <color key="titleColor" red="0.086274509803921567" green="0.62745098039215685" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
@@ -200,7 +200,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Mj-uw-t4S">
-                                                        <rect key="frame" x="0.0" y="28" width="95" height="23.5"/>
+                                                        <rect key="frame" x="0.0" y="27" width="95" height="22"/>
                                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                         <state key="normal" title="Select">
                                                             <color key="titleColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -245,19 +245,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Jv-EQ-54n" userLabel="Bottom View">
-                                <rect key="frame" x="0.0" y="369" width="375" height="254"/>
+                                <rect key="frame" x="0.0" y="385" width="375" height="238"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhv-yP-Q55" userLabel="Bottom Frame">
-                                        <rect key="frame" x="10" y="10" width="355" height="224"/>
+                                        <rect key="frame" x="10" y="10" width="355" height="208"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVG-dQ-dA8" userLabel="Header View">
-                                        <rect key="frame" x="25" y="15" width="325" height="30.5"/>
+                                        <rect key="frame" x="25" y="15" width="325" height="28.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Odt-M1-X0E">
-                                                <rect key="frame" x="172.5" y="0.0" width="152.5" height="30.5"/>
+                                                <rect key="frame" x="172.5" y="0.0" width="152.5" height="28.5"/>
                                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                 <state key="normal" title="Spend Type">
                                                     <color key="titleColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -267,7 +267,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Splitter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJN-DV-3bx">
-                                                <rect key="frame" x="20" y="0.0" width="152.5" height="30.5"/>
+                                                <rect key="frame" x="20" y="0.0" width="152.5" height="28.5"/>
                                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
                                                 <color key="textColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -287,7 +287,7 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nwv-vc-sGb">
-                                        <rect key="frame" x="25" y="45.5" width="325" height="183.5"/>
+                                        <rect key="frame" x="25" y="43.5" width="325" height="169.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                 </subviews>
@@ -316,14 +316,14 @@
                             <constraint firstItem="kmT-V3-8QX" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="IIl-7M-xP7"/>
                             <constraint firstItem="0Jv-EQ-54n" firstAttribute="top" secondItem="OUt-YE-FBa" secondAttribute="bottom" id="QzT-d0-C4Z"/>
                             <constraint firstItem="sc7-Yf-e3h" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="VhW-Nb-OBB"/>
-                            <constraint firstItem="sc7-Yf-e3h" firstAttribute="height" secondItem="kmT-V3-8QX" secondAttribute="height" multiplier="3:1" id="XuW-aw-cy3"/>
-                            <constraint firstItem="0Jv-EQ-54n" firstAttribute="height" secondItem="OUt-YE-FBa" secondAttribute="height" multiplier="2.5:1" id="Z0u-i0-8qZ"/>
+                            <constraint firstItem="sc7-Yf-e3h" firstAttribute="height" secondItem="kmT-V3-8QX" secondAttribute="height" multiplier="2.5:1" id="XuW-aw-cy3"/>
+                            <constraint firstItem="0Jv-EQ-54n" firstAttribute="height" secondItem="OUt-YE-FBa" secondAttribute="height" multiplier="2.4:1" id="Z0u-i0-8qZ"/>
                             <constraint firstItem="OUt-YE-FBa" firstAttribute="top" secondItem="sc7-Yf-e3h" secondAttribute="bottom" id="fwp-gE-srj"/>
                             <constraint firstItem="sc7-Yf-e3h" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lhc-RU-fTF"/>
                             <constraint firstItem="sc7-Yf-e3h" firstAttribute="top" secondItem="kmT-V3-8QX" secondAttribute="bottom" id="nta-1y-2er"/>
                             <constraint firstItem="OUt-YE-FBa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="oAP-7c-Zh1"/>
                             <constraint firstItem="kmT-V3-8QX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="oMS-Co-0Rt"/>
-                            <constraint firstItem="OUt-YE-FBa" firstAttribute="height" secondItem="sc7-Yf-e3h" secondAttribute="height" multiplier="1:1.5" id="odK-eB-pKK"/>
+                            <constraint firstItem="OUt-YE-FBa" firstAttribute="height" secondItem="sc7-Yf-e3h" secondAttribute="height" multiplier="1:1.6" id="odK-eB-pKK"/>
                             <constraint firstItem="OUt-YE-FBa" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="phF-la-HPU"/>
                             <constraint firstItem="0Jv-EQ-54n" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="put-T6-oiz"/>
                             <constraint firstItem="kmT-V3-8QX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zCx-UT-ZX2"/>
@@ -331,25 +331,25 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="0.00" id="i97-Rg-U7P">
+                        <barButtonItem title="0.00" image="Decimal" id="i97-Rg-U7P">
                             <connections>
                                 <action selector="selectRounding:" destination="BYZ-38-t0r" id="r12-8M-CSg"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="ONm-yR-UFK"/>
-                        <barButtonItem title="Reset" id="gy9-Lm-fyi">
+                        <barButtonItem title="Reset" image="Reset" id="gy9-Lm-fyi">
                             <connections>
                                 <action selector="resetButtonPressed:" destination="BYZ-38-t0r" id="Z5r-rq-OWf"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="BF8-hE-C1w"/>
-                        <barButtonItem title=" ¢ " id="bnW-OO-UXG">
+                        <barButtonItem title=" ¢ " image="Currency" id="bnW-OO-UXG">
                             <connections>
                                 <action selector="selectCurrency:" destination="BYZ-38-t0r" id="jk2-Yv-sa5"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Your Spend" id="CqX-p8-iUo">
+                    <navigationItem key="navigationItem" title="Home" id="CqX-p8-iUo">
                         <barButtonItem key="leftBarButtonItem" title="Intro" id="TGj-IF-a31">
                             <connections>
                                 <action selector="introSelected:" destination="BYZ-38-t0r" id="EL9-Ka-bvl"/>
@@ -646,13 +646,13 @@
                         <viewLayoutGuide key="safeArea" id="Vny-eg-ev7"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Add Splitter" image="AddSplitter60" id="H8s-Sh-RyH">
+                        <barButtonItem title="Add Splitter" image="Add_Diner" id="H8s-Sh-RyH">
                             <connections>
                                 <action selector="addPerson:" destination="Nsv-iG-bKB" id="kWO-bO-dBc"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="F6A-dB-oQs"/>
-                        <barButtonItem title="Add Item" id="Lxm-2l-Fc7">
+                        <barButtonItem title="Add Item" image="Add_Item" id="Lxm-2l-Fc7">
                             <connections>
                                 <action selector="addItem:" destination="Nsv-iG-bKB" id="v9s-sF-sRe"/>
                             </connections>
@@ -741,8 +741,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AddSplitter60" width="40" height="40"/>
-        <image name="SplitLogo1024" width="512" height="128"/>
+        <image name="Add_Diner" width="60" height="60"/>
+        <image name="Add_Item" width="60" height="60"/>
+        <image name="Currency" width="60" height="60"/>
+        <image name="Decimal" width="60" height="60"/>
+        <image name="Reset" width="60" height="60"/>
+        <image name="Split_Logo_Orange" width="512" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="557-lP-Rga"/>

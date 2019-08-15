@@ -10,7 +10,9 @@
 		7F07F31722C85F03008410C6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F07F31622C85F03008410C6 /* Settings.swift */; };
 		7F6B0FD922E8B1D30078C23D /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B0FD822E8B1D30078C23D /* IntroViewController.swift */; };
 		7F73AEEF22BC87630087A4DA /* SplitCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */; };
+		7F776E5923043F7400435E2E /* Concert One regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F776E5823043F7400435E2E /* Concert One regular.ttf */; };
 		7F7E42B022C674F9001A43F9 /* DinersCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */; };
+		7F95821A2304FC33000EC587 /* Lemon regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F9582192304FC31000EC587 /* Lemon regular.ttf */; };
 		7F9CAEB622FEFE50000CE91B /* DinerFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */; };
 		7FAB647E22DF68E700EB440E /* SplitTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73AEEC22BC87630087A4DA /* SplitTableCell.swift */; };
 		7FAB648022DF6E2B00EB440E /* FoodCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB647F22DF6E2B00EB440E /* FoodCostViewController.swift */; };
@@ -36,7 +38,9 @@
 		7F6B0FD822E8B1D30078C23D /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		7F73AEEC22BC87630087A4DA /* SplitTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTableCell.swift; sourceTree = "<group>"; };
 		7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplitCustomCell.xib; sourceTree = "<group>"; };
+		7F776E5823043F7400435E2E /* Concert One regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Concert One regular.ttf"; path = "../Concert One regular.ttf"; sourceTree = "<group>"; };
 		7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinersCostViewController.swift; sourceTree = "<group>"; };
+		7F9582192304FC31000EC587 /* Lemon regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lemon regular.ttf"; sourceTree = "<group>"; };
 		7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
 		7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinerFoodViewController.swift; sourceTree = "<group>"; };
 		7FAB647F22DF6E2B00EB440E /* FoodCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCostViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +120,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		7F776E5A23043F8600435E2E /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				7F9582192304FC31000EC587 /* Lemon regular.ttf */,
+				7F776E5823043F7400435E2E /* Concert One regular.ttf */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		7FB7C0E422B44F51003C03F4 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +155,7 @@
 				7F07F31122C6FFD4008410C6 /* View */,
 				7F73AEE722BC85F70087A4DA /* Model */,
 				7FB7C0FA22B44F59003C03F4 /* Assets.xcassets */,
+				7F776E5A23043F8600435E2E /* New Group */,
 				7FB7C0FC22B44F59003C03F4 /* LaunchScreen.storyboard */,
 				7FB7C0FF22B44F59003C03F4 /* Info.plist */,
 				7FB7C0F722B44F52003C03F4 /* Split1.xcdatamodeld */,
@@ -218,6 +232,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FB7C0FE22B44F59003C03F4 /* LaunchScreen.storyboard in Resources */,
+				7F776E5923043F7400435E2E /* Concert One regular.ttf in Resources */,
+				7F95821A2304FC33000EC587 /* Lemon regular.ttf in Resources */,
 				7FF7733522CA905C00A7353B /* Notes in Resources */,
 				7F73AEEF22BC87630087A4DA /* SplitCustomCell.xib in Resources */,
 				7FCBDE9622F354AD00D55FF9 /* LaunchScreen.storyboard in Resources */,
