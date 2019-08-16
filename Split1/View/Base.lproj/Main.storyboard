@@ -10,6 +10,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Cabin 500italic.ttf">
+            <string>Cabin-MediumItalic</string>
+        </array>
+        <array key="Cabin 700italic.ttf">
+            <string>Cabin-BoldItalic</string>
+        </array>
+        <array key="Cabin regular.ttf">
+            <string>Cabin-Regular</string>
+        </array>
         <array key="Lemon regular.ttf">
             <string>Lemon-Regular</string>
         </array>
@@ -298,7 +307,7 @@
                                         <rect key="frame" x="25" y="15" width="364" height="32"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Odt-M1-X0E">
-                                                <rect key="frame" x="192" y="0.0" width="172" height="32"/>
+                                                <rect key="frame" x="194.66666666666663" y="0.0" width="169.33333333333337" height="32"/>
                                                 <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
                                                 <state key="normal" title="Spend Type">
                                                     <color key="titleColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -308,7 +317,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Splitter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJN-DV-3bx">
-                                                <rect key="frame" x="20" y="0.0" width="172" height="32"/>
+                                                <rect key="frame" x="25" y="0.0" width="169.66666666666666" height="32"/>
                                                 <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
                                                 <color key="textColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -320,7 +329,7 @@
                                             <constraint firstItem="Odt-M1-X0E" firstAttribute="top" secondItem="sVG-dQ-dA8" secondAttribute="top" id="97X-PG-Peg"/>
                                             <constraint firstAttribute="bottom" secondItem="LJN-DV-3bx" secondAttribute="bottom" id="Vw6-TS-LuQ"/>
                                             <constraint firstItem="Odt-M1-X0E" firstAttribute="leading" secondItem="LJN-DV-3bx" secondAttribute="trailing" id="W6R-jB-7Rf"/>
-                                            <constraint firstItem="LJN-DV-3bx" firstAttribute="leading" secondItem="sVG-dQ-dA8" secondAttribute="leading" constant="20" id="bI8-ll-wt0"/>
+                                            <constraint firstItem="LJN-DV-3bx" firstAttribute="leading" secondItem="sVG-dQ-dA8" secondAttribute="leading" constant="25" id="bI8-ll-wt0"/>
                                             <constraint firstItem="LJN-DV-3bx" firstAttribute="top" secondItem="sVG-dQ-dA8" secondAttribute="top" id="d6g-gU-XLT"/>
                                             <constraint firstAttribute="trailing" secondItem="Odt-M1-X0E" secondAttribute="trailing" id="eqK-iu-SdR"/>
                                             <constraint firstItem="Odt-M1-X0E" firstAttribute="width" secondItem="LJN-DV-3bx" secondAttribute="width" id="gUo-xj-Qsn"/>
@@ -446,27 +455,27 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="112.33333333333333"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wjm-MF-buk">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="43.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                                                 <color key="textColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Lemon-Regular" family="Lemon" pointSize="32"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Subtitle1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xg0-GS-ji9" userLabel="Subtitle1 Text">
-                                                <rect key="frame" x="0.0" y="43.333333333333329" width="414" height="34.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="48" width="414" height="32.333333333333343"/>
                                                 <color key="textColor" red="0.90196078431372551" green="0.49411764705882355" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="21"/>
+                                                <fontDescription key="fontDescription" name="Cabin-MediumItalic" family="Cabin" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Subtitle2" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FwA-Na-n7N" userLabel="Subtitle2 Text">
-                                                <rect key="frame" x="0.0" y="77.666666666666657" width="414" height="34.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="80.333333333333343" width="414" height="32"/>
                                                 <color key="textColor" red="0.90196078431372551" green="0.49411764705882355" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
+                                                <fontDescription key="fontDescription" name="Cabin-MediumItalic" family="Cabin" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="FwA-Na-n7N" firstAttribute="height" secondItem="xg0-GS-ji9" secondAttribute="height" multiplier="1:1" id="E2q-7e-fRN"/>
-                                            <constraint firstItem="xg0-GS-ji9" firstAttribute="height" secondItem="wjm-MF-buk" secondAttribute="height" multiplier="1:1.25" id="GoU-ZX-IkF"/>
+                                            <constraint firstItem="xg0-GS-ji9" firstAttribute="height" secondItem="wjm-MF-buk" secondAttribute="height" multiplier="1:1.5" id="GoU-ZX-IkF"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -479,7 +488,7 @@
                                         <rect key="frame" x="10" y="20.000000000000028" width="394" height="475.66666666666674"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" red="0.17254901960784313" green="0.24313725490196078" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="Cabin-Regular" family="Cabin" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
@@ -619,24 +628,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Splitters" borderStyle="roundedRect" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7xK-en-eaM">
-                                <rect key="frame" x="0.0" y="64" width="414" height="33"/>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Splitters" borderStyle="roundedRect" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7xK-en-eaM">
+                                <rect key="frame" x="0.0" y="64" width="414" height="31"/>
                                 <color key="textColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Lemon-Regular" family="Lemon" pointSize="21"/>
+                                <fontDescription key="fontDescription" name="Cabin-BoldItalic" family="Cabin" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Food &amp; Drink" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zZu-HX-DaI">
-                                <rect key="frame" x="0.0" y="378" width="414" height="33"/>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Food &amp; Drink" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zZu-HX-DaI">
+                                <rect key="frame" x="0.0" y="378" width="414" height="31"/>
                                 <color key="textColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Lemon-Regular" family="Lemon" pointSize="22"/>
+                                <fontDescription key="fontDescription" name="Cabin-BoldItalic" family="Cabin" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Im0-LS-Xpz" userLabel="Splitter Table View">
-                                <rect key="frame" x="0.0" y="97" width="414" height="281"/>
+                                <rect key="frame" x="0.0" y="95" width="414" height="283"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g14-BL-XJL" userLabel="Food Table View">
-                                <rect key="frame" x="0.0" y="411" width="414" height="281"/>
+                                <rect key="frame" x="0.0" y="409" width="414" height="283"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>

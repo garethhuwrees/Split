@@ -38,8 +38,12 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Concert One Regular.ttf</string>
+		<string>Cabin 600italic.ttf</string>
 		<string>Lemon regular.ttf</string>
+		<string>Cabin 700italic.ttf</string>
+		<string>Cabin regular.ttf</string>
+		<string>Cabin 500.ttf</string>
+		<string>Cabin 500italic.ttf</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

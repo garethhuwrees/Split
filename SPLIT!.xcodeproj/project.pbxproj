@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		7F07F31722C85F03008410C6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F07F31622C85F03008410C6 /* Settings.swift */; };
+		7F38462D2306E5EB0025317B /* Cabin regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F38462C2306E5EA0025317B /* Cabin regular.ttf */; };
+		7F38462F2306E6060025317B /* Cabin 500.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F38462E2306E6060025317B /* Cabin 500.ttf */; };
+		7F3846312306E6170025317B /* Cabin 500italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F3846302306E6170025317B /* Cabin 500italic.ttf */; };
+		7F3846332306EF020025317B /* Cabin 600italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F3846322306EF020025317B /* Cabin 600italic.ttf */; };
+		7F3846352306F11E0025317B /* Cabin 700italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F3846342306F11D0025317B /* Cabin 700italic.ttf */; };
 		7F6B0FD922E8B1D30078C23D /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B0FD822E8B1D30078C23D /* IntroViewController.swift */; };
 		7F73AEEF22BC87630087A4DA /* SplitCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */; };
 		7F776E5923043F7400435E2E /* Concert One regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F776E5823043F7400435E2E /* Concert One regular.ttf */; };
@@ -35,6 +40,11 @@
 /* Begin PBXFileReference section */
 		48FBA6CCE5070BAC99204B82 /* Pods-Split1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Split1.debug.xcconfig"; path = "Target Support Files/Pods-Split1/Pods-Split1.debug.xcconfig"; sourceTree = "<group>"; };
 		7F07F31622C85F03008410C6 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		7F38462C2306E5EA0025317B /* Cabin regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cabin regular.ttf"; sourceTree = "<group>"; };
+		7F38462E2306E6060025317B /* Cabin 500.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cabin 500.ttf"; sourceTree = "<group>"; };
+		7F3846302306E6170025317B /* Cabin 500italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cabin 500italic.ttf"; sourceTree = "<group>"; };
+		7F3846322306EF020025317B /* Cabin 600italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cabin 600italic.ttf"; sourceTree = "<group>"; };
+		7F3846342306F11D0025317B /* Cabin 700italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cabin 700italic.ttf"; sourceTree = "<group>"; };
 		7F6B0FD822E8B1D30078C23D /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		7F73AEEC22BC87630087A4DA /* SplitTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTableCell.swift; sourceTree = "<group>"; };
 		7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplitCustomCell.xib; sourceTree = "<group>"; };
@@ -123,6 +133,11 @@
 		7F776E5A23043F8600435E2E /* New Group */ = {
 			isa = PBXGroup;
 			children = (
+				7F38462C2306E5EA0025317B /* Cabin regular.ttf */,
+				7F38462E2306E6060025317B /* Cabin 500.ttf */,
+				7F3846302306E6170025317B /* Cabin 500italic.ttf */,
+				7F3846322306EF020025317B /* Cabin 600italic.ttf */,
+				7F3846342306F11D0025317B /* Cabin 700italic.ttf */,
 				7F9582192304FC31000EC587 /* Lemon regular.ttf */,
 				7F776E5823043F7400435E2E /* Concert One regular.ttf */,
 			);
@@ -232,10 +247,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FB7C0FE22B44F59003C03F4 /* LaunchScreen.storyboard in Resources */,
+				7F38462F2306E6060025317B /* Cabin 500.ttf in Resources */,
 				7F776E5923043F7400435E2E /* Concert One regular.ttf in Resources */,
+				7F3846312306E6170025317B /* Cabin 500italic.ttf in Resources */,
+				7F3846352306F11E0025317B /* Cabin 700italic.ttf in Resources */,
+				7F38462D2306E5EB0025317B /* Cabin regular.ttf in Resources */,
 				7F95821A2304FC33000EC587 /* Lemon regular.ttf in Resources */,
 				7FF7733522CA905C00A7353B /* Notes in Resources */,
 				7F73AEEF22BC87630087A4DA /* SplitCustomCell.xib in Resources */,
+				7F3846332306EF020025317B /* Cabin 600italic.ttf in Resources */,
 				7FCBDE9622F354AD00D55FF9 /* LaunchScreen.storyboard in Resources */,
 				7FB7C0FB22B44F59003C03F4 /* Assets.xcassets in Resources */,
 				7FB7C0F622B44F52003C03F4 /* Main.storyboard in Resources */,

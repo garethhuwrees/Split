@@ -39,8 +39,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let lightGreyColour = UIColor(red: 149/255, green: 165/255, blue: 166/255, alpha: 1)
     
     let fontSize: CGFloat = 20
-    let fontName: String = "ChalkboardSE-Regular"
-    let secondFontName = "Lemon-Regular"
+    let fontName: String = "Cabin-Medium"
+    let secondFontName = "Cabin-BoldItalic"
    
     // Settings
     var percentageTip: Float = 0.0
@@ -219,11 +219,6 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
 //        printFonts()
         
-        
-        //initialised to 0 so must be reset before further function calls
-        //TODO: Can this move to loadTables()?
-        percentageTip = settings?[0].gratuity ?? 0.0
-        
         showBillTotals()
         splitterTableView.reloadData()
         
@@ -259,6 +254,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        loadTables()
         showBillTotals()
         splitterTableView.reloadData()
 
@@ -622,34 +619,29 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         switch iphoneType {
         case "5,SE":
-            textHeight = fontSize-2
+            textHeight = fontSize-4
         case "6,7,8":
             textHeight = fontSize
         default:
             textHeight = fontSize+2
         }
         
-        showTotalBill.font = showTotalBill.font?.withSize(textHeight)
-        showBillWithTip.font = showBillWithTip.font?.withSize(textHeight)
+        totalBillText.font = UIFont(name: fontName, size: textHeight)
+        totalToPayText.font = UIFont(name: fontName, size: textHeight)
+        roundedBillText.font = UIFont(name: fontName, size: textHeight)
+        
+        showTotalBill.font = UIFont(name: fontName, size: textHeight)
+        showBillWithTip.font = UIFont(name: fontName, size: textHeight)
         showRoundedBill.titleLabel?.font = UIFont(name: fontName, size: textHeight)
  
-//        totalBillText.font = totalBillText.font.withSize(textHeight)
-        totalBillText.font = UIFont(name: fontName, size: textHeight)
-        totalToPayText.font = totalToPayText.font.withSize(textHeight)
-        roundedBillText.font = roundedBillText.font.withSize(textHeight)
+        gratuityText.font = UIFont(name: fontName, size: textHeight-3)
+        taxRateText.font = UIFont(name: fontName, size: textHeight-3)
         
         showTip.titleLabel?.font = UIFont(name: fontName, size: textHeight-3)
         showTax.titleLabel?.font = UIFont(name: fontName, size: textHeight-3)
-//        showRounding.titleLabel?.font = UIFont(name: "Chalkboard SE", size: textHeight-3)
         
-        gratuityText.font = gratuityText.font.withSize(textHeight-3)
-        taxRateText.font = taxRateText.font.withSize(textHeight-3)
-        //setRoundingText.font = setRoundingText.font.withSize(textHeight-3)
-        
-        
-//        showSplitterName.font = showSplitterName.font.withSize(textHeight-3)
-        showSplitterName.font = UIFont(name: secondFontName, size: textHeight-4)
-        showSpendType.titleLabel?.font = UIFont(name: secondFontName, size: textHeight-4)
+        showSplitterName.font = UIFont(name: secondFontName, size: textHeight-2)
+        showSpendType.titleLabel?.font = UIFont(name: secondFontName, size: textHeight-2)
         showSpendType.setTitle(settings?[0].spendType, for: .normal)
         
         frameTop.layer.cornerRadius = 10.0
@@ -906,7 +898,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Set Percentage Tip", message: "Enter a tip greater than 1%", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Set Percentage Tip", message: "Enter a value greater than 1%", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Enter", style: .default) { (action) in
             
