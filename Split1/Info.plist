@@ -38,12 +38,14 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Cabin 600italic.ttf</string>
 		<string>Lemon regular.ttf</string>
-		<string>Cabin 700italic.ttf</string>
-		<string>Cabin regular.ttf</string>
-		<string>Cabin 500.ttf</string>
-		<string>Cabin 500italic.ttf</string>
+		<string>Livvic regular.ttf</string>
+		<string>Livvic 900.ttf</string>
+		<string>Neuton regular.ttf</string>
+		<string>Neuton 800.ttf</string>
+		<string>Roboto regular.ttf</string>
+		<string>Roboto 500.ttf</string>
+		<string>Roboto 700.ttf</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

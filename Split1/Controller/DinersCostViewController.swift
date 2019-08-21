@@ -33,7 +33,7 @@ class DinersCostViewController: UITableViewController {
     
     // Set table text colour and font
     let greyText: UIColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
-    let tableTextFont: UIFont = UIFont(name: "ChalkboardSE-Regular", size: 20) ?? UIFont(name: "Regular", size: 20)!
+    let tableTextFont: UIFont = UIFont(name: "Roboto-Regular", size: 20) ?? UIFont(name: "Georgia", size: 20)!
     
     //---------------- VIEW DID LOAD & DISAPPEAR ----------------------
     override func viewDidLoad() {
@@ -181,7 +181,7 @@ class DinersCostViewController: UITableViewController {
             do {
                 try self.realm.write {
                     let selectedDiner = dinerRecord?[0]
-                    selectedDiner?.personSpendNet = totalBill
+                    selectedDiner?.personSpend = totalBill
                 } // end try
             } // end do
             catch {
@@ -233,13 +233,21 @@ class DinersCostViewController: UITableViewController {
         
         if numberOfDiners > 0 {
             for index in 0...(numberOfDiners - 1){
-                billTotal = billTotal + (person?[index].personSpendNet)!
+                billTotal = billTotal + (person?[index].personSpend)!
             }
         } // end if
         
         if numberOfDiners > 0 {
             for index in 0...(numberOfDiners - 1){
-                let percentOfBill = (person?[index].personSpendNet)! / billTotal
+                
+                var percentOfBill: Float
+                
+                if billTotal == Float(0.0){
+                    percentOfBill = 0.0
+                }
+                else {
+                    percentOfBill = (person?[index].personSpend)! / billTotal
+                }
                 
                 do {
                     try self.realm.write {
@@ -247,7 +255,7 @@ class DinersCostViewController: UITableViewController {
                     } // end try
                 } // end do
                 catch {
-                    print("Error updating Diners Spend")
+                    print("Error updating Person table")
                 }
             } // end for
         } // end if

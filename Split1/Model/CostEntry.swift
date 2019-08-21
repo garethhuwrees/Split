@@ -10,9 +10,10 @@ import Foundation
 import RealmSwift
 
 class CostEntry: Object {
-    @objc dynamic var personName : String = ""
-    @objc dynamic var itemName : String = ""
-    @objc dynamic var itemSpend : Float = 0.0
+    @objc dynamic var personName: String = ""
+    @objc dynamic var itemName: String = ""
+    @objc dynamic var itemSpend: Float = 0.0
+    @objc dynamic var itemNumber: Int = 0
     
     // Set up the inverse relationships
 //    var consumedBy = LinkingObjects(fromType: Splitter.self, property: "consumes")

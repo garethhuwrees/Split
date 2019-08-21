@@ -31,7 +31,7 @@ class DinersViewController: UITableViewController {
     let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
     let greenColour = UIColor(red: 22/255, green: 160/255, blue: 132/255, alpha: 1)
     
-    let tableTextFont: UIFont = UIFont(name: "Chalkboard SE", size: 18) ?? UIFont(name: "Regular", size: 18)!
+    let tableTextFont: UIFont = UIFont(name: "Chalkboard SE", size: 18) ?? UIFont(name: "Georgia", size: 18)!
 
     
     @IBOutlet weak var showTipStatus: UIBarButtonItem!
@@ -88,20 +88,20 @@ class DinersViewController: UITableViewController {
         
         if numberOfDiners > 0 {
             for n in 0...(numberOfDiners-1) {
-                totalBill = totalBill + person![n].personSpendNet
+                totalBill = totalBill + person![n].personSpend
             } // end for
         }
         else {
             // leave totalBill = 0.0
         }
         
-        let billWithTip = totalBill * (1 + percentageTip/100)
+//        let billWithTip = totalBill * (1 + percentageTip/100)
         
         if let setSpendTotals = settings?[0] {
             do {
                 try realm.write {
-                    setSpendTotals.billTotalSpend = totalBill
-                    setSpendTotals.billWithTip = billWithTip
+                    setSpendTotals.totalSpend = totalBill
+//                    setSpendTotals.billWithTip = billWithTip
                 }
             }
             catch {
@@ -138,7 +138,7 @@ class DinersViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "splitTableCell", for: indexPath) as! SplitTableCell
 
-        var spend = (person?[indexPath.row].personSpendNet) ?? 0.0
+        var spend = (person?[indexPath.row].personSpend) ?? 0.0
         spend = (spend * 100).rounded() / 100
         let spendString = formatNumber(numberToFormat: spend, digits: 2)
         
@@ -263,7 +263,7 @@ class DinersViewController: UITableViewController {
                 if invalidEntry == false {
                     let newItem = Person()
                     newItem.personName = textField.text!
-                    newItem.personSpendNet = 0.00
+                    newItem.personSpend = 0.00
                     
                     self.saveNewDiner(name: newItem)
                     self.addCostEntryRecords(diner: newItem.personName)

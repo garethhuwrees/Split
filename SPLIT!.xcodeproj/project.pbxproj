@@ -8,15 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		7F07F31722C85F03008410C6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F07F31622C85F03008410C6 /* Settings.swift */; };
-		7F38462D2306E5EB0025317B /* Cabin regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F38462C2306E5EA0025317B /* Cabin regular.ttf */; };
-		7F38462F2306E6060025317B /* Cabin 500.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F38462E2306E6060025317B /* Cabin 500.ttf */; };
-		7F3846312306E6170025317B /* Cabin 500italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F3846302306E6170025317B /* Cabin 500italic.ttf */; };
-		7F3846332306EF020025317B /* Cabin 600italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F3846322306EF020025317B /* Cabin 600italic.ttf */; };
-		7F3846352306F11E0025317B /* Cabin 700italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F3846342306F11D0025317B /* Cabin 700italic.ttf */; };
 		7F6B0FD922E8B1D30078C23D /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B0FD822E8B1D30078C23D /* IntroViewController.swift */; };
 		7F73AEEF22BC87630087A4DA /* SplitCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */; };
-		7F776E5923043F7400435E2E /* Concert One regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F776E5823043F7400435E2E /* Concert One regular.ttf */; };
 		7F7E42B022C674F9001A43F9 /* DinersCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */; };
+		7F7ED3E6230B505C0010E297 /* Livvic regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3E5230B505C0010E297 /* Livvic regular.ttf */; };
+		7F7ED3E8230B507F0010E297 /* Livvic 900.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3E7230B507F0010E297 /* Livvic 900.ttf */; };
+		7F7ED3EA230C1E0F0010E297 /* Neuton regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3E9230C1E0F0010E297 /* Neuton regular.ttf */; };
+		7F7ED3EC230C1E2A0010E297 /* Neuton 800.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3EB230C1E290010E297 /* Neuton 800.ttf */; };
+		7F7ED3EE230C23860010E297 /* Roboto regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3ED230C23830010E297 /* Roboto regular.ttf */; };
+		7F7ED3F0230C239F0010E297 /* Roboto 700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3EF230C239F0010E297 /* Roboto 700.ttf */; };
+		7F7ED3F2230C294A0010E297 /* Roboto 500.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3F1230C29490010E297 /* Roboto 500.ttf */; };
 		7F95821A2304FC33000EC587 /* Lemon regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F9582192304FC31000EC587 /* Lemon regular.ttf */; };
 		7F9CAEB622FEFE50000CE91B /* DinerFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */; };
 		7FAB647E22DF68E700EB440E /* SplitTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73AEEC22BC87630087A4DA /* SplitTableCell.swift */; };
@@ -40,16 +41,17 @@
 /* Begin PBXFileReference section */
 		48FBA6CCE5070BAC99204B82 /* Pods-Split1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Split1.debug.xcconfig"; path = "Target Support Files/Pods-Split1/Pods-Split1.debug.xcconfig"; sourceTree = "<group>"; };
 		7F07F31622C85F03008410C6 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		7F38462C2306E5EA0025317B /* Cabin regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cabin regular.ttf"; sourceTree = "<group>"; };
-		7F38462E2306E6060025317B /* Cabin 500.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cabin 500.ttf"; sourceTree = "<group>"; };
-		7F3846302306E6170025317B /* Cabin 500italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cabin 500italic.ttf"; sourceTree = "<group>"; };
-		7F3846322306EF020025317B /* Cabin 600italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cabin 600italic.ttf"; sourceTree = "<group>"; };
-		7F3846342306F11D0025317B /* Cabin 700italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cabin 700italic.ttf"; sourceTree = "<group>"; };
 		7F6B0FD822E8B1D30078C23D /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		7F73AEEC22BC87630087A4DA /* SplitTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTableCell.swift; sourceTree = "<group>"; };
 		7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplitCustomCell.xib; sourceTree = "<group>"; };
-		7F776E5823043F7400435E2E /* Concert One regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Concert One regular.ttf"; path = "../Concert One regular.ttf"; sourceTree = "<group>"; };
 		7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinersCostViewController.swift; sourceTree = "<group>"; };
+		7F7ED3E5230B505C0010E297 /* Livvic regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Livvic regular.ttf"; sourceTree = "<group>"; };
+		7F7ED3E7230B507F0010E297 /* Livvic 900.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Livvic 900.ttf"; sourceTree = "<group>"; };
+		7F7ED3E9230C1E0F0010E297 /* Neuton regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Neuton regular.ttf"; sourceTree = "<group>"; };
+		7F7ED3EB230C1E290010E297 /* Neuton 800.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Neuton 800.ttf"; sourceTree = "<group>"; };
+		7F7ED3ED230C23830010E297 /* Roboto regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto regular.ttf"; sourceTree = "<group>"; };
+		7F7ED3EF230C239F0010E297 /* Roboto 700.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto 700.ttf"; sourceTree = "<group>"; };
+		7F7ED3F1230C29490010E297 /* Roboto 500.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto 500.ttf"; sourceTree = "<group>"; };
 		7F9582192304FC31000EC587 /* Lemon regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lemon regular.ttf"; sourceTree = "<group>"; };
 		7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
 		7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinerFoodViewController.swift; sourceTree = "<group>"; };
@@ -133,13 +135,14 @@
 		7F776E5A23043F8600435E2E /* New Group */ = {
 			isa = PBXGroup;
 			children = (
-				7F38462C2306E5EA0025317B /* Cabin regular.ttf */,
-				7F38462E2306E6060025317B /* Cabin 500.ttf */,
-				7F3846302306E6170025317B /* Cabin 500italic.ttf */,
-				7F3846322306EF020025317B /* Cabin 600italic.ttf */,
-				7F3846342306F11D0025317B /* Cabin 700italic.ttf */,
 				7F9582192304FC31000EC587 /* Lemon regular.ttf */,
-				7F776E5823043F7400435E2E /* Concert One regular.ttf */,
+				7F7ED3E5230B505C0010E297 /* Livvic regular.ttf */,
+				7F7ED3E7230B507F0010E297 /* Livvic 900.ttf */,
+				7F7ED3E9230C1E0F0010E297 /* Neuton regular.ttf */,
+				7F7ED3EB230C1E290010E297 /* Neuton 800.ttf */,
+				7F7ED3ED230C23830010E297 /* Roboto regular.ttf */,
+				7F7ED3F1230C29490010E297 /* Roboto 500.ttf */,
+				7F7ED3EF230C239F0010E297 /* Roboto 700.ttf */,
 			);
 			path = "New Group";
 			sourceTree = "<group>";
@@ -247,18 +250,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FB7C0FE22B44F59003C03F4 /* LaunchScreen.storyboard in Resources */,
-				7F38462F2306E6060025317B /* Cabin 500.ttf in Resources */,
-				7F776E5923043F7400435E2E /* Concert One regular.ttf in Resources */,
-				7F3846312306E6170025317B /* Cabin 500italic.ttf in Resources */,
-				7F3846352306F11E0025317B /* Cabin 700italic.ttf in Resources */,
-				7F38462D2306E5EB0025317B /* Cabin regular.ttf in Resources */,
+				7F7ED3EA230C1E0F0010E297 /* Neuton regular.ttf in Resources */,
+				7F7ED3E8230B507F0010E297 /* Livvic 900.ttf in Resources */,
+				7F7ED3F2230C294A0010E297 /* Roboto 500.ttf in Resources */,
 				7F95821A2304FC33000EC587 /* Lemon regular.ttf in Resources */,
 				7FF7733522CA905C00A7353B /* Notes in Resources */,
 				7F73AEEF22BC87630087A4DA /* SplitCustomCell.xib in Resources */,
-				7F3846332306EF020025317B /* Cabin 600italic.ttf in Resources */,
+				7F7ED3EC230C1E2A0010E297 /* Neuton 800.ttf in Resources */,
 				7FCBDE9622F354AD00D55FF9 /* LaunchScreen.storyboard in Resources */,
+				7F7ED3F0230C239F0010E297 /* Roboto 700.ttf in Resources */,
 				7FB7C0FB22B44F59003C03F4 /* Assets.xcassets in Resources */,
+				7F7ED3EE230C23860010E297 /* Roboto regular.ttf in Resources */,
 				7FB7C0F622B44F52003C03F4 /* Main.storyboard in Resources */,
+				7F7ED3E6230B505C0010E297 /* Livvic regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

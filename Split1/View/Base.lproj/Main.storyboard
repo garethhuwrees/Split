@@ -13,14 +13,14 @@
         <array key="Cabin 500italic.ttf">
             <string>Cabin-MediumItalic</string>
         </array>
-        <array key="Cabin 700italic.ttf">
-            <string>Cabin-BoldItalic</string>
-        </array>
         <array key="Cabin regular.ttf">
             <string>Cabin-Regular</string>
         </array>
         <array key="Lemon regular.ttf">
             <string>Lemon-Regular</string>
+        </array>
+        <array key="Roboto 500.ttf">
+            <string>Roboto-Medium</string>
         </array>
     </customFonts>
     <scenes>
@@ -44,7 +44,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQi-hj-WxP" userLabel="Text View">
                                         <rect key="frame" x="186.66666666666663" y="0.0" width="142.33333333333337" height="70"/>
                                         <subviews>
-                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="right" contentVerticalAlignment="center" text="SPLIT!" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wsg-5Z-xt9" userLabel="SPLIT Text">
+                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="right" contentVerticalAlignment="center" text="SPLIT!" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wsg-5Z-xt9" userLabel="SPLIT Text">
                                                 <rect key="frame" x="9.9999999999999929" y="10" width="122.33333333333331" height="40"/>
                                                 <color key="textColor" red="0.0" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Lemon-Regular" family="Lemon" pointSize="41"/>
@@ -382,18 +382,21 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem title="0.00" image="Decimal" id="i97-Rg-U7P">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <connections>
                                 <action selector="selectRounding:" destination="BYZ-38-t0r" id="r12-8M-CSg"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="ONm-yR-UFK"/>
                         <barButtonItem title="Reset" image="Reset" id="gy9-Lm-fyi">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <connections>
                                 <action selector="resetButtonPressed:" destination="BYZ-38-t0r" id="Z5r-rq-OWf"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="BF8-hE-C1w"/>
                         <barButtonItem title=" ¢ " image="Currency" id="bnW-OO-UXG">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <connections>
                                 <action selector="selectCurrency:" destination="BYZ-38-t0r" id="jk2-Yv-sa5"/>
                             </connections>
@@ -628,58 +631,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Splitters" borderStyle="roundedRect" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7xK-en-eaM">
-                                <rect key="frame" x="0.0" y="64" width="414" height="31"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="neL-kz-4C8" userLabel="Buffer View">
+                                <rect key="frame" x="0.0" y="64" width="414" height="10"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="ktB-Lr-HzC"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Splitters" borderStyle="roundedRect" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="7xK-en-eaM">
+                                <rect key="frame" x="25" y="74" width="364" height="30"/>
                                 <color key="textColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Cabin-BoldItalic" family="Cabin" pointSize="22"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Food &amp; Drink" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zZu-HX-DaI">
-                                <rect key="frame" x="0.0" y="378" width="414" height="31"/>
-                                <color key="textColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Cabin-BoldItalic" family="Cabin" pointSize="22"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Im0-LS-Xpz" userLabel="Splitter Table View">
-                                <rect key="frame" x="0.0" y="95" width="414" height="283"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="279"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Food &amp; Drink" borderStyle="roundedRect" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="zZu-HX-DaI">
+                                <rect key="frame" x="25" y="383" width="364" height="30"/>
+                                <color key="textColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="22"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g14-BL-XJL" userLabel="Food Table View">
-                                <rect key="frame" x="0.0" y="409" width="414" height="283"/>
+                                <rect key="frame" x="0.0" y="413" width="414" height="279"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="g14-BL-XJL" firstAttribute="trailing" secondItem="Vny-eg-ev7" secondAttribute="trailing" id="0wo-q6-Rfk"/>
-                            <constraint firstItem="7xK-en-eaM" firstAttribute="leading" secondItem="Vny-eg-ev7" secondAttribute="leading" id="1YF-4l-ELK"/>
-                            <constraint firstItem="zZu-HX-DaI" firstAttribute="leading" secondItem="Vny-eg-ev7" secondAttribute="leading" id="2CI-PT-8H7"/>
-                            <constraint firstItem="zZu-HX-DaI" firstAttribute="trailing" secondItem="Vny-eg-ev7" secondAttribute="trailing" id="82n-93-TeX"/>
-                            <constraint firstItem="Im0-LS-Xpz" firstAttribute="top" secondItem="7xK-en-eaM" secondAttribute="bottom" id="B4T-mm-O92"/>
+                            <constraint firstItem="zZu-HX-DaI" firstAttribute="leading" secondItem="Vny-eg-ev7" secondAttribute="leading" constant="25" id="2CI-PT-8H7"/>
+                            <constraint firstItem="zZu-HX-DaI" firstAttribute="trailing" secondItem="Vny-eg-ev7" secondAttribute="trailing" constant="-25" id="82n-93-TeX"/>
+                            <constraint firstItem="7xK-en-eaM" firstAttribute="leading" secondItem="Vny-eg-ev7" secondAttribute="leading" constant="25" id="IZF-VP-J6u"/>
                             <constraint firstItem="Im0-LS-Xpz" firstAttribute="trailing" secondItem="Vny-eg-ev7" secondAttribute="trailing" id="KRD-Y9-c1f"/>
                             <constraint firstItem="g14-BL-XJL" firstAttribute="top" secondItem="zZu-HX-DaI" secondAttribute="bottom" id="PCc-ph-9AS"/>
-                            <constraint firstItem="7xK-en-eaM" firstAttribute="trailing" secondItem="Vny-eg-ev7" secondAttribute="trailing" id="QNP-i2-VEA"/>
+                            <constraint firstItem="neL-kz-4C8" firstAttribute="leading" secondItem="Vny-eg-ev7" secondAttribute="leading" id="RmR-c9-TtI"/>
                             <constraint firstItem="g14-BL-XJL" firstAttribute="leading" secondItem="Vny-eg-ev7" secondAttribute="leading" id="U6g-8L-n7a"/>
-                            <constraint firstItem="7xK-en-eaM" firstAttribute="top" secondItem="Vny-eg-ev7" secondAttribute="top" id="e3D-AE-muS"/>
+                            <constraint firstItem="zZu-HX-DaI" firstAttribute="height" secondItem="7xK-en-eaM" secondAttribute="height" id="Ut9-Af-8iP"/>
+                            <constraint firstItem="neL-kz-4C8" firstAttribute="trailing" secondItem="Vny-eg-ev7" secondAttribute="trailing" id="cs4-9O-glT"/>
+                            <constraint firstItem="7xK-en-eaM" firstAttribute="top" secondItem="neL-kz-4C8" secondAttribute="bottom" id="dXc-B5-aW3"/>
                             <constraint firstItem="g14-BL-XJL" firstAttribute="bottom" secondItem="Vny-eg-ev7" secondAttribute="bottom" id="ecc-Jr-eVw"/>
                             <constraint firstItem="zZu-HX-DaI" firstAttribute="top" secondItem="Im0-LS-Xpz" secondAttribute="bottom" id="fL1-KT-EHH"/>
                             <constraint firstItem="Im0-LS-Xpz" firstAttribute="leading" secondItem="Vny-eg-ev7" secondAttribute="leading" id="jKQ-qT-fFg"/>
                             <constraint firstItem="g14-BL-XJL" firstAttribute="top" secondItem="zZu-HX-DaI" secondAttribute="bottom" id="mCd-Jn-D4j"/>
-                            <constraint firstItem="Im0-LS-Xpz" firstAttribute="top" secondItem="7xK-en-eaM" secondAttribute="bottom" id="mVq-wV-3JP"/>
-                            <constraint firstItem="zZu-HX-DaI" firstAttribute="height" secondItem="7xK-en-eaM" secondAttribute="height" id="oK0-g5-RBe"/>
+                            <constraint firstItem="Im0-LS-Xpz" firstAttribute="top" secondItem="7xK-en-eaM" secondAttribute="bottom" id="nZS-2S-bQU"/>
                             <constraint firstItem="g14-BL-XJL" firstAttribute="height" secondItem="Im0-LS-Xpz" secondAttribute="height" id="png-Ac-uD5"/>
                             <constraint firstItem="zZu-HX-DaI" firstAttribute="top" secondItem="Im0-LS-Xpz" secondAttribute="bottom" id="shd-Ln-YSg"/>
+                            <constraint firstItem="7xK-en-eaM" firstAttribute="trailing" secondItem="Vny-eg-ev7" secondAttribute="trailing" constant="-25" id="teU-zy-AVN"/>
+                            <constraint firstItem="neL-kz-4C8" firstAttribute="top" secondItem="Vny-eg-ev7" secondAttribute="top" id="vPF-pp-DRs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vny-eg-ev7"/>
                     </view>
                     <toolbarItems>
                         <barButtonItem title="Add Splitter" image="Add_Diner" id="H8s-Sh-RyH">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <connections>
                                 <action selector="addPerson:" destination="Nsv-iG-bKB" id="kWO-bO-dBc"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="F6A-dB-oQs"/>
                         <barButtonItem title="Add Item" image="Add_Item" id="Lxm-2l-Fc7">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <connections>
                                 <action selector="addItem:" destination="Nsv-iG-bKB" id="v9s-sF-sRe"/>
                             </connections>
@@ -697,7 +711,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o6R-f9-bo5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1750" y="12"/>
+            <point key="canvasLocation" x="1749.2753623188407" y="11.413043478260871"/>
         </scene>
         <!--Splitters-->
         <scene sceneID="7C4-wT-jAs">

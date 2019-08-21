@@ -33,6 +33,10 @@ class IntroViewController: UIViewController {
     
     
     let textColour: UIColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
+    let splitFont: String = "Lemon-Regular"
+    let regularFont: String = "Roboto-Regular"
+    let mediumFont: String = "Roboto-Medium"
+    let boldFont = "Roboto-Bold"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,27 +85,32 @@ class IntroViewController: UIViewController {
     
     func setFontAndMessage() {
         
-        let  iphoneType = settings?[0].phoneType ?? ""
+        let  screenHeight = settings?[0].screenHeight ?? 1334
         
         var textHeight: CGFloat = 0.0
         
-        switch iphoneType {
-        case "5,SE":
-            textHeight = 13
-        case "6,7,8":
-            textHeight = 15
+        switch screenHeight {
+        case 1136:
+            textHeight = 12
+        case 1334:
+            textHeight = 14
         default:
             textHeight = 17
             
         }
         
-        titleTest.font = titleTest.font?.withSize(textHeight+20)
-        subtitleText.font = subtitleText.font?.withSize(textHeight+10)
-        subTitle2Text.font = subTitle2Text.font?.withSize(textHeight+8)
-        storyText.font = storyText.font?.withSize(textHeight)
+        titleTest.font = UIFont(name: splitFont, size: textHeight+20)
+        subtitleText.font = UIFont(name: boldFont, size: textHeight+10)
+        subTitle2Text.font = UIFont(name: mediumFont, size: textHeight+8)
+        storyText.font = UIFont(name: regularFont, size: textHeight)
+        
+//        titleTest.font = titleTest.font?.withSize(textHeight+20)
+//        subtitleText.font = subtitleText.font?.withSize(textHeight+10)
+//        subTitle2Text.font = subTitle2Text.font?.withSize(textHeight+8)
+//        storyText.font = storyText.font?.withSize(textHeight)
 
         titleTest.text = "SPLIT!"
-        subtitleText.text = "Helping To Maintain World Peace"
+        subtitleText.text = "Helping Maintain World Peace"
         subTitle2Text.text = "one meal at a time"
 
         

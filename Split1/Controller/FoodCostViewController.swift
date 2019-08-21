@@ -33,7 +33,7 @@ class FoodCostViewController: UITableViewController {
     var currencyPrefix: String = ""
     
     let greyText: UIColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
-    let tableTextFont: UIFont = UIFont(name: "ChalkboardSE-Regular", size: 20) ?? UIFont(name: "Regular", size: 20)!
+    let tableTextFont: UIFont = UIFont(name: "Roboto-Regular", size: 20) ?? UIFont(name: "Georgia", size: 20)!
  
     //MARK:------------------ VIEW DID LOAD & DISAPPEAR ----------------------------------
 
@@ -46,6 +46,7 @@ class FoodCostViewController: UITableViewController {
         tableView.register(UINib(nibName: "SplitCustomCell", bundle: nil) , forCellReuseIdentifier: "splitTableCell")
         
         loadTables()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -127,7 +128,6 @@ class FoodCostViewController: UITableViewController {
                     }
                 } // end if
                 
-                //self.updateDinerSpendOld(tableRow: selectedDiner)
                 self.updateMenuSpend()
                 self.tableView.reloadData()
             }
@@ -221,7 +221,7 @@ class FoodCostViewController: UITableViewController {
                 
                 do {
                     try self.realm.write {
-                        person?[index].personSpendNet = dinerSpend
+                        person?[index].personSpend = dinerSpend
                     } // end try
                 } // end do
                 catch {
@@ -232,19 +232,28 @@ class FoodCostViewController: UITableViewController {
     } // end func
     
     func updatePercentOfBill() {
+        
         var billTotal: Float = 0.0
         
         let numberOfDiners = person?.count ?? 0
         
         if numberOfDiners > 0 {
             for index in 0...(numberOfDiners - 1){
-                billTotal = billTotal + (person?[index].personSpendNet)!
+                billTotal = billTotal + (person?[index].personSpend)!
             }
         } // end if
         
         if numberOfDiners > 0 {
             for index in 0...(numberOfDiners - 1){
-                let percentOfBill = (person?[index].personSpendNet)! / billTotal
+                
+                var percentOfBill: Float
+                
+                if billTotal == Float(0.0){
+                    percentOfBill = 0.0
+                }
+                else {
+                    percentOfBill = (person?[index].personSpend)! / billTotal
+                }
                 
                 do {
                     try self.realm.write {
@@ -252,7 +261,7 @@ class FoodCostViewController: UITableViewController {
                     } // end try
                 } // end do
                 catch {
-                    print("Error updating Diners Spend")
+                    print("Error updating Person table")
                 }
             } // end for
         } // end if

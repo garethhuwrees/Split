@@ -11,9 +11,7 @@ import RealmSwift
 
 class Person: Object {
     @objc dynamic var personName : String = ""
-    @objc dynamic var personSpendNet : Float = 0.0
-    @objc dynamic var personSpendGross : Float = 0.0
-    @objc dynamic var personSpendRounded : Float = 0.0
+    @objc dynamic var personSpend : Float = 0.0
     @objc dynamic var percentOfBill : Float = 0.0
     
     

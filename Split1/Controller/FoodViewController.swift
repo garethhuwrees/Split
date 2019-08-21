@@ -31,7 +31,7 @@ class FoodViewController: UITableViewController {
     let greenColour = UIColor(red: 22/255, green: 160/255, blue: 132/255, alpha: 1)
   
     let tableTextColour: UIColor = UIColor(red: 44/255, green: 62/255, blue: 00/255, alpha: 1)
-    let tableTextFont: UIFont = UIFont(name: "Chalkboard SE", size: 18) ?? UIFont(name: "Regular", size: 18)!
+    let tableTextFont: UIFont = UIFont(name: "Chalkboard SE", size: 18) ?? UIFont(name: "Georgia", size: 18)!
     
    
     //Setting up some Global Variables
@@ -92,21 +92,21 @@ class FoodViewController: UITableViewController {
         
         if numberOfDiners > 0 {
             for n in 0...(numberOfDiners-1) {
-                totalBill = totalBill + person![n].personSpendNet
+                totalBill = totalBill + person![n].personSpend
             } // end for
         }
         else {
             // leave totalBill = 0.0
         }
         
-        let  percentageTip = settings?[0].gratuity ?? 0.0
-        let billWithTip = totalBill * (1 + percentageTip/100)
+//        let  percentageTip = settings?[0].gratuity ?? 0.0
+//        let billWithTip = totalBill * (1 + percentageTip/100)
         
         if let setSpendTotals = settings?[0] {
             do {
                 try realm.write {
-                    setSpendTotals.billTotalSpend = totalBill
-                    setSpendTotals.billWithTip = billWithTip
+                    setSpendTotals.totalSpend = totalBill
+//                    setSpendTotals.billWithTip = billWithTip
                 }
             }
             catch {
@@ -353,7 +353,7 @@ class FoodViewController: UITableViewController {
                 
                 do{
                     try realm.write {
-                        person![n].personSpendNet = dinersSpend
+                        person![n].personSpend = dinersSpend
                     }
                 } catch {
                     print("Error saving to Realm, \(error)")

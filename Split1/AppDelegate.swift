@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 import RealmSwift
 
 @UIApplicationMain
@@ -28,12 +27,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } catch {
                 print("Error initialising real, \(error)")
             }
+        
+        // Set Navigation bar appearance
+        
+        // Cannot get font name and size to work correctly
+        
+//        let screenHeight = Int(UIScreen.main.nativeBounds.height)
+//
+//        let greyColour = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
+//        let greenColour = UIColor(red: 22/255, green: 160/255, blue: 132/255, alpha: 1)
+//        let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
+//
+//        let regularFont: String = "Chalkduster"
+//
+//        var textHeight: CGFloat = 0.0
+//
+//        switch screenHeight {
+//        case 1136:
+//            textHeight = 18
+//        case 1334:
+//            textHeight = 20
+//        default:
+//            textHeight = 22
+//        }
+//
+//        let navigationBarAppearace = UINavigationBar.appearance()
+//
+//        navigationBarAppearace.tintColor = UIColor.white
+//        navigationBarAppearace.barTintColor = greenColour
+//
+//        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: regularFont, size: textHeight)!]
+//        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
+
+        
+        
         return true
+        
+       
     }
     
+
+    
+    
     // Customise the Navigation Bar - can't??
-    
-    
     
     
 
@@ -45,6 +81,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        let appDeligate = UIApplication.shared.delegate as! SplitViewController
+        
+        appDeligate.updateSettings()
+    
+//        let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SplitViewController") as! SplitViewController
+//
+////        let mainVC = UIStoryboard(name: "Main", bundle: "nil").instantiateViewController(withIdentifier:"SplitViewController") as! SplitViewController
+//        mainVC.updateSettings()
+//        print (mainVC.percentageTip)
+
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -54,9 +101,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
+    
+    func updateSettings() {
+        
+    }
 
     
     }
+
 
 
 
