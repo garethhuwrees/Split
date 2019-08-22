@@ -124,7 +124,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		7F776E5A23043F8600435E2E /* New Group */ = {
+		7F776E5A23043F8600435E2E /* Text Files */ = {
 			isa = PBXGroup;
 			children = (
 				7FCF2491230EF46900A19260 /* Lemon regular.ttf */,
@@ -132,7 +132,7 @@
 				7FCF248D230EF41E00A19260 /* Roboto 700.ttf */,
 				7FCF248B230EF40200A19260 /* Roboto 500.ttf */,
 			);
-			path = "New Group";
+			path = "Text Files";
 			sourceTree = "<group>";
 		};
 		7FB7C0E422B44F51003C03F4 = {
@@ -161,7 +161,7 @@
 				7F07F31122C6FFD4008410C6 /* View */,
 				7F73AEE722BC85F70087A4DA /* Model */,
 				7FB7C0FA22B44F59003C03F4 /* Assets.xcassets */,
-				7F776E5A23043F8600435E2E /* New Group */,
+				7F776E5A23043F8600435E2E /* Text Files */,
 				7FB7C0FC22B44F59003C03F4 /* LaunchScreen.storyboard */,
 				7FB7C0FF22B44F59003C03F4 /* Info.plist */,
 				7FB7C0F722B44F52003C03F4 /* Split1.xcdatamodeld */,
