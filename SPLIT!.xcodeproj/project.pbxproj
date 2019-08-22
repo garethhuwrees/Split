@@ -11,14 +11,6 @@
 		7F6B0FD922E8B1D30078C23D /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B0FD822E8B1D30078C23D /* IntroViewController.swift */; };
 		7F73AEEF22BC87630087A4DA /* SplitCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */; };
 		7F7E42B022C674F9001A43F9 /* DinersCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */; };
-		7F7ED3E6230B505C0010E297 /* Livvic regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3E5230B505C0010E297 /* Livvic regular.ttf */; };
-		7F7ED3E8230B507F0010E297 /* Livvic 900.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3E7230B507F0010E297 /* Livvic 900.ttf */; };
-		7F7ED3EA230C1E0F0010E297 /* Neuton regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3E9230C1E0F0010E297 /* Neuton regular.ttf */; };
-		7F7ED3EC230C1E2A0010E297 /* Neuton 800.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3EB230C1E290010E297 /* Neuton 800.ttf */; };
-		7F7ED3EE230C23860010E297 /* Roboto regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3ED230C23830010E297 /* Roboto regular.ttf */; };
-		7F7ED3F0230C239F0010E297 /* Roboto 700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3EF230C239F0010E297 /* Roboto 700.ttf */; };
-		7F7ED3F2230C294A0010E297 /* Roboto 500.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7ED3F1230C29490010E297 /* Roboto 500.ttf */; };
-		7F95821A2304FC33000EC587 /* Lemon regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F9582192304FC31000EC587 /* Lemon regular.ttf */; };
 		7F9CAEB622FEFE50000CE91B /* DinerFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */; };
 		7FAB647E22DF68E700EB440E /* SplitTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73AEEC22BC87630087A4DA /* SplitTableCell.swift */; };
 		7FAB648022DF6E2B00EB440E /* FoodCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB647F22DF6E2B00EB440E /* FoodCostViewController.swift */; };
@@ -30,6 +22,10 @@
 		7FB7C0FB22B44F59003C03F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FB7C0FA22B44F59003C03F4 /* Assets.xcassets */; };
 		7FB7C0FE22B44F59003C03F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FB7C0FC22B44F59003C03F4 /* LaunchScreen.storyboard */; };
 		7FCBDE9622F354AD00D55FF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FCBDE9522F354AD00D55FF9 /* LaunchScreen.storyboard */; };
+		7FCF248C230EF40200A19260 /* Roboto 500.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF248B230EF40200A19260 /* Roboto 500.ttf */; };
+		7FCF248E230EF41E00A19260 /* Roboto 700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF248D230EF41E00A19260 /* Roboto 700.ttf */; };
+		7FCF2490230EF44800A19260 /* Roboto regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF248F230EF44800A19260 /* Roboto regular.ttf */; };
+		7FCF2492230EF46900A19260 /* Lemon regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF2491230EF46900A19260 /* Lemon regular.ttf */; };
 		7FF21BE322C690BE00BBCDA3 /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */; };
 		7FF46CE122F08D4900F842C9 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF46CE022F08D4900F842C9 /* Item.swift */; };
 		7FF46CE322F08D9800F842C9 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF46CE222F08D9800F842C9 /* Person.swift */; };
@@ -45,14 +41,6 @@
 		7F73AEEC22BC87630087A4DA /* SplitTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTableCell.swift; sourceTree = "<group>"; };
 		7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplitCustomCell.xib; sourceTree = "<group>"; };
 		7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinersCostViewController.swift; sourceTree = "<group>"; };
-		7F7ED3E5230B505C0010E297 /* Livvic regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Livvic regular.ttf"; sourceTree = "<group>"; };
-		7F7ED3E7230B507F0010E297 /* Livvic 900.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Livvic 900.ttf"; sourceTree = "<group>"; };
-		7F7ED3E9230C1E0F0010E297 /* Neuton regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Neuton regular.ttf"; sourceTree = "<group>"; };
-		7F7ED3EB230C1E290010E297 /* Neuton 800.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Neuton 800.ttf"; sourceTree = "<group>"; };
-		7F7ED3ED230C23830010E297 /* Roboto regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto regular.ttf"; sourceTree = "<group>"; };
-		7F7ED3EF230C239F0010E297 /* Roboto 700.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto 700.ttf"; sourceTree = "<group>"; };
-		7F7ED3F1230C29490010E297 /* Roboto 500.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto 500.ttf"; sourceTree = "<group>"; };
-		7F9582192304FC31000EC587 /* Lemon regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lemon regular.ttf"; sourceTree = "<group>"; };
 		7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
 		7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinerFoodViewController.swift; sourceTree = "<group>"; };
 		7FAB647F22DF6E2B00EB440E /* FoodCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCostViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +54,10 @@
 		7FB7C0FD22B44F59003C03F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7FB7C0FF22B44F59003C03F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FCBDE9522F354AD00D55FF9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7FCF248B230EF40200A19260 /* Roboto 500.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto 500.ttf"; sourceTree = "<group>"; };
+		7FCF248D230EF41E00A19260 /* Roboto 700.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto 700.ttf"; sourceTree = "<group>"; };
+		7FCF248F230EF44800A19260 /* Roboto regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto regular.ttf"; sourceTree = "<group>"; };
+		7FCF2491230EF46900A19260 /* Lemon regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lemon regular.ttf"; sourceTree = "<group>"; };
 		7FF46CE022F08D4900F842C9 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		7FF46CE222F08D9800F842C9 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		7FF7733222CA893C00A7353B /* CostEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostEntry.swift; sourceTree = "<group>"; };
@@ -135,14 +127,10 @@
 		7F776E5A23043F8600435E2E /* New Group */ = {
 			isa = PBXGroup;
 			children = (
-				7F9582192304FC31000EC587 /* Lemon regular.ttf */,
-				7F7ED3E5230B505C0010E297 /* Livvic regular.ttf */,
-				7F7ED3E7230B507F0010E297 /* Livvic 900.ttf */,
-				7F7ED3E9230C1E0F0010E297 /* Neuton regular.ttf */,
-				7F7ED3EB230C1E290010E297 /* Neuton 800.ttf */,
-				7F7ED3ED230C23830010E297 /* Roboto regular.ttf */,
-				7F7ED3F1230C29490010E297 /* Roboto 500.ttf */,
-				7F7ED3EF230C239F0010E297 /* Roboto 700.ttf */,
+				7FCF2491230EF46900A19260 /* Lemon regular.ttf */,
+				7FCF248F230EF44800A19260 /* Roboto regular.ttf */,
+				7FCF248D230EF41E00A19260 /* Roboto 700.ttf */,
+				7FCF248B230EF40200A19260 /* Roboto 500.ttf */,
 			);
 			path = "New Group";
 			sourceTree = "<group>";
@@ -250,19 +238,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FB7C0FE22B44F59003C03F4 /* LaunchScreen.storyboard in Resources */,
-				7F7ED3EA230C1E0F0010E297 /* Neuton regular.ttf in Resources */,
-				7F7ED3E8230B507F0010E297 /* Livvic 900.ttf in Resources */,
-				7F7ED3F2230C294A0010E297 /* Roboto 500.ttf in Resources */,
-				7F95821A2304FC33000EC587 /* Lemon regular.ttf in Resources */,
 				7FF7733522CA905C00A7353B /* Notes in Resources */,
+				7FCF248E230EF41E00A19260 /* Roboto 700.ttf in Resources */,
+				7FCF2490230EF44800A19260 /* Roboto regular.ttf in Resources */,
 				7F73AEEF22BC87630087A4DA /* SplitCustomCell.xib in Resources */,
-				7F7ED3EC230C1E2A0010E297 /* Neuton 800.ttf in Resources */,
 				7FCBDE9622F354AD00D55FF9 /* LaunchScreen.storyboard in Resources */,
-				7F7ED3F0230C239F0010E297 /* Roboto 700.ttf in Resources */,
+				7FCF248C230EF40200A19260 /* Roboto 500.ttf in Resources */,
 				7FB7C0FB22B44F59003C03F4 /* Assets.xcassets in Resources */,
-				7F7ED3EE230C23860010E297 /* Roboto regular.ttf in Resources */,
 				7FB7C0F622B44F52003C03F4 /* Main.storyboard in Resources */,
-				7F7ED3E6230B505C0010E297 /* Livvic regular.ttf in Resources */,
+				7FCF2492230EF46900A19260 /* Lemon regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

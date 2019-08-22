@@ -39,10 +39,6 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lemon regular.ttf</string>
-		<string>Livvic regular.ttf</string>
-		<string>Livvic 900.ttf</string>
-		<string>Neuton regular.ttf</string>
-		<string>Neuton 800.ttf</string>
 		<string>Roboto regular.ttf</string>
 		<string>Roboto 500.ttf</string>
 		<string>Roboto 700.ttf</string>

@@ -590,7 +590,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         case 1334:
             fontSize = fontSize-2; tableRowHeight = 30
         default:
-            tableRowHeight = 3 // Default fontSize (22)
+            tableRowHeight = 32 // Default fontSize (22)
         }
         
         totalBillText.font = UIFont(name: mediumFont, size: fontSize)
@@ -949,6 +949,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             appearance.setupMaskedCorners([.layerMaxXMaxYCorner, .layerMinXMaxYCorner])
         }
     }
+    
+    //MARK:---------------- TEMP FUNCTIONS -----------------------------------
     
     func printFonts() {
         for family in UIFont.familyNames.sorted() {

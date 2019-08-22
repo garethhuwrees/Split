@@ -38,7 +38,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b37-va-MrK" userLabel="Buffer Left">
                                         <rect key="frame" x="0.0" y="0.0" width="85" height="70"/>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Split_Logo_Orange" translatesAutoresizingMaskIntoConstraints="NO" id="FJh-x4-Z79" userLabel="SPLIT Logo">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Split Image" translatesAutoresizingMaskIntoConstraints="NO" id="FJh-x4-Z79" userLabel="SPLIT Logo">
                                         <rect key="frame" x="85" y="0.0" width="101.66666666666669" height="70"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQi-hj-WxP" userLabel="Text View">
@@ -790,7 +790,7 @@
         <image name="Currency" width="60" height="60"/>
         <image name="Decimal" width="60" height="60"/>
         <image name="Reset" width="60" height="60"/>
-        <image name="Split_Logo_Orange" width="256" height="256"/>
+        <image name="Split Image" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="557-lP-Rga"/>
