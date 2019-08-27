@@ -26,14 +26,16 @@ class FoodCostViewController: UITableViewController {
     var settings: Results<Settings>?
     
     // Global variable to hold record for 'textPassedOver' food type
-    var menuItemsFiltered: Results<Item>?
+    var itemRecord: Results<Item>?
     var dinersFiltered: Results<Person>? // initalise global variable
     var costEntryFiltered: Results<CostEntry>?
     
     var currencyPrefix: String = ""
-    
+    var screenHeight: Int = 0
+    var fontSize: CGFloat = 20
+    let regularFont: String = "Roboto-Regular"
     let greyText: UIColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
-    let tableTextFont: UIFont = UIFont(name: "Roboto-Regular", size: 20) ?? UIFont(name: "Georgia", size: 20)!
+
  
     //MARK:------------------ VIEW DID LOAD & DISAPPEAR ----------------------------------
 
@@ -43,9 +45,11 @@ class FoodCostViewController: UITableViewController {
         self.title = textPassedOver!
         
         // Register the .xib file (historically a .nib file)
-        tableView.register(UINib(nibName: "SplitCustomCell", bundle: nil) , forCellReuseIdentifier: "splitTableCell")
+        tableView.register(UINib(nibName: "QuantityTableCell", bundle: nil) , forCellReuseIdentifier: "quantityTableCell")
         
         loadTables()
+        
+        setAppearance()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -55,7 +59,7 @@ class FoodCostViewController: UITableViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        updateDinerSpend()
+//        updateDinerSpend()
         updatePercentOfBill()
     }
 
@@ -67,21 +71,28 @@ class FoodCostViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "splitTableCell", for: indexPath) as! SplitTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "quantityTableCell", for: indexPath) as! QuantityTableCell
+        
+        let tableTextFont: UIFont = UIFont(name: regularFont, size: fontSize) ?? UIFont(name: "Georgia", size: fontSize)!
         
         // Set font type and colour
-        cell.leftCellLabel.textColor = self.greyText
-        cell.leftCellLabel.font = self.tableTextFont
-        cell.rightCellLabel.textColor = self.greyText
-        cell.rightCellLabel.font = self.tableTextFont
+        cell.nameLabel.textColor = self.greyText
+        cell.nameLabel.font = tableTextFont
+        cell.quantityLabel.textColor = self.greyText
+        cell.quantityLabel.font = tableTextFont
+        cell.spendLabel.textColor = self.greyText
+        cell.spendLabel.font = tableTextFont
         
         // set contents
         var spend = costEntry?[indexPath.row].itemSpend ?? 0.0
         spend = (spend * 100).rounded() / 100
         let spendString = formatNumber(numberToFormat: spend, digits: 2)
         
-        cell.leftCellLabel.text = costEntry?[indexPath.row].personName
-        cell.rightCellLabel.text = currencyPrefix + spendString
+        let quantity = costEntry?[indexPath.row].itemNumber ?? 0
+        
+        cell.nameLabel.text = costEntry?[indexPath.row].personName
+        cell.quantityLabel.text = String(quantity)
+        cell.spendLabel.text = currencyPrefix + spendString
         
         return cell
     }
@@ -105,44 +116,59 @@ class FoodCostViewController: UITableViewController {
         
         //let selectedDiner = indexPath.row
         
-        var textField = UITextField()
-        
-        let alert = UIAlertController(title: "Add/Update Spend", message: "What was spent on this item?", preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "Apply", style: .default) { (action) in
+        if itemRecord?[0].unitPrice == true {
             
-            if textField.text!.isEmpty{
-                //Do nothing
-            }
-            else {
-                let itemCost = (textField.text! as NSString).floatValue
-                
-                if let item = self.costEntry?[indexPath.row] {
-                    do {
-                        try self.realm.write {
-                            item.itemSpend = itemCost
-                        }
-                    }
-                    catch {
-                        print("Error updating cost")
-                    }
-                } // end if
-                
-                self.updateMenuSpend()
-                self.tableView.reloadData()
-            }
-            
+            // Increase/Decrease quanitity
         }
-        alert.addTextField { (alertTextField) in
+        
+        else { // Enter New Spend on Foood Item
+        
+            var textField = UITextField()
             
-            alertTextField.placeholder = "\(self.costEntry?[indexPath.row].itemSpend ?? 0.0)"
-            textField = alertTextField
-            textField.keyboardType = .decimalPad
-        } // end alert
+            let alert = UIAlertController(title: "Add/Update Spend", message: "What was spent on this item?", preferredStyle: .alert)
+            
+            let action = UIAlertAction(title: "Apply", style: .default) { (action) in
+                
+                if textField.text!.isEmpty{
+                    //Do nothing
+                }
+                else {
+                    let itemCost = (textField.text! as NSString).floatValue
+                    
+                    if let item = self.costEntry?[indexPath.row] {
+                        do {
+                            try self.realm.write {
+                                item.itemSpend = itemCost
+                                if itemCost == 0.0 {
+                                    item.itemNumber = 0
+                                }
+                                else {
+                                    item.itemNumber = 1
+                                }
+                            }
+                        }
+                        catch {
+                            print("Error updating cost")
+                        }
+                    } // end if
+                    
+                    self.updateMenuSpend()
+                    self.updateDinerSpend()
+                    self.loadTables()
+                }
+                
+            }
+            alert.addTextField { (alertTextField) in
+                
+                alertTextField.placeholder = "\(self.costEntry?[indexPath.row].itemSpend ?? 0.0)"
+                textField = alertTextField
+                textField.keyboardType = .decimalPad
+            } // end alert
+            
+            alert.addAction(action)
+            present(alert, animated: true, completion: nil)
         
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-        
+        } // end else
     }
     
     
@@ -159,9 +185,10 @@ class FoodCostViewController: UITableViewController {
         
         settings = realm.objects(Settings.self)
         currencyPrefix = settings?[0].currencyPrefix ?? ""
+        screenHeight = settings?[0].screenHeight ?? 0
         
         item = realm.objects(Item.self)
-//        MenuItemsFiltered = menuItems?.filter("menuItem == %@", textPassedOver ?? "No Name")
+        itemRecord = item?.filter("itemName == %@", textPassedOver ?? "No Name")
         
         person = realm.objects(Person.self)
         //dinerRecord = diners?.filter("personName == %@", textPassedOver ?? "No Name")
@@ -169,12 +196,32 @@ class FoodCostViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    func setAppearance(){
+        
+        var tableRowHeight: CGFloat
+        
+        switch screenHeight {
+        case 1136:
+            fontSize = 16; tableRowHeight = 28
+        case 1334:
+            fontSize = 18; tableRowHeight = 30
+        default:
+            fontSize = 20; tableRowHeight = 32
+        }
+        
+        tableView.separatorColor = UIColor.clear
+        tableView.rowHeight = tableRowHeight
+
+    }
+    
     
     func updateMenuSpend() {
         
-        menuItemsFiltered = item?.filter("itemName == %@", textPassedOver ?? "No Name")
+//        itemRecord moved to loadTables() as part of PxQ updat
+//        itemRecord = item?.filter("itemName == %@", textPassedOver ?? "No Name")
         
         var menuSpend: Float = 0.0
+        var itemCount: Int = 0
         
         let numberOfRecords = costEntry?.count
         
@@ -182,11 +229,13 @@ class FoodCostViewController: UITableViewController {
             for index in 0...numberOfRecords!-1 {
 
                 menuSpend = menuSpend + (costEntry?[index].itemSpend ?? 0.0)
+                itemCount = itemCount + (costEntry?[index].itemNumber ?? 0)
                 }
 
                 do {
                     try self.realm.write {
-                        menuItemsFiltered![0].itemSpendNet = menuSpend
+                        itemRecord![0].itemSpendNet = menuSpend
+                        itemRecord![0].itemNumber = itemCount
                     } // end try
                 } // end do
                 catch {

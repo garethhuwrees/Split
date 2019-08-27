@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7F07F31722C85F03008410C6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F07F31622C85F03008410C6 /* Settings.swift */; };
+		7F5C0C472312C0DA00F26963 /* QuantityTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5C0C452312C0DA00F26963 /* QuantityTableCell.swift */; };
+		7F5C0C482312C0DA00F26963 /* QuantityTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F5C0C462312C0DA00F26963 /* QuantityTableCell.xib */; };
 		7F6B0FD922E8B1D30078C23D /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6B0FD822E8B1D30078C23D /* IntroViewController.swift */; };
 		7F73AEEF22BC87630087A4DA /* SplitCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */; };
 		7F7E42B022C674F9001A43F9 /* DinersCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */; };
@@ -37,14 +39,16 @@
 /* Begin PBXFileReference section */
 		48FBA6CCE5070BAC99204B82 /* Pods-Split1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Split1.debug.xcconfig"; path = "Target Support Files/Pods-Split1/Pods-Split1.debug.xcconfig"; sourceTree = "<group>"; };
 		7F07F31622C85F03008410C6 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		7F5C0C452312C0DA00F26963 /* QuantityTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityTableCell.swift; sourceTree = "<group>"; };
+		7F5C0C462312C0DA00F26963 /* QuantityTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuantityTableCell.xib; sourceTree = "<group>"; };
 		7F6B0FD822E8B1D30078C23D /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		7F73AEEC22BC87630087A4DA /* SplitTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTableCell.swift; sourceTree = "<group>"; };
 		7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplitCustomCell.xib; sourceTree = "<group>"; };
 		7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinersCostViewController.swift; sourceTree = "<group>"; };
-		7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
+		7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoodViewController.swift; path = ../FoodViewController.swift; sourceTree = "<group>"; };
 		7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinerFoodViewController.swift; sourceTree = "<group>"; };
 		7FAB647F22DF6E2B00EB440E /* FoodCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCostViewController.swift; sourceTree = "<group>"; };
-		7FB47CFD22B5BF8E00BFBFEE /* DinersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinersViewController.swift; sourceTree = "<group>"; };
+		7FB47CFD22B5BF8E00BFBFEE /* DinersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DinersViewController.swift; path = ../DinersViewController.swift; sourceTree = "<group>"; };
 		7FB7C0ED22B44F52003C03F4 /* SPLIT!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPLIT!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FB7C0F022B44F52003C03F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FB7C0F222B44F52003C03F4 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
@@ -92,11 +96,10 @@
 			children = (
 				7FB7C0F222B44F52003C03F4 /* SplitViewController.swift */,
 				7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */,
-				7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */,
 				7FAB647F22DF6E2B00EB440E /* FoodCostViewController.swift */,
-				7FB47CFD22B5BF8E00BFBFEE /* DinersViewController.swift */,
 				7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */,
 				7F6B0FD822E8B1D30078C23D /* IntroViewController.swift */,
+				7F5C0C492312D64600F26963 /* New Group */,
 				7FF7733422CA905C00A7353B /* Notes */,
 			);
 			path = Controller;
@@ -111,6 +114,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7F5C0C492312D64600F26963 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */,
+				7FB47CFD22B5BF8E00BFBFEE /* DinersViewController.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		7F73AEE722BC85F70087A4DA /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +132,8 @@
 				7FF7733222CA893C00A7353B /* CostEntry.swift */,
 				7FF46CE022F08D4900F842C9 /* Item.swift */,
 				7FF46CE222F08D9800F842C9 /* Person.swift */,
+				7F5C0C452312C0DA00F26963 /* QuantityTableCell.swift */,
+				7F5C0C462312C0DA00F26963 /* QuantityTableCell.xib */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +256,7 @@
 				7FCF248E230EF41E00A19260 /* Roboto 700.ttf in Resources */,
 				7FCF2490230EF44800A19260 /* Roboto regular.ttf in Resources */,
 				7F73AEEF22BC87630087A4DA /* SplitCustomCell.xib in Resources */,
+				7F5C0C482312C0DA00F26963 /* QuantityTableCell.xib in Resources */,
 				7FCBDE9622F354AD00D55FF9 /* LaunchScreen.storyboard in Resources */,
 				7FCF248C230EF40200A19260 /* Roboto 500.ttf in Resources */,
 				7FB7C0FB22B44F59003C03F4 /* Assets.xcassets in Resources */,
@@ -313,6 +328,7 @@
 				7F6B0FD922E8B1D30078C23D /* IntroViewController.swift in Sources */,
 				7FB7C0F322B44F52003C03F4 /* SplitViewController.swift in Sources */,
 				7FB7C0F122B44F52003C03F4 /* AppDelegate.swift in Sources */,
+				7F5C0C472312C0DA00F26963 /* QuantityTableCell.swift in Sources */,
 				7FF46CE122F08D4900F842C9 /* Item.swift in Sources */,
 				7F7E42B022C674F9001A43F9 /* DinersCostViewController.swift in Sources */,
 				7FAB647E22DF68E700EB440E /* SplitTableCell.swift in Sources */,

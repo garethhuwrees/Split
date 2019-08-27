@@ -10,7 +10,9 @@ import UIKit
 import RealmSwift
 
 class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
+//class DinerFoodViewController: UITableViewController {
+
     let realm = try!Realm()
     
     var costItems: Results<CostEntry>?
@@ -24,7 +26,6 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
     var currencyPrefix: String = ""
     var roundingOn: Bool = false
     var percentageTip: Float = 0.0
-//    var iphoneType: String = ""
     var screenHeight: Int = 0
     
 
@@ -53,11 +54,11 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         
         splitterTableView.delegate = self
         splitterTableView.dataSource = self
-        splitterTableView.register(UINib(nibName: "SplitCustomCell", bundle: nil) , forCellReuseIdentifier: "splitTableCell")
+        splitterTableView.register(UINib(nibName: "QuantityTableCell", bundle: nil) , forCellReuseIdentifier: "quantityTableCell")
         
         foodTableView.delegate = self
         foodTableView.dataSource = self
-        foodTableView.register(UINib(nibName: "SplitCustomCell", bundle: nil) , forCellReuseIdentifier: "splitTableCell")
+        foodTableView.register(UINib(nibName: "QuantityTableCell", bundle: nil) , forCellReuseIdentifier: "quantityTableCell")
         
         
         loadTables()
@@ -105,7 +106,6 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
-        
         if tableView.tag == 1 {
             return person?.count ?? 1
         }
@@ -119,39 +119,41 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         let tableTextFont: UIFont = UIFont(name: regularFont, size: fontSize) ?? UIFont(name: "Georgia", size: fontSize)!
         
         if tableView.tag == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "splitTableCell", for: indexPath) as! SplitTableCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "quantityTableCell", for: indexPath) as! QuantityTableCell
             
             // Set font type and colour
-            cell.leftCellLabel.textColor = self.greyColour
-            cell.leftCellLabel.font = tableTextFont
-            cell.rightCellLabel.textColor = self.greyColour
-            cell.rightCellLabel.font = tableTextFont
+            cell.nameLabel.textColor = self.greyColour
+            cell.nameLabel.font = tableTextFont
+            cell.spendLabel.textColor = self.greyColour
+            cell.spendLabel.font = tableTextFont
             
             var spend = (person?[indexPath.row].personSpend) ?? 0.0
             spend = (spend * 100).rounded() / 100
             let spendString = formatNumber(numberToFormat: spend, digits: 2)
             
-            cell.leftCellLabel.text = person?[indexPath.row].personName
-            cell.rightCellLabel.text = currencyPrefix + spendString
+            cell.nameLabel.text = person?[indexPath.row].personName
+            cell.spendLabel.text = currencyPrefix + spendString
+            cell.quantityLabel.text = ""
             
             return cell
         }
         
         else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "splitTableCell", for: indexPath) as! SplitTableCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "quantityTableCell", for: indexPath) as! QuantityTableCell
             
             // Set font type and colour
-            cell.leftCellLabel.textColor = self.greyColour
-            cell.leftCellLabel.font = tableTextFont
-            cell.rightCellLabel.textColor = self.greyColour
-            cell.rightCellLabel.font = tableTextFont
+            cell.nameLabel.textColor = self.greyColour
+            cell.nameLabel.font = tableTextFont
+            cell.spendLabel.textColor = self.greyColour
+            cell.spendLabel.font = tableTextFont
             
             var spend = item?[indexPath.row].itemSpendNet ?? 0.0
             spend = (spend * 100).rounded() / 100
             let spendString = formatNumber(numberToFormat: spend, digits: 2)
             
-            cell.leftCellLabel.text = item?[indexPath.row].itemName ?? "No Menu Items Added"
-            cell.rightCellLabel.text = currencyPrefix + spendString
+            cell.nameLabel.text = item?[indexPath.row].itemName ?? "No Menu Items Added"
+            cell.spendLabel.text = currencyPrefix + spendString
+            cell.quantityLabel.text = ""
             
             return cell
         }
@@ -213,67 +215,68 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         navigationController?.popViewController(animated: false)
     }
         
+    //MARK:---------------------- EDIT ACTIONS FOR ROWS ------------------------------
     
-    // MARK:-------------- DELETE TABLE ENTRY --------------------------
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?{
         
-            if tableView.tag == 1 {
+        if tableView.tag == 1 {
+            let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
                 
-                print("Deleting Person")
+//          Find & Delete Related Cost Entry Records
+            if let record = self.person?[indexPath.row] {
+                do {
+                    try self.realm.write {
+                        let recordsToDelete = self.costItems?.filter("personName == %@", record.personName)
+
+                        let numberOfRecords = recordsToDelete?.count ?? 0
+
+                        if numberOfRecords > 0 {
+                            for _ in 0...(numberOfRecords-1) {
+                                var costItemToDelete = recordsToDelete![0]
+                                self.realm.delete(costItemToDelete)
+                                costItemToDelete = CostEntry()
+                            }
+                        }
+                        else {
+                            print("No records to delete")
+                        }
+                        // Delete Diners Record
+                        self.realm.delete(record)
+
+                    } // end try
+
+                } catch {
+                    print("Error deleting record, \(error)")
+                } // end catch
+            } // end if let
+
+            self.loadTables()
+            self.updateMenuItemSpend()
+                
+            } // end action
             
-                //Find & Delete Related Cost Entry Records
-                if let record = person?[indexPath.row] {
-                    do {
-                        try realm.write {
-                            let recordsToDelete = costItems?.filter("personName == %@", record.personName)
-                        
-                            let numberOfRecords = recordsToDelete?.count ?? 0
-                            
-                            if numberOfRecords > 0 {
-                                for _ in 0...(numberOfRecords-1) {
-                                    var costItemToDelete = recordsToDelete![0]
-                                    realm.delete(costItemToDelete)
-                                    costItemToDelete = CostEntry()
-                                }
-                            }
-                            else {
-                                print("No records to delete")
-                            }
-                            // Delete Diners Record
-                            realm.delete(record)
-                            
-                        } // end try
-                        
-                    } catch {
-                        print("Error deleting record, \(error)")
-                    } // end catch
-                } // end if let
-                
-                loadTables()
-                updateMenuItemSpend()
-                
-            } // end if
-        
-        } // end if TableView.tag == 1
+            delete.backgroundColor = .red
+            return [delete]
+            
+        } // end if tableView.tag == 1
         
         if tableView.tag == 2 {
             
-            if editingStyle == .delete {
+            let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
                 
-                if let record = item?[indexPath.row] {
+                if let record = self.item?[indexPath.row] {
                     do {
-                        try realm.write {
-                            
-                            let recordsToDelete = costItems?.filter("itemName == %@", record.itemName)
+                        try self.realm.write {
+
+                            let recordsToDelete = self.costItems?.filter("itemName == %@", record.itemName)
                             let numberOfRecords = recordsToDelete?.count ?? 0
-                            
+
                             // Delete Cost Entry Records
                             if numberOfRecords > 0 {
                                 for _ in 0...(numberOfRecords-1) {
                                     var costItemToDelete = recordsToDelete![0]
-                                    realm.delete(costItemToDelete)
+                                    self.realm.delete(costItemToDelete)
                                     costItemToDelete = CostEntry()
                                 }
                             }
@@ -281,22 +284,137 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
                                 print("No records to delete")
                             }
                             // Delete Menu Record
-                            realm.delete(record)
-                            
+                            self.realm.delete(record)
+
                         } // end try
-                        
+
                     } catch {
                         print("Error deleting record, \(error)")
                     } // end catch
                 } // end if let
                 
-                loadTables()
-                updateDinersSpend()
-                
-            } // end if
-        } // end if tableView.tag == 2
+                self.loadTables()
+                self.updateDinersSpend()
+               
+            } // end action
+            
+            delete.backgroundColor = .red
+            
+            let selecectdItem = item?[indexPath.row].itemName
+            let selectedRecord = item?.filter("itemName == %@", selecectdItem!)
+            let unitPrice = selectedRecord![0].unitPrice
+            let numberOfItems = selectedRecord![0].itemNumber
+            
+            if unitPrice == false {
+                let price = UITableViewRowAction(style: .normal, title: "Set\nUnit Price") { action, index in
+                    
+                    if numberOfItems == 0 {
+                        let title = "Set Unit Price"
+                        let message = "Enter Price and Confirm\n(This cannot be undone)"
+                        
+                        self.unitPriceAlert(title: title, message: message, record: selectedRecord!)
+                        }
+                    else {
+                        
+                        let spendWarning = UIAlertController(title: "Spend Recorded", message: "This will overwrite the existing item spend", preferredStyle: UIAlertController.Style .alert)
+                        
+                        spendWarning.addAction(UIAlertAction(title: "Cancel", style: .destructive
+                            , handler: { (UIAlertAction) in
+                                // Do Nothing
+                        }))
+                        
+                        spendWarning.addAction(UIAlertAction(title: "Proceed", style: .default, handler: { (UIAlertAction) in
+                            
+                            let title = "Set Unit Price"
+                            let message = "Enter Price and Confirm\n(This cannot be undone)"
+                            
+                            self.unitPriceAlert(title: title, message: message, record: selectedRecord!)
+                            
+                            // Also update existing costEntry.itemSpend = item.unitPrice
+                        }))
+                        
+                        self.present(spendWarning, animated: true, completion: nil)
+                    }
+                } // end action
+
+                price.backgroundColor = self.greenColour
+                return [delete, price]
+            } // end if unitPrice == false
+            
+            if unitPrice == true {
+                let price = UITableViewRowAction(style: .normal, title: "Update\nUnit Price") { action, index in
+                   
+                    let title = "Update Unit Price"
+                    let message = "Enter Price and Confirm\n(This will overwrite exising spend?"
+                    
+                    self.unitPriceAlert(title: title, message: message, record: selectedRecord!)
+                }
+                price.backgroundColor = .blue
+                return [delete, price]
+            } // end if unitPrice == true
+        }
+
+        return []
+    }
+
+    
+    func unitPriceAlert(title: String, message: String, record: Results<Item> ){
         
-    } // end override function
+        var priceTextfield = UITextField()
+        
+        let priceAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        priceAlert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { (action: UIAlertAction) in
+            //                        print("Cancel Selected")
+        }))
+        
+        priceAlert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { (action: UIAlertAction ) in
+
+            let itemUnitPrice = (priceTextfield.text! as NSString).floatValue
+            
+            do{
+                try self.realm.write {
+                    record[0].unitPrice = true
+                    record[0].itemUnitPrice = itemUnitPrice
+                    
+                    if record[0].itemNumber > 0 {
+                        //Look for cost entry records and update costEntry.itemSpend = item.itemUnitPrice
+                        let itemName = record[0].itemName
+                
+        // Could not get the predicate filter to work with an integer test and therefore used if statement below
+        //let predicate = NSPredicate(format: "itemName == [c]%@", "itemNumber == %d", itemName, 1)
+                        
+                        let predicate = NSPredicate(format: "itemName == [c]%@", itemName)
+                        let itemsWithSpend = self.costItems?.filter(predicate)
+                        
+                        if itemsWithSpend?.count ?? 0 > 0 {
+                            for n in 0...(itemsWithSpend!.count-1) {
+                                if itemsWithSpend![n].itemNumber == 1 {
+                                    itemsWithSpend![n].itemSpend = itemUnitPrice
+                                }
+                            }
+                        } // end if itemsWithSpend
+                    } // end if record[0]
+                } // end try
+            } catch {
+                print("Error updating item record, \(error)")
+            }
+            
+            self.loadTables()
+            
+        })) // end action
+        
+        priceAlert.addTextField(configurationHandler: { (alertTextField) in
+            alertTextField.placeholder = "Unit Price"
+            priceTextfield = alertTextField
+            priceTextfield.keyboardType = .decimalPad
+            
+        })
+        
+        self.present(priceAlert, animated: true, completion: nil )
+        
+    } // end func
+
     
     //MARK:---------------------- IB ACTIONS ----------------------------------
     
@@ -419,11 +537,11 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         
         switch screenHeight {
         case 1136:
-            fontSize = 16; tableRowHeight = 28
+            fontSize = 16; tableRowHeight = 30
         case 1334:
-            fontSize = 18; tableRowHeight = 30
+            fontSize = 18; tableRowHeight = 35
         default:
-            fontSize = 20; tableRowHeight = 32
+            fontSize = 20; tableRowHeight = 40
         }
         
         splitterText.font = splitterText.font?.withSize(fontSize)
