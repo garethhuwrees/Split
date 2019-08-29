@@ -35,8 +35,17 @@ class FoodCostViewController: UITableViewController {
     var fontSize: CGFloat = 20
     let regularFont: String = "Roboto-Regular"
     let greyText: UIColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
+    let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
+    
+    
+    @IBOutlet weak var headerFrame: UILabel!
 
- 
+    @IBOutlet weak var splitterText: UILabel!
+    @IBOutlet weak var quantityText: UILabel!
+    @IBOutlet weak var spendText: UILabel!
+    
+    
+    
     //MARK:------------------ VIEW DID LOAD & DISAPPEAR ----------------------------------
 
     override func viewDidLoad() {
@@ -51,15 +60,10 @@ class FoodCostViewController: UITableViewController {
         
         setAppearance()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-//        updateDinerSpend()
+
         updatePercentOfBill()
     }
 
@@ -119,9 +123,63 @@ class FoodCostViewController: UITableViewController {
         if itemRecord?[0].unitPrice == true {
             
             // Increase/Decrease quanitity
+            let alert = UIAlertController(title: "Increment Quantity", message: "Add (or subtract) the quantity consumed", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Add One", style: .default, handler: { (action: UIAlertAction) in
+                
+                var quantity = self.costEntry?[indexPath.row].itemNumber
+                
+                quantity = quantity! + 1
+                
+                do {
+                    try self.realm.write {
+                        self.costEntry?[indexPath.row].itemNumber = quantity ?? 0
+                    }
+                }
+                catch {
+                    print("Error updating costEntry record")
+                }
+                self.updateMenuSpend()
+                self.updateDinerSpend()
+                tableView.reloadData()
+                
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "(Subtract One)", style: .destructive, handler: { (action: UIAlertAction) in
+                
+                var quantity = self.costEntry?[indexPath.row].itemNumber
+                
+                if quantity! > 0 {
+                    quantity = quantity! - 1
+                }
+                
+                do {
+                    try self.realm.write {
+                        self.costEntry?[indexPath.row].itemNumber = quantity ?? 0
+                    }
+                }
+                catch {
+                    print("Error updating cost")
+                }
+                
+                self.updateMenuSpend()
+                self.updateDinerSpend()
+                tableView.reloadData()
+                
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction) in
+//                print("Cancel button pressed")
+            }))
+            
+            
+            self.present(alert, animated: true, completion: nil)
+            
         }
         
-        else { // Enter New Spend on Foood Item
+        if itemRecord?[0].unitPrice == false { // Enter New Spend on Foood Item
         
             var textField = UITextField()
             
@@ -211,6 +269,14 @@ class FoodCostViewController: UITableViewController {
         
         tableView.separatorColor = UIColor.clear
         tableView.rowHeight = tableRowHeight
+        
+        splitterText.font = splitterText.font.withSize(fontSize)
+        quantityText.font = quantityText.font.withSize(fontSize)
+        spendText.font = spendText.font.withSize(fontSize)
+        
+        headerFrame.layer.cornerRadius = 10.0
+        headerFrame.layer.borderColor = orangeColour.cgColor
+        headerFrame.layer.borderWidth = 1.0
 
     }
     
@@ -228,7 +294,7 @@ class FoodCostViewController: UITableViewController {
         if numberOfRecords! > 0 {
             for index in 0...numberOfRecords!-1 {
 
-                menuSpend = menuSpend + (costEntry?[index].itemSpend ?? 0.0)
+                menuSpend = menuSpend + (costEntry?[index].itemSpend ?? 0.0) * Float(((costEntry?[index].itemNumber)!))
                 itemCount = itemCount + (costEntry?[index].itemNumber ?? 0)
                 }
 
@@ -252,7 +318,7 @@ class FoodCostViewController: UITableViewController {
         var dinerSpend: Float = 0.0
         
         // relaod costEntry with all records
-        costEntry = realm.objects(CostEntry.self)
+        let fullCostEntry = realm.objects(CostEntry.self)
         
         person = realm.objects(Person.self)
         let numberOfDiners = person?.count ?? 0
@@ -261,11 +327,11 @@ class FoodCostViewController: UITableViewController {
             for index in 0...numberOfDiners-1 {
                 dinerItemToUpdate = person?[index].personName ?? "No Name"
                 
-                dinerItemRecords = costEntry?.filter("personName == %@", dinerItemToUpdate)
+                dinerItemRecords = fullCostEntry.filter("personName == %@", dinerItemToUpdate)
                 let numberOfDinerItemRecords = dinerItemRecords?.count ?? 0
                 dinerSpend = 0.0
                 for x in 0...numberOfDinerItemRecords-1 {
-                    dinerSpend = dinerSpend + (dinerItemRecords?[x].itemSpend ?? 0.0)
+                    dinerSpend = dinerSpend + (dinerItemRecords![x].itemSpend) * Float((dinerItemRecords![x].itemNumber))
                 }
                 
                 do {

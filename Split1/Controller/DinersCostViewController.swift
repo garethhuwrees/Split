@@ -33,7 +33,15 @@ class DinersCostViewController: UITableViewController {
     var fontSize: CGFloat = 20
     let regularFont: String = "Roboto-Regular"
     let greyText: UIColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
-
+    let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
+    
+    @IBOutlet weak var headerFrame: UILabel!
+    
+    @IBOutlet weak var itemText: UILabel!
+    @IBOutlet weak var quantityText: UILabel!
+    @IBOutlet weak var spendText: UILabel!
+    
+    
     
     //MARK: ---------------- VIEW DID LOAD & DISAPPEAR ----------------------
     
@@ -110,15 +118,73 @@ class DinersCostViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let itemName = self.costEntry?[indexPath.row].itemName
+        
+        item = realm.objects(Item.self) // Reload item
         let selectedItem = item?.filter("itemName == %@", itemName ?? "No Name")
         
         if selectedItem?[0].unitPrice == true {
             
-            // Increase/Decrease quantity
+            
+            let alert = UIAlertController(title: "Increment Quantity", message: "Add (or subtract) the quantity consumed", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Add One", style: .default, handler: { (action: UIAlertAction) in
+                
+                var quantity = self.costEntry?[indexPath.row].itemNumber
+                
+                quantity = quantity! + 1
+
+                    do {
+                        try self.realm.write {
+                            self.costEntry?[indexPath.row].itemNumber = quantity ?? 0
+                        }
+                    }
+                    catch {
+                        print("Error updating costEntry record")
+                    }
+                self.updateMenuSpend()
+                self.updateDinerSpend()
+                tableView.reloadData()
+                
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "(Subtract One)", style: .destructive, handler: { (action: UIAlertAction) in
+                
+                var quantity = self.costEntry?[indexPath.row].itemNumber
+                
+                if quantity! > 0 {
+                    quantity = quantity! - 1
+                }
+                
+                do {
+                    try self.realm.write {
+                        self.costEntry?[indexPath.row].itemNumber = quantity ?? 0
+                    }
+                }
+                catch {
+                    print("Error updating cost")
+                }
+                
+                self.updateMenuSpend()
+                self.updateDinerSpend()
+                tableView.reloadData()
+                
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction) in
+//                print("Cancel button pressed")
+            }))
+            
+
+            
+            self.present(alert, animated: true, completion: nil)
             
         }
         
-        else {
+        if selectedItem?[0].unitPrice == false {
+            
+            
             var textField = UITextField()
             
             let alert = UIAlertController(title: "Add/Update Spend", message: "What was spent on this item?", preferredStyle: .alert)
@@ -144,7 +210,7 @@ class DinersCostViewController: UITableViewController {
                                 }
                             }
                             catch {
-                                print("Error updating cost")
+                                print("Error updating costEntry record")
                             }
                         } // end if
                 
@@ -211,6 +277,14 @@ class DinersCostViewController: UITableViewController {
         tableView.separatorColor = UIColor.clear
         tableView.rowHeight = tableRowHeight
         
+        itemText.font = itemText.font.withSize(fontSize)
+        quantityText.font = quantityText.font.withSize(fontSize)
+        spendText.font = spendText.font.withSize(fontSize)
+        
+        headerFrame.layer.cornerRadius = 10.0
+        headerFrame.layer.borderColor = orangeColour.cgColor
+        headerFrame.layer.borderWidth = 1.0
+        
     }
     
     func updateDinerSpend() {
@@ -219,7 +293,7 @@ class DinersCostViewController: UITableViewController {
         var totalBill: Float = 0.0
         if numberOfRecords > 0 {
             for index in 0...(numberOfRecords-1) {
-                totalBill = totalBill + (costEntry?[index].itemSpend)!
+                totalBill = totalBill + (costEntry![index].itemSpend) * Float(costEntry![index].itemNumber)
             } // end for
             do {
                 try self.realm.write {
@@ -242,7 +316,7 @@ class DinersCostViewController: UITableViewController {
         var itemCount: Int
         
         // relaod costEntry with all records
-        costEntry = realm.objects(CostEntry.self)
+        let fullCostEntry = realm.objects(CostEntry.self)
         
         // reload items with all records
         item = realm.objects(Item.self)
@@ -252,16 +326,15 @@ class DinersCostViewController: UITableViewController {
             for index in 0...numberOfMenuItems-1 {
                 menuItemToUpdate = item?[index].itemName ?? "No Name" // process each item.itemName in turn
                 
-                menuItemRecords = costEntry?.filter("itemName == %@", menuItemToUpdate)
+                menuItemRecords = fullCostEntry.filter("itemName == %@", menuItemToUpdate)
                 let numberOfMenuItemRecords = menuItemRecords?.count ?? 0
                 menuSpend = 0.0
                 itemCount = 0
-                for x in 0...numberOfMenuItemRecords-1 {
-                    menuSpend = menuSpend + (menuItemRecords?[x].itemSpend ?? 0.0)
-                    itemCount = itemCount + (menuItemRecords?[x].itemNumber ?? 0)
-                    
-                }
                 
+                for x in 0...numberOfMenuItemRecords-1 {
+                    menuSpend = menuSpend + (menuItemRecords![x].itemSpend * Float(menuItemRecords![x].itemNumber))
+                    itemCount = itemCount + (menuItemRecords?[x].itemNumber ?? 0)
+                }
                 do {
                     try self.realm.write {
                         item?[index].itemSpendNet = menuSpend

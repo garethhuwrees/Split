@@ -151,7 +151,12 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
             spend = (spend * 100).rounded() / 100
             let spendString = formatNumber(numberToFormat: spend, digits: 2)
             
-            cell.nameLabel.text = item?[indexPath.row].itemName ?? "No Menu Items Added"
+            if item?[indexPath.row].unitPrice == true {
+                cell.nameLabel.text = item![indexPath.row].itemName + " (UP)"
+            }
+            else {
+                cell.nameLabel.text = item![indexPath.row].itemName
+            }
             cell.spendLabel.text = currencyPrefix + spendString
             cell.quantityLabel.text = ""
             
@@ -306,7 +311,13 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
             let numberOfItems = selectedRecord![0].itemNumber
             
             if unitPrice == false {
-                let price = UITableViewRowAction(style: .normal, title: "Set\nUnit Price") { action, index in
+                
+                var actionTitle = "Set\nUnit Price"
+                if screenHeight <= 1334 {
+                    actionTitle = "Set Unit Price"
+                }
+                
+                let price = UITableViewRowAction(style: .normal, title: actionTitle) { action, index in
                     
                     if numberOfItems == 0 {
                         let title = "Set Unit Price"
@@ -342,7 +353,13 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
             } // end if unitPrice == false
             
             if unitPrice == true {
-                let price = UITableViewRowAction(style: .normal, title: "Update\nUnit Price") { action, index in
+                
+                var actionTitle = "Update\nUnit Price"
+                if screenHeight <= 1334 {
+                    actionTitle = "Update Unit Price"
+                }
+                
+                let price = UITableViewRowAction(style: .normal, title: actionTitle) { action, index in
                    
                     let title = "Update Unit Price"
                     let message = "Enter Price and Confirm\n(This will overwrite exising spend?"
@@ -377,29 +394,27 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
                     record[0].unitPrice = true
                     record[0].itemUnitPrice = itemUnitPrice
                     
-                    if record[0].itemNumber > 0 {
-                        //Look for cost entry records and update costEntry.itemSpend = item.itemUnitPrice
-                        let itemName = record[0].itemName
-                
-        // Could not get the predicate filter to work with an integer test and therefore used if statement below
-        //let predicate = NSPredicate(format: "itemName == [c]%@", "itemNumber == %d", itemName, 1)
-                        
-                        let predicate = NSPredicate(format: "itemName == [c]%@", itemName)
-                        let itemsWithSpend = self.costItems?.filter(predicate)
-                        
-                        if itemsWithSpend?.count ?? 0 > 0 {
-                            for n in 0...(itemsWithSpend!.count-1) {
-                                if itemsWithSpend![n].itemNumber == 1 {
-                                    itemsWithSpend![n].itemSpend = itemUnitPrice
-                                }
-                            }
-                        } // end if itemsWithSpend
-                    } // end if record[0]
+                    //Look for cost entry records and update costEntry.itemSpend = item.itemUnitPrice
+                    let itemName = record[0].itemName
+            
+    // Could not get the predicate filter to work with an integer test and therefore used if statement below
+    //let predicate = NSPredicate(format: "itemName == [c]%@", "itemNumber == %d", itemName, 1)
+                    
+                    let predicate = NSPredicate(format: "itemName == [c]%@", itemName)
+                    let itemsWithSpend = self.costItems?.filter(predicate)
+                    
+                    if itemsWithSpend?.count ?? 0 > 0 {
+                        for n in 0...(itemsWithSpend!.count-1) {
+                            // Update all items with Unit Price
+                            itemsWithSpend![n].itemSpend = itemUnitPrice
+                        }
+                    } // end if
                 } // end try
             } catch {
                 print("Error updating item record, \(error)")
             }
-            
+            self.updateDinersSpend()
+            self.updateMenuItemSpend()
             self.loadTables()
             
         })) // end action
@@ -482,6 +497,10 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
                 if invalidEntry == false {
                     let newItem = Item()
                     newItem.itemName = textField.text!
+                    newItem.itemNumber = 0
+                    newItem.unitPrice = false
+                    newItem.itemUnitPrice = 0.0
+                    newItem.itemSpendNet = 0.0
                     // Append not requited as the Results object is auto updating
                     
                     self.saveFoodItems(menuItem: newItem)
@@ -694,7 +713,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 if numberOfCostRecords > 0 {
                     for m in 0...(numberOfCostRecords - 1) {
-                        menuItemSpend = menuItemSpend + costEntryReords![m].itemSpend
+                        menuItemSpend = menuItemSpend + (costEntryReords![m].itemSpend * Float(costEntryReords![m].itemNumber))
                     }
                     
                 } // end if
@@ -724,7 +743,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 if numberOfCostRecords > 0 {
                     for m in 0...(numberOfCostRecords - 1) {
-                        dinersSpend = dinersSpend + costEntryReords![m].itemSpend
+                        dinersSpend = dinersSpend + (costEntryReords![m].itemSpend * Float(costEntryReords![m].itemNumber))
                     }
                     
                 } // end if
