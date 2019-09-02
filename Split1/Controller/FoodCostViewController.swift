@@ -29,12 +29,13 @@ class FoodCostViewController: UITableViewController {
     var itemRecord: Results<Item>?
     var dinersFiltered: Results<Person>? // initalise global variable
     var costEntryFiltered: Results<CostEntry>?
+    var unitPrice: Bool = false
     
     var currencyPrefix: String = ""
     var screenHeight: Int = 0
     var fontSize: CGFloat = 20
     let regularFont: String = "Roboto-Regular"
-    let greyText: UIColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
+    let greyColour = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
     let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
     
     
@@ -51,8 +52,6 @@ class FoodCostViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = textPassedOver!
-        
         // Register the .xib file (historically a .nib file)
         tableView.register(UINib(nibName: "QuantityTableCell", bundle: nil) , forCellReuseIdentifier: "quantityTableCell")
         
@@ -60,6 +59,12 @@ class FoodCostViewController: UITableViewController {
         
         setAppearance()
         
+        if unitPrice == true {
+            self.title = textPassedOver! + " *"
+        }
+        else {
+            self.title = textPassedOver!
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -80,11 +85,11 @@ class FoodCostViewController: UITableViewController {
         let tableTextFont: UIFont = UIFont(name: regularFont, size: fontSize) ?? UIFont(name: "Georgia", size: fontSize)!
         
         // Set font type and colour
-        cell.nameLabel.textColor = self.greyText
+        cell.nameLabel.textColor = self.greyColour
         cell.nameLabel.font = tableTextFont
-        cell.quantityLabel.textColor = self.greyText
+        cell.quantityLabel.textColor = self.greyColour
         cell.quantityLabel.font = tableTextFont
-        cell.spendLabel.textColor = self.greyText
+        cell.spendLabel.textColor = self.greyColour
         cell.spendLabel.font = tableTextFont
         
         // set contents
@@ -185,7 +190,11 @@ class FoodCostViewController: UITableViewController {
             
             let alert = UIAlertController(title: "Add/Update Spend", message: "What was spent on this item?", preferredStyle: .alert)
             
-            let action = UIAlertAction(title: "Apply", style: .default) { (action) in
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                // do nothing
+            }))
+            
+            alert.addAction((UIAlertAction(title: "OK", style: .default, handler: { (action) in
                 
                 if textField.text!.isEmpty{
                     //Do nothing
@@ -214,8 +223,8 @@ class FoodCostViewController: UITableViewController {
                     self.updateDinerSpend()
                     self.loadTables()
                 }
-                
-            }
+            })))
+            
             alert.addTextField { (alertTextField) in
                 
                 alertTextField.placeholder = "\(self.costEntry?[indexPath.row].itemSpend ?? 0.0)"
@@ -223,7 +232,6 @@ class FoodCostViewController: UITableViewController {
                 textField.keyboardType = .decimalPad
             } // end alert
             
-            alert.addAction(action)
             present(alert, animated: true, completion: nil)
         
         } // end else
@@ -247,6 +255,7 @@ class FoodCostViewController: UITableViewController {
         
         item = realm.objects(Item.self)
         itemRecord = item?.filter("itemName == %@", textPassedOver ?? "No Name")
+        unitPrice = itemRecord![0].unitPrice
         
         person = realm.objects(Person.self)
         //dinerRecord = diners?.filter("personName == %@", textPassedOver ?? "No Name")

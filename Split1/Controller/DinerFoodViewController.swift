@@ -50,7 +50,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "The Table"
+        self.title = "Your Table"
         
         splitterTableView.delegate = self
         splitterTableView.dataSource = self
@@ -152,7 +152,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
             let spendString = formatNumber(numberToFormat: spend, digits: 2)
             
             if item?[indexPath.row].unitPrice == true {
-                cell.nameLabel.text = item![indexPath.row].itemName + " (UP)"
+                cell.nameLabel.text = item![indexPath.row].itemName + " *"
             }
             else {
                 cell.nameLabel.text = item![indexPath.row].itemName
@@ -381,11 +381,11 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let priceAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        priceAlert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { (action: UIAlertAction) in
+        priceAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction) in
             //                        print("Cancel Selected")
         }))
         
-        priceAlert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { (action: UIAlertAction ) in
+        priceAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction ) in
 
             let itemUnitPrice = (priceTextfield.text! as NSString).floatValue
             
@@ -439,41 +439,42 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let alert = UIAlertController(title: "Add Splitter", message: "Who else is splitting the bill?", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Add Splitter", style: .default) { (action) in
-            
-            if textField.text!.isEmpty {
-                //do nothing
-            }
-            else {
-                
-                let invalidEntry = self.checkForDuplicatePerson(name: textField.text!)
-                
-                if invalidEntry == false {
-                    let newItem = Person()
-                    newItem.personName = textField.text!
-                    newItem.personSpend = 0.00
-                    
-                    self.saveNewPerson(name: newItem)
-                    self.addCostEntryRecords(person: newItem.personName)
-                    self.splitterTableView.reloadData()
-                } //end if
-                else {
-                    
-                    let duplicateAlert = UIAlertController(title: "Duplicate Splitter", message: "Using the same name will be very confusing!", preferredStyle: UIAlertController.Style.alert)
-                    duplicateAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(duplicateAlert, animated: true, completion: nil)
-                    
-                } // end else
-            } //end else
-        } // end closure
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            // Do Nothing
+        }))
         
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            if textField.text!.isEmpty {
+                    //do nothing
+                }
+                else {
+    
+                    let invalidEntry = self.checkForDuplicatePerson(name: textField.text!)
+    
+                    if invalidEntry == false {
+                        let newItem = Person()
+                        newItem.personName = textField.text!
+                        newItem.personSpend = 0.00
+    
+                        self.saveNewPerson(name: newItem)
+                        self.addCostEntryRecords(person: newItem.personName)
+                        self.splitterTableView.reloadData()
+                    } //end if
+                    else {
+    
+                        let duplicateAlert = UIAlertController(title: "Duplicate Splitter", message: "Using the same name will be very confusing!", preferredStyle: UIAlertController.Style.alert)
+    
+                        duplicateAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(duplicateAlert, animated: true, completion: nil)
+    
+                    } // end else
+                } //end else
+        }))
         
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Splitters Name" // Creates initial grey text to be overwritten
             textField = alertTextField
         } // end closure
-        
-        alert.addAction(action)
         
         present(alert, animated: true, completion: nil)
     }
@@ -483,46 +484,47 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
        
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Add Menu Item", message: "What food & drink is being ordered", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add Category", message: "What food & drink is being ordered", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            // Do Nothing
+        }))
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             
             if textField.text!.isEmpty {
-                // do nothing
-            }
-            else {
-                
-                let invalidEntry = self.checkForDuplicateItem(name: textField.text!)
-                
-                if invalidEntry == false {
-                    let newItem = Item()
-                    newItem.itemName = textField.text!
-                    newItem.itemNumber = 0
-                    newItem.unitPrice = false
-                    newItem.itemUnitPrice = 0.0
-                    newItem.itemSpendNet = 0.0
-                    // Append not requited as the Results object is auto updating
-                    
-                    self.saveFoodItems(menuItem: newItem)
-                    self.addCostEntryRecords(food: newItem.itemName)
-                    self.loadTables() // Not sure if this is needed //
-                } // end if
-                else {
-                    
-                    let duplicateAlert = UIAlertController(title: "Duplicate Menu Item", message: "Item names must be different", preferredStyle: UIAlertController.Style.alert)
-                    duplicateAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(duplicateAlert, animated: true, completion: nil)
+                    // do nothing
                 }
-            } // end else
-        
-        }
+                else {
+    
+                    let invalidEntry = self.checkForDuplicateItem(name: textField.text!)
+    
+                    if invalidEntry == false {
+                        let newItem = Item()
+                        newItem.itemName = textField.text!
+                        newItem.itemNumber = 0
+                        newItem.unitPrice = false
+                        newItem.itemUnitPrice = 0.0
+                        newItem.itemSpendNet = 0.0
+                        // Append not requited as the Results object is auto updating
+    
+                        self.saveFoodItems(menuItem: newItem)
+                        self.addCostEntryRecords(food: newItem.itemName)
+                        self.loadTables() // Not sure if this is needed //
+                    } // end if
+                    else {
+    
+                        let duplicateAlert = UIAlertController(title: "Duplicate Category", message: "Category names must be different", preferredStyle: UIAlertController.Style.alert)
+                        duplicateAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(duplicateAlert, animated: true, completion: nil)
+                    }
+                } // end else
+        }))
         
         alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Menu Item Type" // Creates initial grey text to be overwritten
+            alertTextField.placeholder = "Food & Drink"
             textField = alertTextField
         }
-        
-        alert.addAction(action)
         
         present(alert, animated: true, completion: nil)
     }

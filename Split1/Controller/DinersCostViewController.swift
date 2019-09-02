@@ -32,7 +32,7 @@ class DinersCostViewController: UITableViewController {
     var screenHeight: Int = 0
     var fontSize: CGFloat = 20
     let regularFont: String = "Roboto-Regular"
-    let greyText: UIColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
+    let greyColour = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
     let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
     
     @IBOutlet weak var headerFrame: UILabel!
@@ -78,11 +78,11 @@ class DinersCostViewController: UITableViewController {
         let tableTextFont: UIFont = UIFont(name: regularFont, size: fontSize) ?? UIFont(name: "Georgia", size: fontSize)!
         
         // Set font type and colour
-        cell.nameLabel.textColor = self.greyText
+        cell.nameLabel.textColor = self.greyColour
         cell.nameLabel.font = tableTextFont
-        cell.quantityLabel.textColor = self.greyText
+        cell.quantityLabel.textColor = self.greyColour
         cell.quantityLabel.font = tableTextFont
-        cell.spendLabel.textColor = self.greyText
+        cell.spendLabel.textColor = self.greyColour
         cell.spendLabel.font = tableTextFont
         
         // Set contents
@@ -92,7 +92,16 @@ class DinersCostViewController: UITableViewController {
         
         let quantity = costEntry?[indexPath.row].itemNumber ?? 0
         
-        cell.nameLabel.text = costEntry?[indexPath.row].itemName
+        var selectedItem = realm.objects(Item.self)
+        selectedItem = (selectedItem.filter("itemName = %@", costEntry![indexPath.row].itemName))
+        let unitPrice = selectedItem[0].unitPrice
+        
+        if unitPrice == true {
+            cell.nameLabel.text = costEntry![indexPath.row].itemName + " *"
+        }
+        else {
+            cell.nameLabel.text = costEntry![indexPath.row].itemName
+        }
         cell.quantityLabel.text = String(quantity)
         cell.spendLabel.text = currencyPrefix + spendString
         
@@ -124,8 +133,8 @@ class DinersCostViewController: UITableViewController {
         
         if selectedItem?[0].unitPrice == true {
             
-            
             let alert = UIAlertController(title: "Increment Quantity", message: "Add (or subtract) the quantity consumed", preferredStyle: .alert)
+        
             
             alert.addAction(UIAlertAction(title: "Add One", style: .default, handler: { (action: UIAlertAction) in
                 
@@ -189,37 +198,41 @@ class DinersCostViewController: UITableViewController {
             
             let alert = UIAlertController(title: "Add/Update Spend", message: "What was spent on this item?", preferredStyle: .alert)
             
-            let action = UIAlertAction(title: "Apply", style: .default) { (action) in
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                // do nothing
+            }))
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
                 
                 if textField.text!.isEmpty{
                     //Do nothing
                 }
                 else {
                     let itemCost = (textField.text! as NSString).floatValue
-                
-                        if let item = self.costEntry?[indexPath.row] {
-                            do {
-                                try self.realm.write {
-                                    item.itemSpend = itemCost
-                                    if itemCost == 0.0 {
-                                        item.itemNumber = 0
-                                    }
-                                    else {
-                                        item.itemNumber = 1
-                                    }
+                    
+                    if let item = self.costEntry?[indexPath.row] {
+                        do {
+                            try self.realm.write {
+                                item.itemSpend = itemCost
+                                if itemCost == 0.0 {
+                                    item.itemNumber = 0
+                                }
+                                else {
+                                    item.itemNumber = 1
                                 }
                             }
-                            catch {
-                                print("Error updating costEntry record")
-                            }
-                        } // end if
-                
-                        self.updateDinerSpend()
-                        self.updateMenuSpend()
-                        self.loadTables()
+                        }
+                        catch {
+                            print("Error updating costEntry record")
+                        }
+                    } // end if
+                    
+                    self.updateDinerSpend()
+                    self.updateMenuSpend()
+                    self.loadTables()
                 }
-                
-           }
+            }))
+            
             alert.addTextField { (alertTextField) in
                 
                 alertTextField.placeholder = "\(self.costEntry?[indexPath.row].itemSpend ?? 0.0)"
@@ -227,7 +240,6 @@ class DinersCostViewController: UITableViewController {
                 textField.keyboardType = .decimalPad
             } // end alert
             
-            alert.addAction(action)
             present(alert, animated: true, completion: nil)
         }
         

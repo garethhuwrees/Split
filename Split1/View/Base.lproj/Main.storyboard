@@ -437,6 +437,7 @@
                         <segue destination="ae0-Ma-gsN" kind="show" identifier="gotoIntro" id="weN-hF-4Yf"/>
                         <segue destination="Nsv-iG-bKB" kind="show" identifier="gotoTable" id="JVP-Qr-pv6"/>
                         <segue destination="ae0-Ma-gsN" kind="show" identifier="gotoGuide" id="Mp7-Jj-CWi"/>
+                        <segue destination="LSD-GT-C1o" kind="show" identifier="gotoBill" animates="NO" id="PT0-VZ-1sd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -836,6 +837,34 @@
             </objects>
             <point key="canvasLocation" x="1749.2753623188407" y="11.413043478260871"/>
         </scene>
+        <!--Bill View Controller-->
+        <scene sceneID="BAS-dV-GpR">
+            <objects>
+                <tableViewController id="LSD-GT-C1o" customClass="BillViewController" customModule="SPLIT_" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hy0-mZ-agO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BillCell" id="bGN-7c-gMr">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bGN-7c-gMr" id="GgN-s0-wAd">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="LSD-GT-C1o" id="HoJ-IL-UQ2"/>
+                            <outlet property="delegate" destination="LSD-GT-C1o" id="WQH-jX-niX"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zY7-1w-3Vh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900" y="-716"/>
+        </scene>
         <!--Splitters-->
         <scene sceneID="7C4-wT-jAs">
             <objects>
@@ -916,7 +945,7 @@
         <image name="Split Image" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="557-lP-Rga"/>
+        <segue reference="n60-7H-OLt"/>
         <segue reference="R31-mx-cou"/>
         <segue reference="weN-hF-4Yf"/>
     </inferredMetricsTieBreakers>

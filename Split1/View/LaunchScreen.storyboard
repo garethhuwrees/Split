@@ -25,7 +25,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZ3-9R-IOv" userLabel="Middle View">
                                 <rect key="frame" x="0.0" y="135" width="375" height="330"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Split_Logo_Orange" translatesAutoresizingMaskIntoConstraints="NO" id="hTo-rX-lyy">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Split Image" translatesAutoresizingMaskIntoConstraints="NO" id="hTo-rX-lyy">
                                         <rect key="frame" x="0.0" y="10" width="375" height="170"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="170" id="71k-S6-i6E"/>
@@ -70,6 +70,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Split_Logo_Orange" width="256" height="256"/>
+        <image name="Split Image" width="512" height="512"/>
     </resources>
 </document>

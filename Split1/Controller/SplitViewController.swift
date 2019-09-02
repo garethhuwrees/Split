@@ -84,11 +84,13 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Amount To Pay", message: "This muust be greater that the bill", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Enter Amount To Pay", message: "This muust be greater that the total spend", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Enter", style: .default) { (action) in
-            
-            //TODO:- should this be moved to updateSettings()?
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            // do nothing
+        }))
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             
             if textField.text!.isEmpty{
                 //Do nothing
@@ -111,20 +113,18 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.splitterTableView.reloadData()
             }
             
-        }
+        }))
+        
         alert.addTextField { (alertTextField) in
             
             alertTextField.placeholder = "\(self.settings?[0].fixedSpend ?? 0.0)"
             textField = alertTextField
             textField.keyboardType = .decimalPad
-        } // end alert
+        } // end addTextField
         
-        alert.addAction(action)
         present(alert, animated: true, completion: nil)
-        
     }
     
-
     
     @IBAction func chooseTipButton(_ sender: Any) {
         tipDropdown.show()
@@ -134,9 +134,13 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Rate of Tax", message: "Enter the local tax rate", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Set Rate of Tax", message: "Enter the local tax rate", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Enter", style: .default) { (action) in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            // do nothing
+        }))
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             
             if textField.text!.isEmpty{
                 //Do nothing
@@ -148,16 +152,15 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.updateSettings()
             self.showBillTotals()
             self.splitterTableView.reloadData()
-            
-        }
+        }))
+        
         alert.addTextField { (alertTextField) in
             
             alertTextField.placeholder = "\(self.taxRate)"
             textField = alertTextField
             textField.keyboardType = .decimalPad
-        } // end alert
-        
-        alert.addAction(action)
+        } // end addTextField
+    
         present(alert, animated: true, completion: nil)
         
     }
@@ -273,7 +276,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 performSegue(withIdentifier: "goToFood", sender: self)
             }
             else {
-                performSegue(withIdentifier: "gotoGuide", sender: self)
+                performSegue(withIdentifier: "gotoBill", sender: self)
             }
         }
             
@@ -309,6 +312,14 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let trans = CATransition()
             trans.type = CATransitionType.push
             trans.subtype = CATransitionSubtype.fromRight
+            trans.duration = 0.35
+            self.navigationController?.view.layer.add(trans, forKey: nil)
+        }
+        
+        if let _ = segue.destination as? BillViewController {
+            let trans = CATransition()
+            trans.type = CATransitionType.push
+            trans.subtype = CATransitionSubtype.fromLeft
             trans.duration = 0.35
             self.navigationController?.view.layer.add(trans, forKey: nil)
         }
@@ -405,6 +416,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         spend = (spend * roundingFactor).rounded() / roundingFactor
         let spendString = formatNumber(numberToFormat: spend, digits: numberOfDigits)
         cell.rightCellLabel.text = self.currencyPrefix + spendString
+        
+        cell.isUserInteractionEnabled = false
         
         return cell
     }
@@ -617,11 +630,11 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         frameMiddle.layer.cornerRadius = 10.0
         frameMiddle.layer.borderColor = orangeColour.cgColor
-        frameMiddle.layer.borderWidth = 0.5
+        frameMiddle.layer.borderWidth = 0.8
         
         frameBotton.layer.cornerRadius = 10.0
         frameBotton.layer.borderColor = orangeColour.cgColor
-        frameBotton.layer.borderWidth = 0.5
+        frameBotton.layer.borderWidth = 0.8
         
         splitterTableView.rowHeight = tableRowHeight
         
@@ -852,9 +865,13 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Set Percentage Tip", message: "Enter a value greater than 1%", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Set Percentage Tip", message: "The value must be greater than 1%", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Enter", style: .default) { (action) in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            // do nothing
+        }))
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             
             if textField.text!.isEmpty{
                 //Do nothing
@@ -868,7 +885,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     self.showBillTotals()
                 }
             } // end else
-        } //end action
+        }))
         
         alert.addTextField { (alertTextField) in
             
@@ -877,7 +894,6 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             textField.keyboardType = .decimalPad
         } // end alert
         
-        alert.addAction(action)
         present(alert, animated: true, completion: nil)
         
     }
@@ -904,6 +920,10 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 let confirmAlert = UIAlertController(title: title, message: "Click OK to Confirm", preferredStyle: UIAlertController.Style .alert)
                 
+                confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (action: UIAlertAction!) in
+                    // do nothing
+                }))
+                
                 confirmAlert.addAction(UIAlertAction(title: "OK", style: .default, handler:{ (action: UIAlertAction!) in
                     switch index {
                     case 0: self!.resetSpend()
@@ -914,10 +934,6 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     default:
                         print("A case default must have an executable statement")
                     }
-                }))
-                
-                confirmAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler:{ (action: UIAlertAction!) in
-                    print("Don't delete anything")
                 }))
                 
                 self!.present(confirmAlert, animated: true, completion: nil)
