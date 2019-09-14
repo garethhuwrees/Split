@@ -253,6 +253,11 @@ class BillViewController: UITableViewController {
 //        
         tableView.separatorColor = UIColor.clear
         tableView.rowHeight = tableRowHeight
+        
+        let leftButton = UIBarButtonItem(title: "< Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.backTapped))
+        leftButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: regularFont, size: fontSize)!], for: UIControl.State.normal)
+        leftButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: mediumFont, size: fontSize)!], for: UIControl.State.selected)
+        navigationItem.leftBarButtonItem = leftButton
 
 //        
 //        splitterText.layer.cornerRadius = 10.0
@@ -264,6 +269,7 @@ class BillViewController: UITableViewController {
 //        foodText.layer.borderWidth = 1.0
         
     }
+    
     
     func formatNumber(numberToFormat: Float, digits: Int) -> String {
         

@@ -626,7 +626,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         switch screenHeight {
         case 1136:
-            fontSize = fontSize-6; tableRowHeight = 26 // fontsixe 14
+            fontSize = fontSize-6; tableRowHeight = 26 // fontsize 14
         case 1334:
             fontSize = fontSize-2; tableRowHeight = 30 // fontsize 18
         default:
@@ -671,15 +671,22 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //        UIBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red, NSAttributedString.Key.font: UIFont.init(name: regularFont, size: 10)])
 
         
-        // Set Nav Bar Apearance
-        navigationController?.navigationBar.barTintColor = greenColour
-//        navigationController?.navigationBar.tintColor = UIColor.white
-        
-        //        navigationController?.navigationBar.
-        //TODO - How to set navigation text font?
+        // SET NAVBAR APPEARANCE
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: regularFont, size: fontSize + 3)!]
         
+        
+//        navigationController?.navigationBar.tintColor = UIColor.white (set in main.storyboard)
+        
+        let leftButton = UIBarButtonItem(title: "Intro", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.introSelected(_:)))
+        leftButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: regularFont, size: fontSize)!], for: UIControl.State.normal)
+        leftButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: mediumFont, size: fontSize)!], for: UIControl.State.selected)
+        navigationItem.leftBarButtonItem = leftButton
+        
+        let rightButton = UIBarButtonItem(title: "Guide", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.guideSelected(_:)))
+        rightButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: regularFont, size: fontSize)!], for: UIControl.State.normal)
+        rightButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: mediumFont, size: fontSize)!], for: UIControl.State.selected)
+        navigationItem.rightBarButtonItem = rightButton
     }
     
     

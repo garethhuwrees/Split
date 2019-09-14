@@ -413,12 +413,14 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Home" id="CqX-p8-iUo">
-                        <barButtonItem key="leftBarButtonItem" title="Intro" id="TGj-IF-a31">
+                        <barButtonItem key="leftBarButtonItem" title="Intro" id="TGj-IF-a31" userLabel="Intro Button">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="introSelected:" destination="BYZ-38-t0r" id="EL9-Ka-bvl"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Guide" id="ve0-QS-5me">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="guideSelected:" destination="BYZ-38-t0r" id="12b-5A-AmJ"/>
                             </connections>

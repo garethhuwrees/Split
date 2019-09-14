@@ -32,6 +32,7 @@ class DinersCostViewController: UITableViewController {
     var screenHeight: Int = 0
     var fontSize: CGFloat = 20
     let regularFont: String = "Roboto-Regular"
+    let mediumFont: String = "Roboto-Medium"
     let greyColour = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
     let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
     
@@ -297,6 +298,21 @@ class DinersCostViewController: UITableViewController {
         headerFrame.layer.borderColor = orangeColour.cgColor
         headerFrame.layer.borderWidth = 1.0
         
+        let leftButton = UIBarButtonItem(title: "< Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.backTapped))
+        leftButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: regularFont, size: fontSize)!], for: UIControl.State.normal)
+        leftButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: mediumFont, size: fontSize)!], for: UIControl.State.selected)
+        navigationItem.leftBarButtonItem = leftButton
+        
+    }
+    
+    @objc func backTapped() {
+        
+        let trans = CATransition()
+        trans.type = CATransitionType.push
+        trans.subtype = CATransitionSubtype.fromLeft
+        trans.duration = 0.35
+        self.navigationController?.view.layer.add(trans, forKey: nil)
+        navigationController?.popViewController(animated: false)
     }
     
     func updateDinerSpend() {

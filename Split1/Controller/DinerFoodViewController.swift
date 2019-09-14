@@ -582,6 +582,11 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         foodText.layer.borderColor = orangeColour.cgColor
         foodText.layer.borderWidth = 1.0
         
+        let leftButton = UIBarButtonItem(title: "< Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.backTapped))
+        leftButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: regularFont, size: fontSize)!], for: UIControl.State.normal)
+        leftButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: mediumFont, size: fontSize)!], for: UIControl.State.selected)
+        navigationItem.leftBarButtonItem = leftButton
+        
     }
     
     func formatNumber(numberToFormat: Float, digits: Int) -> String {

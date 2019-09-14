@@ -42,7 +42,7 @@ class IntroViewController: UIViewController {
         
         settings = realm.objects(Settings.self)
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(backTapped))
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(backTapped))
         
         titleTest.isUserInteractionEnabled = false
         subtitleText.isUserInteractionEnabled = false
@@ -89,6 +89,7 @@ class IntroViewController: UIViewController {
     
     func setAppearance() {
         
+        
         let  screenHeight = settings?[0].screenHeight ?? 1334
         
         var textHeight: CGFloat = 0.0
@@ -100,18 +101,22 @@ class IntroViewController: UIViewController {
             textHeight = 15
         default:
             textHeight = 17
-            
         }
         
         titleTest.font = UIFont(name: splitFont, size: textHeight+18)
         subtitleText.font = UIFont(name: boldFont, size: textHeight+4)
         subTitle2Text.font = UIFont(name: mediumFont, size: textHeight+2)
         storyText.font = UIFont(name: regularFont, size: textHeight)
+        
+        let leftbutton = UIBarButtonItem(title: "< Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.backTapped))
+        leftbutton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: regularFont, size: textHeight + 2)!], for: UIControl.State.normal)
+        navigationItem.leftBarButtonItem = leftbutton
 
         titleTest.text = "SPLIT!"
         subtitleText.text = "Helping Maintain World Peace"
         subTitle2Text.text = "one meal at a time"
     }
+    
 
     func setMessage() {
         
