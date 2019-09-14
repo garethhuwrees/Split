@@ -32,32 +32,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Cannot get font name and size to work correctly
         
-//        let screenHeight = Int(UIScreen.main.nativeBounds.height)
-//
-//        let greyColour = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
-//        let greenColour = UIColor(red: 22/255, green: 160/255, blue: 132/255, alpha: 1)
+        let screenHeight = Int(UIScreen.main.nativeBounds.height)
+        
+        print(screenHeight)
+
+        let greyColour = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
+        let greenColour = UIColor(red: 22/255, green: 160/255, blue: 132/255, alpha: 1)
 //        let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
-//
-//        let regularFont: String = "Chalkduster"
-//
-//        var textHeight: CGFloat = 0.0
-//
-//        switch screenHeight {
-//        case 1136:
-//            textHeight = 18
-//        case 1334:
-//            textHeight = 20
-//        default:
-//            textHeight = 22
-//        }
-//
-//        let navigationBarAppearace = UINavigationBar.appearance()
-//
-//        navigationBarAppearace.tintColor = UIColor.white
-//        navigationBarAppearace.barTintColor = greenColour
-//
-//        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: regularFont, size: textHeight)!]
-//        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
+
+        let regularFont: String = "Chalkduster"
+//        let regularFont: String = "Roboto-Regular"
+
+        var textHeight: CGFloat = 0.0
+
+        switch screenHeight {
+        case 1136:
+            textHeight = 10
+        case 1334:
+            textHeight = 20
+        default:
+            textHeight = 22
+        }
+
+        let navigationBarAppearace = UINavigationBar.appearance()
+
+        navigationBarAppearace.tintColor = UIColor.white
+//        navigationBarAppearace.tintColor = greyColour
+        navigationBarAppearace.barTintColor = greenColour
+
+        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: regularFont, size: textHeight)!]
+        
+        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
 
         
         

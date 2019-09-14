@@ -279,7 +279,7 @@ class DinersCostViewController: UITableViewController {
         
         switch screenHeight {
         case 1136:
-            fontSize = 16; tableRowHeight = 28
+            fontSize = 15; tableRowHeight = 26
         case 1334:
             fontSize = 18; tableRowHeight = 30
         default:

@@ -12,16 +12,20 @@ class TableSection {
     
     let foodType: String
     var nameArray: Array<String>
-    var quantityArray: Array<Int>
-    var spendArray: Array<Float>
+    var quantityArray: Array<String>
+    var spendArray: Array<String>
     
-    init(food: String, person: Array<String>, quantity: Array<Int>, spend: Array<Float>) {
+    init(food: String, person: Array<String>, quantity: Array<String>, spend: Array<String>) {
         foodType = food
         nameArray = person
         quantityArray = quantity
         spendArray = spend
         
     }
+    
+    // Note: had to convert quantityAttay from Array<Int> to Array<Float> so that an empty string arry could be used
+    // in the total section.
+    // spendArray changed for consistancey
     
     
 }

@@ -24,6 +24,8 @@ class BillViewController: UITableViewController {
     var roundingOn: Bool = false
     var screenHeight: Int = 0
     var fontSize: CGFloat = 20
+    var totalSpend: Float = 0.0
+    var totalSpendAsSrring = ""
     
     let regularFont: String = "Roboto-Regular"
     let mediumFont: String = "Roboto-Medium"
@@ -34,6 +36,8 @@ class BillViewController: UITableViewController {
     let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
     let greenColour = UIColor(red: 22/255, green: 160/255, blue: 132/255, alpha: 1)
     
+    
+    // MARK:--------------------- VIEW DID LOAD ---------------------------------
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +66,7 @@ class BillViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-
+    // MARK:--------------------------- SEGUE ---------------------------------
     
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         
@@ -81,7 +85,7 @@ class BillViewController: UITableViewController {
         navigationController?.popViewController(animated: false)
     }
 
-    // MARK: - Table view data source
+    // MARK:------------------------ TABLE METHODS ----------------------------------
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -89,15 +93,18 @@ class BillViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         return sections[section].foodType
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return (2 * fontSize)
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = lightgreyColour
         
-        let headerLabel = UILabel(frame: CGRect(x: 30, y: 0, width:
+        let headerLabel = UILabel(frame: CGRect(x: 35, y: (0.5 * fontSize), width:
             tableView.bounds.size.width, height: tableView.bounds.size.height))
         
         headerLabel.font = UIFont(name: mediumFont, size: fontSize) ?? UIFont(name: "Georgia", size: fontSize)!
@@ -139,16 +146,15 @@ class BillViewController: UITableViewController {
         cell.spendLabel.font = tableTextFont
         
         cell.nameLabel.text = sections[indexPath.section].nameArray[indexPath.row]
-        cell.quantityLabel.text =  ("\(sections[indexPath.section].quantityArray[indexPath.row])")
-        cell.spendLabel.text = ("\(sections[indexPath.section].spendArray[indexPath.row])")
+        cell.quantityLabel.text =  sections[indexPath.section].quantityArray[indexPath.row]
+        cell.spendLabel.text = currencyPrefix + sections[indexPath.section].spendArray[indexPath.row]
         
         cell.isUserInteractionEnabled = false
 
         return cell
     }
 
-
-  
+    // MARK:------------------------- LOCAL FUNCTIONS ---------------------------
     
     func loadTables() {
         
@@ -161,6 +167,10 @@ class BillViewController: UITableViewController {
         settings = realm.objects(Settings.self)
         currencyPrefix = settings?[0].currencyPrefix ?? ""
         screenHeight = settings?[0].screenHeight ?? 0
+        
+        totalSpend = settings?[0].totalSpend ?? 0.0
+        totalSpend = (totalSpend * 100).rounded() / 100
+        totalSpendAsSrring = formatNumber(numberToFormat: totalSpend, digits: 2)
         
         item = realm.objects(Item.self)
 
@@ -177,23 +187,33 @@ class BillViewController: UITableViewController {
         numberOfSections = item!.count
         
         var nameArray: Array<String> = []
-        var quantityArray: Array<Int> = []
-        var priceArray: Array<Float> = []
+        var quantityArray: Array<String> = []
+        var priceArray: Array<String> = []
         
         if numberOfSections > 0 {
             for m in 0...numberOfSections-1 {
-                let sectionHeader = item![m].itemName
+                var sectionHeader = item![m].itemName
+
                 var tableEntry = costEntry!.filter("itemName == %@", sectionHeader)
                 tableEntry = tableEntry.filter("itemNumber > %@", 0 as Int)
+                
+                if item![m].unitPrice == true {
+                    sectionHeader = sectionHeader + " *"
+                }
                 
                 nameArray = []
                 quantityArray = []
                 priceArray = []
                 
                 for n in 0...tableEntry.count-1 {
+                    
+                    var spend = tableEntry[n].itemSpend
+                    spend = (spend * 100).rounded() / 100
+                    let spendString = formatNumber(numberToFormat: spend, digits: 2)
+                    
                     nameArray.append(tableEntry[n].personName)
-                    quantityArray.append(tableEntry[n].itemNumber)
-                    priceArray.append(tableEntry[n].itemSpend)
+                    quantityArray.append(("\(tableEntry[n].itemNumber)"))
+                    priceArray.append(spendString)
                 }
                 
                 let newSecion = TableSection(food: sectionHeader, person: nameArray, quantity: quantityArray, spend: priceArray)
@@ -201,8 +221,17 @@ class BillViewController: UITableViewController {
                 sections.append(newSecion)
                 
             } // end for
+            
+            
+            let totalSpendArray = [totalSpendAsSrring]
+            let emptyString = [""]
+            let finalSection = TableSection(food: "TOTAL (before tax and tip)", person: emptyString, quantity: emptyString, spend: totalSpendArray)
+            
+            sections.append(finalSection)
+            
         } // end if
         
+        numberOfSections = sections.count
         
     } // end func
     
@@ -212,11 +241,11 @@ class BillViewController: UITableViewController {
         
         switch screenHeight {
         case 1136:
-            fontSize = 16; tableRowHeight = 30
+            fontSize = 15; tableRowHeight = 26
         case 1334:
-            fontSize = 18; tableRowHeight = 35
+            fontSize = 18; tableRowHeight = 30
         default:
-            fontSize = 20; tableRowHeight = 40
+            fontSize = 20; tableRowHeight = 32
         }
         
 //        splitterText.font = splitterText.font?.withSize(fontSize)
@@ -234,6 +263,19 @@ class BillViewController: UITableViewController {
 //        foodText.layer.borderColor = orangeColour.cgColor
 //        foodText.layer.borderWidth = 1.0
         
+    }
+    
+    func formatNumber(numberToFormat: Float, digits: Int) -> String {
+        
+        let numberformatter = NumberFormatter()
+        numberformatter.numberStyle = .decimal
+        numberformatter.minimumFractionDigits = digits
+        
+        let formattedNumber = [numberToFormat].compactMap {number in
+            return numberformatter.string(from: NSNumber(value: number))
+        }
+        
+        return formattedNumber[0]
     }
 
 }

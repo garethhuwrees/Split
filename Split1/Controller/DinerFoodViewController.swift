@@ -484,7 +484,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
        
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Add Category", message: "What food & drink is being ordered", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add Menu Item", message: "What food & drink is being ordered", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             // Do Nothing
@@ -514,7 +514,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
                     } // end if
                     else {
     
-                        let duplicateAlert = UIAlertController(title: "Duplicate Category", message: "Category names must be different", preferredStyle: UIAlertController.Style.alert)
+                        let duplicateAlert = UIAlertController(title: "Duplicate Menu Item", message: "Menu Items names must be different", preferredStyle: UIAlertController.Style.alert)
                         duplicateAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                         self.present(duplicateAlert, animated: true, completion: nil)
                     }
@@ -558,7 +558,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         
         switch screenHeight {
         case 1136:
-            fontSize = 16; tableRowHeight = 30
+            fontSize = 15; tableRowHeight = 26
         case 1334:
             fontSize = 18; tableRowHeight = 35
         default:

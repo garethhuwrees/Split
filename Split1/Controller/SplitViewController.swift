@@ -36,7 +36,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let greenColour = UIColor(red: 22/255, green: 160/255, blue: 132/255, alpha: 1)
     let lightGreyColour = UIColor(red: 149/255, green: 165/255, blue: 166/255, alpha: 1)
     
-    var fontSize: CGFloat = 22
+    var fontSize: CGFloat = 20
     let splitFont: String = "Lemon-Regular"
     let regularFont: String = "Roboto-Regular"
     let mediumFont: String = "Roboto-Medium"
@@ -45,7 +45,6 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // Settings
     var percentageTip: Float = 0.0
     var currencyPrefix: String = ""
-//    var iphoneType: String = ""
     var screenHeight: Int = 0
     var roundingOn: Bool = false
     var billTotal: Float = 0.0
@@ -80,11 +79,15 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var frameMiddle: UILabel!
     @IBOutlet weak var frameBotton: UILabel!
     
+    
+    @IBOutlet weak var guideButton: UIBarButtonItem!
+    @IBOutlet weak var intoButton: UIBarButtonItem!
+    
     @IBAction func setRoundedBill(_ sender: Any) {
 
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Enter Amount To Pay", message: "This muust be greater that the total spend", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Enter Amount To Pay", message: "This should normally be greater that the total spend", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             // do nothing
@@ -181,6 +184,24 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @IBAction func selectSpendType(_ sender: Any) {
+//        if typeOfSpend == .TotalSpend {
+//            typeOfSpend = .SpendPlusTip
+//            typeOfSpendLabel = "Spend + Tip"
+//        }
+//        else if typeOfSpend == .SpendPlusTip {
+//            typeOfSpend = .FixedSpend
+//            typeOfSpendLabel = "Fixed Amount"
+//        }
+//        else if typeOfSpend == .FixedSpend {
+//            typeOfSpend = .TotalSpend
+//            typeOfSpendLabel = "Spend (inc Tax)"
+//        }
+//        showSpendType.setTitle(typeOfSpendLabel, for: .normal)
+//        updateSettings()
+//        splitterTableView.reloadData()
+    }
+    
+    @IBAction func bottomViewPressed(_ sender: Any) {
         if typeOfSpend == .TotalSpend {
             typeOfSpend = .SpendPlusTip
             typeOfSpendLabel = "Spend + Tip"
@@ -196,6 +217,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         showSpendType.setTitle(typeOfSpendLabel, for: .normal)
         updateSettings()
         splitterTableView.reloadData()
+        
     }
     
     
@@ -272,49 +294,54 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         
         if gesture.direction == .right {
-            if screenHeight == 1136 {
-                performSegue(withIdentifier: "goToFood", sender: self)
-            }
-            else {
-                performSegue(withIdentifier: "gotoBill", sender: self)
-            }
+            performSegue(withIdentifier: "gotoBill", sender: self)
+            
+//            if screenHeight == 1136 {
+//                performSegue(withIdentifier: "goToFood", sender: self)
+//            }
+//            else {
+//                performSegue(withIdentifier: "gotoBill", sender: self)
+//            }
         }
             
         else if gesture.direction == .left {
-            if screenHeight == 1136 {
-                performSegue(withIdentifier: "goToDiners", sender: self)
-            }
-            else {
-                performSegue(withIdentifier: "gotoTable", sender: self)
-            }
+            performSegue(withIdentifier: "gotoTable", sender: self)
+            
+//            if screenHeight == 1136 {
+//                performSegue(withIdentifier: "goToDiners", sender: self)
+//            }
+//            else {
+//                performSegue(withIdentifier: "gotoTable", sender: self)
+//            }
         }
         else if gesture.direction == .up {
-            performSegue(withIdentifier: "gotoTable", sender: self)
+//            performSegue(withIdentifier: "gotoTable", sender: self)
             
         }
         else if gesture.direction == .down {
-            
+            introType = "guide"
+            performSegue(withIdentifier: "gotoIntro", sender: self)
         }
     }
 
     
     // Must uncheck 'Animates' on the seque attribites for this to work
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let _ = segue.destination as? FoodViewController {
-            let trans = CATransition()
-            trans.type = CATransitionType.push
-            trans.subtype = CATransitionSubtype.fromLeft
-            //trans.timingFunction = ??
-            trans.duration = 0.35
-            self.navigationController?.view.layer.add(trans, forKey: nil)
-        }
-        if let _ = segue.destination as? DinersViewController {
-            let trans = CATransition()
-            trans.type = CATransitionType.push
-            trans.subtype = CATransitionSubtype.fromRight
-            trans.duration = 0.35
-            self.navigationController?.view.layer.add(trans, forKey: nil)
-        }
+//        if let _ = segue.destination as? FoodViewController {
+//            let trans = CATransition()
+//            trans.type = CATransitionType.push
+//            trans.subtype = CATransitionSubtype.fromLeft
+//            //trans.timingFunction = ??
+//            trans.duration = 0.35
+//            self.navigationController?.view.layer.add(trans, forKey: nil)
+//        }
+//        if let _ = segue.destination as? DinersViewController {
+//            let trans = CATransition()
+//            trans.type = CATransitionType.push
+//            trans.subtype = CATransitionSubtype.fromRight
+//            trans.duration = 0.35
+//            self.navigationController?.view.layer.add(trans, forKey: nil)
+//        }
         
         if let _ = segue.destination as? BillViewController {
             let trans = CATransition()
@@ -372,7 +399,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let tableTextFont: UIFont = UIFont(name: self.regularFont, size: self.fontSize-3) ?? UIFont(name: "Georgia", size: self.fontSize-3)!
+        let tableTextFont: UIFont = UIFont(name: self.regularFont, size: self.fontSize) ?? UIFont(name: "Georgia", size: self.fontSize)!
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "splitTableCell", for: indexPath) as! SplitTableCell
         
@@ -574,22 +601,22 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // Should aim to move this to AppDeligate - did finishlaunching
         
-        var textHeight: CGFloat = 0.0
-        
-        switch screenHeight {
-        case 1136:
-            textHeight = fontSize-2
-        case 1334:
-            textHeight = fontSize
-        default:
-            textHeight = fontSize+2
-        }
-        navigationController?.navigationBar.barTintColor = greenColour
-        navigationController?.navigationBar.tintColor = UIColor.white
-//        navigationController?.navigationBar.
-        //TODO - How to set navigation text font?
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: regularFont, size: textHeight)!]
+//        var textHeight: CGFloat = 0.0
+//
+//        switch screenHeight {
+//        case 1136:
+//            textHeight = fontSize
+//        case 1334:
+//            textHeight = fontSize + 2
+//        default:
+//            textHeight = fontSize + 4
+//        }
+//        navigationController?.navigationBar.barTintColor = greenColour
+//        navigationController?.navigationBar.tintColor = UIColor.white
+////        navigationController?.navigationBar.
+//        //TODO - How to set navigation text font?
+//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
+//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: regularFont, size: textHeight)!]
         
     }
     
@@ -599,29 +626,29 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         switch screenHeight {
         case 1136:
-            fontSize = fontSize-6; tableRowHeight = 28
+            fontSize = fontSize-6; tableRowHeight = 26 // fontsixe 14
         case 1334:
-            fontSize = fontSize-2; tableRowHeight = 30
+            fontSize = fontSize-2; tableRowHeight = 30 // fontsize 18
         default:
-            tableRowHeight = 32 // Default fontSize (22)
+            tableRowHeight = 32 // Default fontSize (20)
         }
         
-        totalBillText.font = UIFont(name: mediumFont, size: fontSize)
-        totalToPayText.font = UIFont(name: mediumFont, size: fontSize)
-        roundedBillText.font = UIFont(name: mediumFont, size: fontSize)
+        totalBillText.font = UIFont(name: mediumFont, size: fontSize + 1)
+        totalToPayText.font = UIFont(name: mediumFont, size: fontSize + 1)
+        roundedBillText.font = UIFont(name: mediumFont, size: fontSize + 1)
         
-        showTotalBill.font = UIFont(name: mediumFont, size: fontSize)
-        showBillWithTip.font = UIFont(name: mediumFont, size: fontSize)
-        showRoundedBill.titleLabel?.font = UIFont(name: mediumFont, size: fontSize)
+        showTotalBill.font = UIFont(name: mediumFont, size: fontSize + 1)
+        showBillWithTip.font = UIFont(name: mediumFont, size: fontSize + 1)
+        showRoundedBill.titleLabel?.font = UIFont(name: mediumFont, size: fontSize + 1)
  
-        gratuityText.font = UIFont(name: regularFont, size: fontSize-3)
-        taxRateText.font = UIFont(name: regularFont, size: fontSize-3)
+        gratuityText.font = UIFont(name: regularFont, size: fontSize)
+        taxRateText.font = UIFont(name: regularFont, size: fontSize)
         
-        showTip.titleLabel?.font = UIFont(name: regularFont, size: fontSize-3)
-        showTax.titleLabel?.font = UIFont(name: regularFont, size: fontSize-3)
+        showTip.titleLabel?.font = UIFont(name: regularFont, size: fontSize)
+        showTax.titleLabel?.font = UIFont(name: regularFont, size: fontSize)
         
-        showSplitterName.font = UIFont(name: boldFont, size: fontSize-2)
-        showSpendType.titleLabel?.font = UIFont(name: boldFont, size: fontSize-2)
+        showSplitterName.font = UIFont(name: boldFont, size: fontSize)
+        showSpendType.titleLabel?.font = UIFont(name: boldFont, size: fontSize)
         showSpendType.setTitle(settings?[0].spendType, for: .normal)
         
         frameTop.layer.cornerRadius = 10.0
@@ -638,7 +665,23 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         splitterTableView.rowHeight = tableRowHeight
         
+//        guideButton.tintColor = greyColour
+//        guideButton.title = "Guide ..."
+        
+//        UIBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red, NSAttributedString.Key.font: UIFont.init(name: regularFont, size: 10)])
+
+        
+        // Set Nav Bar Apearance
+        navigationController?.navigationBar.barTintColor = greenColour
+//        navigationController?.navigationBar.tintColor = UIColor.white
+        
+        //        navigationController?.navigationBar.
+        //TODO - How to set navigation text font?
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: regularFont, size: fontSize + 3)!]
+        
     }
+    
     
     func updateSettings() {
         

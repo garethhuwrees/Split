@@ -29,14 +29,13 @@ class IntroViewController: UIViewController {
     @IBOutlet weak var subTitle2Text: UITextField!
     @IBOutlet weak var storyText: UITextView!
     
-  
-    
-    
     let textColour: UIColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
     let splitFont: String = "Lemon-Regular"
     let regularFont: String = "Roboto-Regular"
     let mediumFont: String = "Roboto-Medium"
     let boldFont = "Roboto-Bold"
+    
+    //MARK:----------- VIEW DID LOAD -------------------------
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,12 +56,15 @@ class IntroViewController: UIViewController {
             self.title = "User Guide"
         }
         
-        setFontAndMessage()
+        setAppearance()
+        setMessage()
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture))
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
     }
+    
+    //MARK:------------------- SEGUE -------------------------
     
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         
@@ -82,8 +84,10 @@ class IntroViewController: UIViewController {
         navigationController?.popViewController(animated: false)
     }
     
+    //MARK:------------ LOCAL FUNCTIONS --------------------------
     
-    func setFontAndMessage() {
+    
+    func setAppearance() {
         
         let  screenHeight = settings?[0].screenHeight ?? 1334
         
@@ -91,23 +95,25 @@ class IntroViewController: UIViewController {
         
         switch screenHeight {
         case 1136:
-            textHeight = 12
+            textHeight = 13
         case 1334:
-            textHeight = 14
+            textHeight = 15
         default:
             textHeight = 17
             
         }
         
-        titleTest.font = UIFont(name: splitFont, size: textHeight+20)
-        subtitleText.font = UIFont(name: boldFont, size: textHeight+6)
-        subTitle2Text.font = UIFont(name: mediumFont, size: textHeight+4)
+        titleTest.font = UIFont(name: splitFont, size: textHeight+18)
+        subtitleText.font = UIFont(name: boldFont, size: textHeight+4)
+        subTitle2Text.font = UIFont(name: mediumFont, size: textHeight+2)
         storyText.font = UIFont(name: regularFont, size: textHeight)
 
         titleTest.text = "SPLIT!"
         subtitleText.text = "Helping Maintain World Peace"
         subTitle2Text.text = "one meal at a time"
+    }
 
+    func setMessage() {
         
         if introType == "story" {
             storyText.text = story1
@@ -119,12 +125,12 @@ class IntroViewController: UIViewController {
     }
     
     
-    let story1 = "Picture the scene: it is the G7 summit and after a day negotiating carbon emissions and world trade, our world leaders are sitting down to relax at a well deserved dinner. However, there is a problem when the bill arrives: Donald had a simple stake & ketchup meal with soda, while Shinzo ordering a tuna starter, Emmanuel drank a whole bottle of a very fine Burgundy himself, Justin had the expensive fish ‘special’ and Boris went heavy on the sweet trolley. No way is he dividing the bill equally 7 ways.\n\nStep in Angela, iPhone in hand. “Ach so lieblings. So who ordered what?” Thanks to SPLIT! each of the leaders paid their fare share of the bill and harmony was once again restored (or at least some level of cordiality). And at the same time they were able to satisfy themselves that the bill did not include anything ordered by members of the Chinese Politburo dining on the next table.\n\nNow the only thing to agree on is how much tip to leave! Oh, and carbon emissions and world trade."
+    let story1 = "Picture the scene: it is the G7 summit and after a tense and exhausting day negotiating carbon emissions and global trade, our world leaders are sitting down to relax at a well deserved dinner. However, there is a problem when the bill arrives: Donald had his usual steak and ketchup with soda, Shinzo ordered the tuna appetizer, Emmanuel polished off an entire bottle of very fine Bordeaux by himself, Justin had the eye-wateringly expensive fish special and Boris went heavy on the sweet trolley. No way is Donald dividing the bill equally seven ways.\n\nStep in Angela, iPhone in hand. “Ach so lieblings. So who ordered what?” Thanks to SPLIT! each of the leaders paid their fair share of the bill and harmony was once again restored (or at least some level of cordiality). And at the same time they were able to satisfy themselves that the bill did not include anything ordered by members of the Chinese Politburo dining on the next table.\n\nNow the only thing to agree on is how much tip to leave! Oh, and carbon emissions and global trade."
     
-    let story2 = "Picture the scene: it is the G7 summit and after a day negotiating carbon emissions and world trade, our world leaders are sitting down to a well deserved dinner. However, there is a problem when the bill arrives: Donald had a simple burger meal with soda, while Shinzo ordering a tuna starter, Francois drank a  bottle of burgundy and Boris went heavy on the sweet trolley. No way is he dividing the bill equally 7 ways.\nStep in Angela, iPhone in hand. “Ach so lieblings. So who ordered what?” Thanks to SPLIT! each of the leaders paid their fare share of the bill and harmony was once again restored.\nNow the only thing to agree on is how much tip to leave! Oh, and carbon emissions and world trade."
+    let story2 = "Picture the scene: it is the G7 summit and after a day negotiating carbon emissions and global trade, our world leaders are sitting down to a well deserved dinner. However, there is a problem when the bill arrives: Donald had his usual steak with ketchup, Shinzo went for a tuna appetizer, Emmanuel had an entire fine Bordeaux to himself, and Boris went heavy on the sweet trolley. No way is he Donald dividing the bill equally 7 ways.\nStep in Angela, iPhone in hand. “Ach so lieblings. So who ordered what?” Thanks to SPLIT! each of the leaders paid their fair share of the bill and harmony was once again restored.\nNow the only thing to agree on is how much tip to leave! Oh, and carbon emissions and global trade."
     
-    let story3 = "Our world leaders can’t agree on world trade or carbon emissions, so why after a hard day of negotiations would they agree to divide the cost of dinner equally.\nWell they could use SPLIT! to record who consumed what and each then pays their own share of the bill. Harmony is maintained. The only thing left to agree upon is how much tip to leave! Oh, and carbon emissions and world trade."
+    let story3 = "Our world leaders can’t agree on world trade or carbon emissions, so why after a hard day of negotiations would they agree to divide the cost of dinner equally.\nWell they could use SPLIT! to record who consumed what and each then pays their own share of the bill. Harmony is maintained. The only thing left to agree upon is how much tip to leave! Oh, and carbon emissions and global trade."
     
-    let instruction = "To start using SPLIT!, swipe left and touch the icons at the bottom of the page to add the names of the people around the table (Splitters) and the type of ‘Menu Items’ to be recorded (e.g. starter, main, dessert, sides, drinks etc.).\nYou can then select any row in the table to record spend by either Splitter or Menu Item. Or swipe left on a Menu Item to set a unit price and then just change the quantity.\n\nThe home page sums total spend (including taxes) and total spend plus tip. There is also an option to enter a 'fixed amount' if you wish to round off the bill - of course, this must be greater than total spend.\nThe table at the bottom summaises the Splitter spend based on the three totals above. The 'fixed amount' is based on the Splitter's proportion of the total spend.\n\nThe icons at the bottom allow you to round to the major currency unit, set a currency symbol and reset the underlying data.\nNote: The tip is calculated from spend before tax, some establishments may add this after tax.\n\nSwipe right from the home page to view a summary of evrything ordered by the table"
+    let instruction = "To start using SPLIT!, swipe left from the Home page and then touch the icons at the bottom of 'Your Table' to add the names of the people at the table (the 'Splitters') and the type of ‘Menu Items’ they will order (e.g. appetize, main, dessert, sides, beer, wine etc.).\nYou can then select any row in the table to record spend by either Splitter or Menu Item. Or swipe left on a Menu Item to set a unit price and then just change the quantity.\n\nOn the Home page you can set the local tax rate and percentage tip. There is also an option to enter a 'Fixed Amount' if you wish to round the bill or deduct a money off coupon - this will be highlighetd if less than the total spend.\nTouch the header in the bottom box of the Home page to cycle through the Splitter's spend based on the options in the top box.\nA couple of things to note:\n- The 'fixed amount' is based on the Splitter's proportion of the total spend\n- The tip is calculated from spend before tax, some establishments may add this after tax.\n\n The icons at the bottom of the Home page allows you to round to the major currency unit, reset the underlying data (ready for the next meal) and set a currency symbol/n/nFinally, from the Home page you can swipe right to see a summary of everything ordered."
     
 }
