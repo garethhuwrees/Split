@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       
         // Print directory path to the Realm database
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+//        print(Realm.Configuration.defaultConfiguration.fileURL)
         
         // Initialise the Realm database
         do {
@@ -40,8 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let greenColour = UIColor(red: 22/255, green: 160/255, blue: 132/255, alpha: 1)
 //        let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
 
-        let regularFont: String = "Chalkduster"
-//        let regularFont: String = "Roboto-Regular"
+//        let regularFont: String = "Chalkduster"
+        let regularFont: String = "Roboto-Regular"
 
         var textHeight: CGFloat = 0.0
 
@@ -65,18 +65,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
 
         
-        
         return true
         
        
     }
-    
-
-    
-    
-    // Customise the Navigation Bar - can't??
-    
-    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -87,9 +79,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
-        let appDeligate = UIApplication.shared.delegate as! SplitViewController
+        // CAN'T RECALL WHY THIS CODE IS HERE - WAS IT AN ATTEMPT TO USE USER DEFAULTS?
         
-        appDeligate.updateSettings()
+//        let appDeligate = UIApplication.shared.delegate as! SplitViewController
+//
+//        appDeligate.updateSettings()
     
 //        let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SplitViewController") as! SplitViewController
 //

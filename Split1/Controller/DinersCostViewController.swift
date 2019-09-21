@@ -29,10 +29,12 @@ class DinersCostViewController: UITableViewController {
     var settings: Results<Settings>?
     
     var currencyPrefix: String = ""
+    var roundingOn: Bool = false
     var screenHeight: Int = 0
     var fontSize: CGFloat = 20
     let regularFont: String = "Roboto-Regular"
     let mediumFont: String = "Roboto-Medium"
+
     let greyColour = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
     let orangeColour = UIColor(red: 230/255, green: 126/255, blue: 34/255, alpha: 1)
     
@@ -54,9 +56,13 @@ class DinersCostViewController: UITableViewController {
         tableView.register(UINib(nibName: "QuantityTableCell", bundle: nil) , forCellReuseIdentifier: "quantityTableCell")
         
         loadTables()
-    
         setAppearance()
-
+        
+        // Added in preparation for swipe down for guide
+//        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture))
+//        swipeDown.direction = .down
+//        self.view.addGestureRecognizer(swipeDown)
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -87,9 +93,15 @@ class DinersCostViewController: UITableViewController {
         cell.spendLabel.font = tableTextFont
         
         // Set contents
+        var numberOfDigits = 2
+        var roundingFactor: Float = 100
+        if roundingOn {
+            numberOfDigits = 0
+            roundingFactor = 1
+        }        
         var spend = costEntry?[indexPath.row].itemSpend ?? 0.0
-        spend = (spend * 100).rounded() / 100
-        let spendString = formatNumber(numberToFormat: spend, digits: 2)
+        spend = (spend * roundingFactor).rounded() / roundingFactor
+        let spendString = formatNumber(numberToFormat: spend, digits: numberOfDigits)
         
         let quantity = costEntry?[indexPath.row].itemNumber ?? 0
         
@@ -269,6 +281,7 @@ class DinersCostViewController: UITableViewController {
         
         settings = realm.objects(Settings.self)
         currencyPrefix = settings?[0].currencyPrefix ?? ""
+        roundingOn = settings?[0].roundingOn ?? false
         screenHeight = settings?[0].screenHeight ?? 0
         
         tableView.reloadData()
@@ -303,6 +316,30 @@ class DinersCostViewController: UITableViewController {
         leftButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: mediumFont, size: fontSize)!], for: UIControl.State.selected)
         navigationItem.leftBarButtonItem = leftButton
         
+    }
+    
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        
+        if gesture.direction == .down {
+            print("SWIPE DOWN")
+            performSegue(withIdentifier: "gotoGuide", sender: self)
+        }
+        else if gesture.direction == .up {
+            print("SWIPE UP")
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "gotoGuide" {
+            let destinationVC = segue.destination as! IntroViewController
+            let trans = CATransition()
+            trans.type = CATransitionType.reveal
+            trans.subtype = CATransitionSubtype.fromBottom
+            //trans.timingFunction = ??
+            trans.duration = 0.35
+            self.navigationController?.view.layer.add(trans, forKey: nil)
+            destinationVC.introType = "guideSwipe"
+        }
     }
     
     @objc func backTapped() {
@@ -365,7 +402,7 @@ class DinersCostViewController: UITableViewController {
                 }
                 do {
                     try self.realm.write {
-                        item?[index].itemSpendNet = menuSpend
+                        item?[index].itemTotalSpend = menuSpend
                         item?[index].itemNumber = itemCount
                     } // end try
                 } // end do

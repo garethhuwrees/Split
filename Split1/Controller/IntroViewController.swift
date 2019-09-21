@@ -29,11 +29,15 @@ class IntroViewController: UIViewController {
     @IBOutlet weak var subTitle2Text: UITextField!
     @IBOutlet weak var storyText: UITextView!
     
-    let textColour: UIColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
+    let greyColour: UIColor = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1)
     let splitFont: String = "Lemon-Regular"
     let regularFont: String = "Roboto-Regular"
     let mediumFont: String = "Roboto-Medium"
     let boldFont = "Roboto-Bold"
+    
+    let guideString = NSMutableAttributedString()
+
+    var fontSize: CGFloat = 20
     
     //MARK:----------- VIEW DID LOAD -------------------------
     
@@ -49,7 +53,7 @@ class IntroViewController: UIViewController {
         subTitle2Text.isUserInteractionEnabled = false
         
         if introType == "story" {
-            self.title = "The Story"
+            self.title = "Background"
         }
         
         else {
@@ -57,11 +61,16 @@ class IntroViewController: UIViewController {
         }
         
         setAppearance()
+        setupGuideText()
         setMessage()
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture))
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
+        
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture))
+        swipeUp.direction = .up
+        self.view.addGestureRecognizer(swipeUp)
     }
     
     //MARK:------------------- SEGUE -------------------------
@@ -72,13 +81,22 @@ class IntroViewController: UIViewController {
             backTapped()
         }
         
+        if gesture.direction == .up {
+            backTapped()
+        }
     }
     
     @objc func backTapped() {
         
         let trans = CATransition()
-        trans.type = CATransitionType.push
-        trans.subtype = CATransitionSubtype.fromRight
+        if introType == "guideSwipe" {
+            trans.type = CATransitionType.reveal
+            trans.subtype = CATransitionSubtype.fromTop
+        }
+        else {
+            trans.type = CATransitionType.push
+            trans.subtype = CATransitionSubtype.fromRight
+        }
         trans.duration = 0.35
         self.navigationController?.view.layer.add(trans, forKey: nil)
         navigationController?.popViewController(animated: false)
@@ -92,24 +110,22 @@ class IntroViewController: UIViewController {
         
         let  screenHeight = settings?[0].screenHeight ?? 1334
         
-        var textHeight: CGFloat = 0.0
-        
         switch screenHeight {
         case 1136:
-            textHeight = 13
+            fontSize = fontSize - 7 //13
         case 1334:
-            textHeight = 15
+            fontSize = fontSize - 5 //15
         default:
-            textHeight = 17
+            fontSize = fontSize - 3 //17
         }
         
-        titleTest.font = UIFont(name: splitFont, size: textHeight+18)
-        subtitleText.font = UIFont(name: boldFont, size: textHeight+4)
-        subTitle2Text.font = UIFont(name: mediumFont, size: textHeight+2)
-        storyText.font = UIFont(name: regularFont, size: textHeight)
+        titleTest.font = UIFont(name: splitFont, size: fontSize+18)
+        subtitleText.font = UIFont(name: boldFont, size: fontSize+4)
+        subTitle2Text.font = UIFont(name: mediumFont, size: fontSize+2)
+        storyText.font = UIFont(name: regularFont, size: fontSize)
         
         let leftbutton = UIBarButtonItem(title: "< Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.backTapped))
-        leftbutton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: regularFont, size: textHeight + 2)!], for: UIControl.State.normal)
+        leftbutton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: regularFont, size: fontSize + 2)!], for: UIControl.State.normal)
         navigationItem.leftBarButtonItem = leftbutton
 
         titleTest.text = "SPLIT!"
@@ -123,10 +139,56 @@ class IntroViewController: UIViewController {
         if introType == "story" {
             storyText.text = story1
         }
-        if introType == "guide" {
-            storyText.text = instruction
+        else {
+            storyText.attributedText = guideString
         }
+    }
+    
+    func setupGuideText() {
         
+//        To start using SPLIT!, swipe left from the Summary page and then touch the icons at the bottom of 'Your Table' to add the names of the people at the table ('Splitters') and the type of ‘Menu Items’ they will order (e.g. appetizer, main, dessert, sides, beer, wine etc.).\nYou can then select any row in the table to record spend by either Splitter or Menu Item. Or swipe left on a Menu Item to set a unit price and then just change the quantity.\n\nOn the Home page you can set the local tax rate and percentage tip. There is also an option to enter a 'Fixed Amount' if you wish to round the bill or deduct a money off coupon - this will be highlighetd if less than the total spend.\nTouch the header in the bottom box of the Home page to cycle through the Splitter's spend based on the options in the top box.\nA couple of things to note:\n- The 'fixed amount' is based on the Splitter's proportion of the total spend\n- The tip is calculated from spend before tax, some establishments may add this after tax.\n\n The icons at the bottom of the Home page allows you to round to the major currency unit, reset the underlying data (ready for the next meal) and set a currency symbol\n\nFinally, from the Home page you can swipe right to see a summary of everything ordered."
+        
+        let normalAttribute = [NSMutableAttributedString.Key.font : UIFont(name: regularFont, size: fontSize), NSMutableAttributedString.Key.foregroundColor: greyColour]
+        let boldAttribute = [NSMutableAttributedString.Key.font : UIFont(name: mediumFont, size: fontSize), NSMutableAttributedString.Key.foregroundColor: greyColour]
+        
+        let guide1 = "To start using SPLIT!, swipe left from the "
+        let guide2 = " page and then touch the icons at the bottom of "
+        let guide3 = " to add the names of the 'Splitters' (the people around the table) and the type of ‘Menu Items’ they will order (e.g. appetizer, main, dessert, sides, beer, wine etc.).\nYou can then select any row in the table to record spend by either Splitter or Menu Item. Swipe left on a Menu Item to set a unit price and then just change the quantity.\n\nBack on the "
+        let guide4 = " page you can set the local tax rate and percentage tip. There is also an option to enter a 'Fixed Amount' if you wish to round the bill or deduct a money off coupon - this will be highlighted if less than the total spend.\nTouch the header in the bottom box of the "
+        let guide5 = " page to cycle through the Splitter's spend based on the options in the top box.\nA couple of things to note:\n- The 'Fixed Amount' is based on the Splitter's proportion of the total spend\n- The tip is calculated from spend before tax, some establishments may add this after tax.\n\n The icons at the bottom of the "
+        let guide6 = " page allows you to round to the major currency unit, reset the underlying data (ready for the next meal) and set a currency symbol\n\nFinally, from the "
+        let guide7 = " page you can swipe right to "
+        let guide8 = " and see a breakdown of everything ordered."
+        
+        
+        let summary = NSMutableAttributedString(string: "Summary", attributes: boldAttribute as [NSAttributedString.Key : Any])
+        let yourTable = NSMutableAttributedString(string: "Your Table", attributes: boldAttribute as [NSAttributedString.Key : Any])
+        let yourBill = NSMutableAttributedString(string: "Your Bill", attributes: boldAttribute as [NSAttributedString.Key : Any])
+        
+        let guide1Attr = NSAttributedString(string: guide1, attributes: normalAttribute as [NSAttributedString.Key : Any])
+        let guide2Attr = NSAttributedString(string: guide2, attributes: normalAttribute as [NSAttributedString.Key : Any])
+        let guide3Attr = NSAttributedString(string: guide3, attributes: normalAttribute as [NSAttributedString.Key : Any])
+        let guide4Attr = NSAttributedString(string: guide4, attributes: normalAttribute as [NSAttributedString.Key : Any])
+        let guide5Attr = NSAttributedString(string: guide5, attributes: normalAttribute as [NSAttributedString.Key : Any])
+        let guide6Attr = NSAttributedString(string: guide6, attributes: normalAttribute as [NSAttributedString.Key : Any])
+        let guide7Attr = NSAttributedString(string: guide7, attributes: normalAttribute as [NSAttributedString.Key : Any])
+        let guide8Attr = NSAttributedString(string: guide8, attributes: normalAttribute as [NSAttributedString.Key : Any])
+        
+        guideString.append(guide1Attr)
+        guideString.append(summary)
+        guideString.append(guide2Attr)
+        guideString.append(yourTable)
+        guideString.append(guide3Attr)
+        guideString.append(summary)
+        guideString.append(guide4Attr)
+        guideString.append(summary)
+        guideString.append(guide5Attr)
+        guideString.append(summary)
+        guideString.append(guide6Attr)
+        guideString.append(summary)
+        guideString.append(guide7Attr)
+        guideString.append(yourBill)
+        guideString.append(guide8Attr)
     }
     
     
@@ -136,6 +198,10 @@ class IntroViewController: UIViewController {
     
     let story3 = "Our world leaders can’t agree on world trade or carbon emissions, so why after a hard day of negotiations would they agree to divide the cost of dinner equally.\nWell they could use SPLIT! to record who consumed what and each then pays their own share of the bill. Harmony is maintained. The only thing left to agree upon is how much tip to leave! Oh, and carbon emissions and global trade."
     
-    let instruction = "To start using SPLIT!, swipe left from the Home page and then touch the icons at the bottom of 'Your Table' to add the names of the people at the table (the 'Splitters') and the type of ‘Menu Items’ they will order (e.g. appetize, main, dessert, sides, beer, wine etc.).\nYou can then select any row in the table to record spend by either Splitter or Menu Item. Or swipe left on a Menu Item to set a unit price and then just change the quantity.\n\nOn the Home page you can set the local tax rate and percentage tip. There is also an option to enter a 'Fixed Amount' if you wish to round the bill or deduct a money off coupon - this will be highlighetd if less than the total spend.\nTouch the header in the bottom box of the Home page to cycle through the Splitter's spend based on the options in the top box.\nA couple of things to note:\n- The 'fixed amount' is based on the Splitter's proportion of the total spend\n- The tip is calculated from spend before tax, some establishments may add this after tax.\n\n The icons at the bottom of the Home page allows you to round to the major currency unit, reset the underlying data (ready for the next meal) and set a currency symbol/n/nFinally, from the Home page you can swipe right to see a summary of everything ordered."
+    
+    
+    let instruction = "To start using SPLIT!, swipe left from the Summary page and then touch the icons at the bottom of 'Your Table' to add the names of the people at the table (the 'Splitters') and the type of ‘Menu Items’ they will order (e.g. appetizer, main, dessert, sides, beer, wine etc.).\nYou can then select any row in the table to record spend by either Splitter or Menu Item. Or swipe left on a Menu Item to set a unit price and then just change the quantity.\n\nOn the Home page you can set the local tax rate and percentage tip. There is also an option to enter a 'Fixed Amount' if you wish to round the bill or deduct a money off coupon - this will be highlighetd if less than the total spend.\nTouch the header in the bottom box of the Home page to cycle through the Splitter's spend based on the options in the top box.\nA couple of things to note:\n- The 'fixed amount' is based on the Splitter's proportion of the total spend\n- The tip is calculated from spend before tax, some establishments may add this after tax.\n\n The icons at the bottom of the Home page allows you to round to the major currency unit, reset the underlying data (ready for the next meal) and set a currency symbol\n\nFinally, from the Home page you can swipe right to see a summary of everything ordered."
     
 }
+
+

@@ -41,6 +41,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let regularFont: String = "Roboto-Regular"
     let mediumFont: String = "Roboto-Medium"
     let boldFont = "Roboto-Bold"
+    let titleFont = "RobotoSlab-Regular"
    
     // Settings
     var percentageTip: Float = 0.0
@@ -55,6 +56,10 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var typeOfSpend: SpendType = .TotalSpend
     var typeOfSpendLabel: String = ""
     var introType: String = "guide"
+    
+    var swipeGuesture: Bool = false
+    
+    //MARK:------------------- IBOutlets --------------------------------
    
     @IBOutlet weak var splitterTableView: UITableView!
     
@@ -79,9 +84,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var frameMiddle: UILabel!
     @IBOutlet weak var frameBotton: UILabel!
     
-    
-    @IBOutlet weak var guideButton: UIBarButtonItem!
-    @IBOutlet weak var intoButton: UIBarButtonItem!
+    //MARK:------------- IBACTIONS ------------------------------------
     
     @IBAction func setRoundedBill(_ sender: Any) {
 
@@ -231,6 +234,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        printFonts()
+        
         splitterTableView.delegate = self
         splitterTableView.dataSource = self
         splitterTableView.register(UINib(nibName: "SplitCustomCell", bundle: nil) , forCellReuseIdentifier: "splitTableCell")
@@ -243,10 +248,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         setAppearance()
  
-        setNavbarAppearance()
-        
-//        printFonts()
-        
+//        setNavbarAppearance()
+
         showBillTotals()
         splitterTableView.reloadData()
         
@@ -265,12 +268,9 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)
         
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture))
-        swipeUp.direction = .up
-        self.view.addGestureRecognizer(swipeUp)
-        
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture))
         swipeDown.direction = .down
+        swipeDown.numberOfTouchesRequired = 2
         self.view.addGestureRecognizer(swipeDown)
         
         
@@ -289,37 +289,21 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     
-    //-------------------- PERFORM SEQUE ----------------------
+    //MARK:-------------------- PERFORM SEQUE ----------------------
     
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         
         if gesture.direction == .right {
             performSegue(withIdentifier: "gotoBill", sender: self)
-            
-//            if screenHeight == 1136 {
-//                performSegue(withIdentifier: "goToFood", sender: self)
-//            }
-//            else {
-//                performSegue(withIdentifier: "gotoBill", sender: self)
-//            }
         }
             
         else if gesture.direction == .left {
             performSegue(withIdentifier: "gotoTable", sender: self)
-            
-//            if screenHeight == 1136 {
-//                performSegue(withIdentifier: "goToDiners", sender: self)
-//            }
-//            else {
-//                performSegue(withIdentifier: "gotoTable", sender: self)
-//            }
         }
-        else if gesture.direction == .up {
-//            performSegue(withIdentifier: "gotoTable", sender: self)
             
-        }
         else if gesture.direction == .down {
-            introType = "guide"
+            introType = "guideSwipe"
+            swipeGuesture = true
             performSegue(withIdentifier: "gotoIntro", sender: self)
         }
     }
@@ -327,21 +311,6 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // Must uncheck 'Animates' on the seque attribites for this to work
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let _ = segue.destination as? FoodViewController {
-//            let trans = CATransition()
-//            trans.type = CATransitionType.push
-//            trans.subtype = CATransitionSubtype.fromLeft
-//            //trans.timingFunction = ??
-//            trans.duration = 0.35
-//            self.navigationController?.view.layer.add(trans, forKey: nil)
-//        }
-//        if let _ = segue.destination as? DinersViewController {
-//            let trans = CATransition()
-//            trans.type = CATransitionType.push
-//            trans.subtype = CATransitionSubtype.fromRight
-//            trans.duration = 0.35
-//            self.navigationController?.view.layer.add(trans, forKey: nil)
-//        }
         
         if let _ = segue.destination as? BillViewController {
             let trans = CATransition()
@@ -351,11 +320,25 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.navigationController?.view.layer.add(trans, forKey: nil)
         }
         
+        if let _ = segue.destination as? DinerFoodViewController {
+            let trans = CATransition()
+            trans.type = CATransitionType.push
+            trans.subtype = CATransitionSubtype.fromRight
+            trans.duration = 0.35
+            self.navigationController?.view.layer.add(trans, forKey: nil)
+        }
+        
         if segue.identifier == "gotoIntro" {
             let destinationVC = segue.destination as! IntroViewController
             let trans = CATransition()
             trans.type = CATransitionType.push
-            trans.subtype = CATransitionSubtype.fromLeft
+            if swipeGuesture == true {
+                trans.subtype = CATransitionSubtype.fromBottom
+            }
+            else {
+                trans.subtype = CATransitionSubtype.fromLeft
+            }
+          
             //trans.timingFunction = ??
             trans.duration = 0.35
             self.navigationController?.view.layer.add(trans, forKey: nil)
@@ -372,22 +355,22 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.navigationController?.view.layer.add(trans, forKey: nil)
             destinationVC.introType = "guide"
         }
-        
     }
     
     
     @IBAction func introSelected(_ sender: UIBarButtonItem) {
         
         introType = "story"
+        swipeGuesture = false
         performSegue(withIdentifier: "gotoIntro", sender: self)
     }
     
     
     @IBAction func guideSelected(_ sender: Any) {
         
-        introType = "guide"
+        introType = "guideButton"
+        swipeGuesture = false
         performSegue(withIdentifier: "gotoIntro", sender: self)
-        
     }
     
     
@@ -448,6 +431,15 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         return cell
     }
+    
+//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        print("Table Selected")
+//    }
+    
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        print("Table Selected")
+//        return []
+//    }
     
     // MARK:------------ LOCAL FUNCTIONS -----------------------
     
@@ -597,10 +589,10 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    func setNavbarAppearance() {
-        
-        // Should aim to move this to AppDeligate - did finishlaunching
-        
+//    func setNavbarAppearance() {
+//
+//        // Should aim to move this to AppDeligate - did finishlaunching
+//
 //        var textHeight: CGFloat = 0.0
 //
 //        switch screenHeight {
@@ -613,12 +605,10 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //        }
 //        navigationController?.navigationBar.barTintColor = greenColour
 //        navigationController?.navigationBar.tintColor = UIColor.white
-////        navigationController?.navigationBar.
-//        //TODO - How to set navigation text font?
+//        //navigationController?.navigationBar.
 //        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
 //        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: regularFont, size: textHeight)!]
-        
-    }
+//    }
     
     func setAppearance() {
 
@@ -665,15 +655,9 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         splitterTableView.rowHeight = tableRowHeight
         
-//        guideButton.tintColor = greyColour
-//        guideButton.title = "Guide ..."
-        
-//        UIBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red, NSAttributedString.Key.font: UIFont.init(name: regularFont, size: 10)])
-
-        
         // SET NAVBAR APPEARANCE
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: regularFont, size: fontSize + 3)!]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: titleFont, size: fontSize + 3)!]
         
         
 //        navigationController?.navigationBar.tintColor = UIColor.white (set in main.storyboard)
@@ -760,7 +744,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             for n in 0...(numberOfRecords - 1) {
                 do {
                     try self.realm.write {
-                        item?[n].itemSpendNet = 0.0
+                        item?[n].itemTotalSpend = 0.0
                     }
                 }
                 catch {
@@ -997,7 +981,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func customiseDropDown() {
         let appearance = DropDown.appearance()
         
-        appearance.cellHeight = 60
+        appearance.cellHeight = fontSize*2
         appearance.backgroundColor = UIColor(white: 1, alpha: 1)
         appearance.selectionBackgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
         //appearance.separatorColor = UIColor(white: 0.7, alpha: 0.8)
@@ -1009,7 +993,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         appearance.animationduration = 0.25
         appearance.textColor = greyColour
 
-        appearance.textFont = UIFont(name: regularFont, size: 18)!
+        appearance.textFont = UIFont(name: regularFont, size: fontSize-2)!
         
         if #available(iOS 11.0, *) {
             appearance.setupMaskedCorners([.layerMaxXMaxYCorner, .layerMinXMaxYCorner])

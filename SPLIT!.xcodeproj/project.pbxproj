@@ -14,9 +14,9 @@
 		7F73AEEF22BC87630087A4DA /* SplitCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */; };
 		7F7E42B022C674F9001A43F9 /* DinersCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */; };
 		7F9CAEB622FEFE50000CE91B /* DinerFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */; };
+		7FA0AFBB2332A5460013EF4D /* Roboto Slab regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FA0AFBA2332A5460013EF4D /* Roboto Slab regular.ttf */; };
 		7FAB647E22DF68E700EB440E /* SplitTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73AEEC22BC87630087A4DA /* SplitTableCell.swift */; };
 		7FAB648022DF6E2B00EB440E /* FoodCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB647F22DF6E2B00EB440E /* FoodCostViewController.swift */; };
-		7FB47CFE22B5BF8E00BFBFEE /* DinersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB47CFD22B5BF8E00BFBFEE /* DinersViewController.swift */; };
 		7FB64A20231B13B100296E89 /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB64A1F231B13B100296E89 /* TableSection.swift */; };
 		7FB64A22231B1ADF00296E89 /* BillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB64A21231B1ADF00296E89 /* BillViewController.swift */; };
 		7FB7C0F122B44F52003C03F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB7C0F022B44F52003C03F4 /* AppDelegate.swift */; };
@@ -30,7 +30,6 @@
 		7FCF248E230EF41E00A19260 /* Roboto 700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF248D230EF41E00A19260 /* Roboto 700.ttf */; };
 		7FCF2490230EF44800A19260 /* Roboto regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF248F230EF44800A19260 /* Roboto regular.ttf */; };
 		7FCF2492230EF46900A19260 /* Lemon regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF2491230EF46900A19260 /* Lemon regular.ttf */; };
-		7FF21BE322C690BE00BBCDA3 /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */; };
 		7FF46CE122F08D4900F842C9 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF46CE022F08D4900F842C9 /* Item.swift */; };
 		7FF46CE322F08D9800F842C9 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF46CE222F08D9800F842C9 /* Person.swift */; };
 		7FF7733322CA893C00A7353B /* CostEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF7733222CA893C00A7353B /* CostEntry.swift */; };
@@ -47,10 +46,9 @@
 		7F73AEEC22BC87630087A4DA /* SplitTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTableCell.swift; sourceTree = "<group>"; };
 		7F73AEED22BC87630087A4DA /* SplitCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplitCustomCell.xib; sourceTree = "<group>"; };
 		7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinersCostViewController.swift; sourceTree = "<group>"; };
-		7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoodViewController.swift; path = ../FoodViewController.swift; sourceTree = "<group>"; };
 		7F9CAEB522FEFE50000CE91B /* DinerFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinerFoodViewController.swift; sourceTree = "<group>"; };
+		7FA0AFBA2332A5460013EF4D /* Roboto Slab regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto Slab regular.ttf"; sourceTree = "<group>"; };
 		7FAB647F22DF6E2B00EB440E /* FoodCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCostViewController.swift; sourceTree = "<group>"; };
-		7FB47CFD22B5BF8E00BFBFEE /* DinersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DinersViewController.swift; path = ../DinersViewController.swift; sourceTree = "<group>"; };
 		7FB64A1F231B13B100296E89 /* TableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
 		7FB64A21231B1ADF00296E89 /* BillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillViewController.swift; sourceTree = "<group>"; };
 		7FB7C0ED22B44F52003C03F4 /* SPLIT!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPLIT!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,7 +102,6 @@
 				7F7E42AF22C674F9001A43F9 /* DinersCostViewController.swift */,
 				7FB64A21231B1ADF00296E89 /* BillViewController.swift */,
 				7F6B0FD822E8B1D30078C23D /* IntroViewController.swift */,
-				7F5C0C492312D64600F26963 /* New Group */,
 				7FF7733422CA905C00A7353B /* Notes */,
 			);
 			path = Controller;
@@ -117,15 +114,6 @@
 				7FCBDE9522F354AD00D55FF9 /* LaunchScreen.storyboard */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		7F5C0C492312D64600F26963 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				7F9C7FB222B5A9770019FF4A /* FoodViewController.swift */,
-				7FB47CFD22B5BF8E00BFBFEE /* DinersViewController.swift */,
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		7F73AEE722BC85F70087A4DA /* Model */ = {
@@ -151,6 +139,7 @@
 				7FCF248F230EF44800A19260 /* Roboto regular.ttf */,
 				7FCF248D230EF41E00A19260 /* Roboto 700.ttf */,
 				7FCF248B230EF40200A19260 /* Roboto 500.ttf */,
+				7FA0AFBA2332A5460013EF4D /* Roboto Slab regular.ttf */,
 			);
 			path = "Text Files";
 			sourceTree = "<group>";
@@ -257,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA0AFBB2332A5460013EF4D /* Roboto Slab regular.ttf in Resources */,
 				7FB7C0FE22B44F59003C03F4 /* LaunchScreen.storyboard in Resources */,
 				7FF7733522CA905C00A7353B /* Notes in Resources */,
 				7FCF248E230EF41E00A19260 /* Roboto 700.ttf in Resources */,
@@ -338,14 +328,12 @@
 				7FF46CE122F08D4900F842C9 /* Item.swift in Sources */,
 				7F7E42B022C674F9001A43F9 /* DinersCostViewController.swift in Sources */,
 				7FAB647E22DF68E700EB440E /* SplitTableCell.swift in Sources */,
-				7FF21BE322C690BE00BBCDA3 /* FoodViewController.swift in Sources */,
 				7FB64A20231B13B100296E89 /* TableSection.swift in Sources */,
 				7F9CAEB622FEFE50000CE91B /* DinerFoodViewController.swift in Sources */,
 				7FAB648022DF6E2B00EB440E /* FoodCostViewController.swift in Sources */,
 				7FB7C0F922B44F52003C03F4 /* Split1.xcdatamodeld in Sources */,
 				7FB64A22231B1ADF00296E89 /* BillViewController.swift in Sources */,
 				7F07F31722C85F03008410C6 /* Settings.swift in Sources */,
-				7FB47CFE22B5BF8E00BFBFEE /* DinersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,7 +483,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GAVM2Q8R9W;
 				INFOPLIST_FILE = Split1/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -515,7 +503,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GAVM2Q8R9W;
 				INFOPLIST_FILE = Split1/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

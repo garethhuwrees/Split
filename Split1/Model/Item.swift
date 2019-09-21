@@ -11,7 +11,7 @@ import RealmSwift
 
 class Item: Object {
     @objc dynamic var itemName : String = ""
-    @objc dynamic var itemSpendNet : Float = 0.0
+    @objc dynamic var itemTotalSpend : Float = 0.0
     @objc dynamic var itemNumber : Int = 0
     @objc dynamic var itemUnitPrice : Float = 0.0
     @objc dynamic var unitPrice: Bool = false

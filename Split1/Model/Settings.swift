@@ -20,5 +20,6 @@ class Settings: Object {
     @objc dynamic var iosVersion : String = ""
     @objc dynamic var screenHeight : Int = 0
     @objc dynamic var roundingOn : Bool = false
+    @objc dynamic var usageCount: Int = 0
 
 }

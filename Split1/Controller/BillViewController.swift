@@ -52,9 +52,17 @@ class BillViewController: UITableViewController {
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
         
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture))
+        swipeDown.direction = .down
+//        swipeDown.numberOfTouchesRequired = 2
+//        self.tableView.addGestureRecognizer(swipeDown)
+        self.view.addGestureRecognizer(swipeDown)
+        
+
+        
+        self.tableView.panGestureRecognizer.maximumNumberOfTouches = 1
     
         loadTables()
-        
         fillSectionArray()
         
         setAppearance()
@@ -73,6 +81,10 @@ class BillViewController: UITableViewController {
         if gesture.direction == .left {
             backTapped()
         }
+        else if gesture.direction == .down {
+            print("SWIPE DOWN")
+            performSegue(withIdentifier: "gotoGuide", sender: self)
+        }
     }
     
     @objc func backTapped() {
@@ -84,6 +96,20 @@ class BillViewController: UITableViewController {
         self.navigationController?.view.layer.add(trans, forKey: nil)
         navigationController?.popViewController(animated: false)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "gotoGuide" {
+            let destinationVC = segue.destination as! IntroViewController
+            let trans = CATransition()
+            trans.type = CATransitionType.reveal
+            trans.subtype = CATransitionSubtype.fromBottom
+            //trans.timingFunction = ??
+            trans.duration = 0.35
+            self.navigationController?.view.layer.add(trans, forKey: nil)
+            destinationVC.introType = "guideSwipe"
+        }
+    }
+    
 
     // MARK:------------------------ TABLE METHODS ----------------------------------
 
@@ -153,6 +179,7 @@ class BillViewController: UITableViewController {
 
         return cell
     }
+    
 
     // MARK:------------------------- LOCAL FUNCTIONS ---------------------------
     
@@ -166,11 +193,18 @@ class BillViewController: UITableViewController {
         
         settings = realm.objects(Settings.self)
         currencyPrefix = settings?[0].currencyPrefix ?? ""
+        roundingOn = settings?[0].roundingOn ?? false
         screenHeight = settings?[0].screenHeight ?? 0
-        
+
+        var numberOfDigits = 2
+        var roundingFactor: Float = 100
+        if roundingOn {
+            numberOfDigits = 0
+            roundingFactor = 1
+        }
         totalSpend = settings?[0].totalSpend ?? 0.0
-        totalSpend = (totalSpend * 100).rounded() / 100
-        totalSpendAsSrring = formatNumber(numberToFormat: totalSpend, digits: 2)
+        totalSpend = (totalSpend * roundingFactor).rounded() / roundingFactor
+        totalSpendAsSrring = formatNumber(numberToFormat: totalSpend, digits: numberOfDigits)
         
         item = realm.objects(Item.self)
 
@@ -182,7 +216,7 @@ class BillViewController: UITableViewController {
     
     func fillSectionArray() {
         
-        item = item!.filter("itemSpendNet > %@", 0.0 as Float)
+        item = item!.filter("itemTotalSpend > %@", 0.0 as Float)
         item = item!.sorted(byKeyPath: "itemName")
         numberOfSections = item!.count
         
@@ -205,11 +239,28 @@ class BillViewController: UITableViewController {
                 quantityArray = []
                 priceArray = []
                 
+                var numberOfDigits = 2
+                var roundingFactor: Float = 100
+                if roundingOn {
+                    numberOfDigits = 0
+                    roundingFactor = 1
+                }
+
                 for n in 0...tableEntry.count-1 {
                     
+//                    var numberOfDigits = 2
+//                    var roundingFactor: Float = 100
+//                    if roundingOn {
+//                        numberOfDigits = 0
+//                        roundingFactor = 1
+//                    }
+//                    var spend = costEntry?[indexPath.row].itemSpend ?? 0.0
+//                    spend = (spend * roundingFactor).rounded() / roundingFactor
+//                    let spendString = formatNumber(numberToFormat: spend, digits: numberOfDigits)
+                    
                     var spend = tableEntry[n].itemSpend
-                    spend = (spend * 100).rounded() / 100
-                    let spendString = formatNumber(numberToFormat: spend, digits: 2)
+                    spend = (spend * roundingFactor).rounded() / roundingFactor
+                    let spendString = formatNumber(numberToFormat: spend, digits: numberOfDigits)
                     
                     nameArray.append(tableEntry[n].personName)
                     quantityArray.append(("\(tableEntry[n].itemNumber)"))

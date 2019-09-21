@@ -13,6 +13,7 @@ class Person: Object {
     @objc dynamic var personName : String = ""
     @objc dynamic var personSpend : Float = 0.0
     @objc dynamic var percentOfBill : Float = 0.0
+    @objc dynamic var personGuest: Bool = false
     
     
 }

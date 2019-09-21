@@ -68,6 +68,11 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)
         
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture))
+        swipeDown.direction = .down
+        swipeDown.numberOfTouchesRequired = 2
+        self.view.addGestureRecognizer(swipeDown)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -127,9 +132,15 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.spendLabel.textColor = self.greyColour
             cell.spendLabel.font = tableTextFont
             
+            var numberOfDigits = 2
+            var roundingFactor: Float = 100
+            if roundingOn {
+                numberOfDigits = 0
+                roundingFactor = 1
+            }
             var spend = (person?[indexPath.row].personSpend) ?? 0.0
-            spend = (spend * 100).rounded() / 100
-            let spendString = formatNumber(numberToFormat: spend, digits: 2)
+            spend = (spend * roundingFactor).rounded() / roundingFactor
+            let spendString = formatNumber(numberToFormat: spend, digits: numberOfDigits)
             
             cell.nameLabel.text = person?[indexPath.row].personName
             cell.spendLabel.text = currencyPrefix + spendString
@@ -147,9 +158,15 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.spendLabel.textColor = self.greyColour
             cell.spendLabel.font = tableTextFont
             
-            var spend = item?[indexPath.row].itemSpendNet ?? 0.0
-            spend = (spend * 100).rounded() / 100
-            let spendString = formatNumber(numberToFormat: spend, digits: 2)
+            var numberOfDigits = 2
+            var roundingFactor: Float = 100
+            if roundingOn {
+                numberOfDigits = 0
+                roundingFactor = 1
+            }
+            var spend = item?[indexPath.row].itemTotalSpend ?? 0.0
+            spend = (spend * roundingFactor).rounded() / roundingFactor
+            let spendString = formatNumber(numberToFormat: spend, digits: numberOfDigits)
             
             if item?[indexPath.row].unitPrice == true {
                 cell.nameLabel.text = item![indexPath.row].itemName + " *"
@@ -172,33 +189,53 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         
         if tableView.tag == 1 {
         selectedDiner = person?[indexPath.row].personName ?? "No Name"
-        
         performSegue(withIdentifier: "gotoDinerCostEntry", sender: self)
-            
         }
         
         if tableView.tag == 2 {
             selectedFood = item?[indexPath.row].itemName ?? "No Name"
-            
             performSegue(withIdentifier: "gotoFoodCostEntry", sender: self)
         }
         
     }
     
+    //Using push when from right/left and revweal when top/bottom
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "gotoDinerCostEntry" {
             
             let destinationVC = segue.destination as! DinersCostViewController
-            
+            let trans = CATransition()
+            trans.type = CATransitionType.push //originally push (fade, reveal, moveIn)
+            trans.subtype = CATransitionSubtype.fromRight
+            //trans.timingFunction = ??
+            trans.duration = 0.35
+            self.navigationController?.view.layer.add(trans, forKey: nil)
             destinationVC.textPassedOver = "\(selectedDiner)"
             
         }
         if segue.identifier == "gotoFoodCostEntry" {
             
             let destinationVC = segue.destination as! FoodCostViewController
-            
+            let trans = CATransition()
+            trans.type = CATransitionType.push //(push, fade, reveal, moveIn)
+            trans.subtype = CATransitionSubtype.fromRight
+            //trans.timingFunction = ??
+            trans.duration = 0.35
+            self.navigationController?.view.layer.add(trans, forKey: nil)
             destinationVC.textPassedOver = "\(selectedFood)"
             
+        }
+        
+        if segue.identifier == "gotoGuide" {
+            let destinationVC = segue.destination as! IntroViewController
+            let trans = CATransition()
+            trans.type = CATransitionType.reveal
+            trans.subtype = CATransitionSubtype.fromBottom
+            //trans.timingFunction = ??
+            trans.duration = 0.35
+            self.navigationController?.view.layer.add(trans, forKey: nil)
+            destinationVC.introType = "guideSwipe"
         }
         
     }
@@ -207,6 +244,10 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         
         if gesture.direction == .right {
             backTapped()
+        }
+        
+        else if gesture.direction == .down {
+            performSegue(withIdentifier: "gotoGuide", sender: self)
         }
     }
     
@@ -505,7 +546,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
                         newItem.itemNumber = 0
                         newItem.unitPrice = false
                         newItem.itemUnitPrice = 0.0
-                        newItem.itemSpendNet = 0.0
+                        newItem.itemTotalSpend = 0.0
                         // Append not requited as the Results object is auto updating
     
                         self.saveFoodItems(menuItem: newItem)
@@ -727,7 +768,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 do{
                     try realm.write {
-                        item![n].itemSpendNet = menuItemSpend
+                        item![n].itemTotalSpend = menuItemSpend
                     }
                 } catch {
                     print("Error saving to Realm, \(error)")

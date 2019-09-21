@@ -38,6 +38,7 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Roboto Slab regular.ttf</string>
 		<string>Lemon regular.ttf</string>
 		<string>Roboto regular.ttf</string>
 		<string>Roboto 500.ttf</string>
