@@ -77,8 +77,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var showTip: UIButton!
     @IBOutlet weak var showTax: UIButton!
     
-    @IBOutlet weak var showSpendType: UIButton!
     @IBOutlet weak var showSplitterName: UILabel!
+    @IBOutlet weak var showSpendType: UILabel!
     
     @IBOutlet weak var frameTop: UILabel!
     @IBOutlet weak var frameMiddle: UILabel!
@@ -186,23 +186,6 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         resetDropdown.show()
     }
     
-    @IBAction func selectSpendType(_ sender: Any) {
-//        if typeOfSpend == .TotalSpend {
-//            typeOfSpend = .SpendPlusTip
-//            typeOfSpendLabel = "Spend + Tip"
-//        }
-//        else if typeOfSpend == .SpendPlusTip {
-//            typeOfSpend = .FixedSpend
-//            typeOfSpendLabel = "Fixed Amount"
-//        }
-//        else if typeOfSpend == .FixedSpend {
-//            typeOfSpend = .TotalSpend
-//            typeOfSpendLabel = "Spend (inc Tax)"
-//        }
-//        showSpendType.setTitle(typeOfSpendLabel, for: .normal)
-//        updateSettings()
-//        splitterTableView.reloadData()
-    }
     
     @IBAction func bottomViewPressed(_ sender: Any) {
         if typeOfSpend == .TotalSpend {
@@ -217,7 +200,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             typeOfSpend = .TotalSpend
             typeOfSpendLabel = "Spend (inc Tax)"
         }
-        showSpendType.setTitle(typeOfSpendLabel, for: .normal)
+        
+        showSpendType.text = typeOfSpendLabel
         updateSettings()
         splitterTableView.reloadData()
         
@@ -432,14 +416,6 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        print("Table Selected")
-//    }
-    
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        print("Table Selected")
-//        return []
-//    }
     
     // MARK:------------ LOCAL FUNCTIONS -----------------------
     
@@ -589,27 +565,6 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-//    func setNavbarAppearance() {
-//
-//        // Should aim to move this to AppDeligate - did finishlaunching
-//
-//        var textHeight: CGFloat = 0.0
-//
-//        switch screenHeight {
-//        case 1136:
-//            textHeight = fontSize
-//        case 1334:
-//            textHeight = fontSize + 2
-//        default:
-//            textHeight = fontSize + 4
-//        }
-//        navigationController?.navigationBar.barTintColor = greenColour
-//        navigationController?.navigationBar.tintColor = UIColor.white
-//        //navigationController?.navigationBar.
-//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
-//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: regularFont, size: textHeight)!]
-//    }
-    
     func setAppearance() {
 
         var tableRowHeight: CGFloat
@@ -638,8 +593,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         showTax.titleLabel?.font = UIFont(name: regularFont, size: fontSize)
         
         showSplitterName.font = UIFont(name: boldFont, size: fontSize)
-        showSpendType.titleLabel?.font = UIFont(name: boldFont, size: fontSize)
-        showSpendType.setTitle(settings?[0].spendType, for: .normal)
+        showSpendType.font = UIFont(name: boldFont, size: fontSize)
+        showSpendType.text = settings?[0].spendType
         
         frameTop.layer.cornerRadius = 10.0
         frameTop.layer.borderColor = orangeColour.cgColor
@@ -656,6 +611,8 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         splitterTableView.rowHeight = tableRowHeight
         
         // SET NAVBAR APPEARANCE
+        // Should aim to move this to AppDeligate - did finishlaunching (but cannot get to work fully)
+        
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: greyColour]
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: titleFont, size: fontSize + 3)!]
         
@@ -709,6 +666,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 do {
                     try self.realm.write {
                         costItems?[n].itemSpend = 0.0
+                        costItems?[n].itemNumber = 0
                     }
                 }
                 catch {
@@ -745,6 +703,9 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 do {
                     try self.realm.write {
                         item?[n].itemTotalSpend = 0.0
+                        item?[n].itemNumber = 0
+                        item?[n].itemUnitPrice = 0.0
+                        item?[n].unitPrice = false
                     }
                 }
                 catch {
@@ -759,8 +720,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if settings!.count > 0 {
             do {
                 try self.realm.write {
-                    settings?[0].totalSpend = 0.0 // DELETE
-//                    settings?[0].billWithTip = 0.0
+                    settings?[0].totalSpend = 0.0
                     settings?[0].fixedSpend = 0.0
                 }
             }
@@ -934,7 +894,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     
     func setupResetDropdown() {
-        resetDropdown.dataSource = ["Reset Spend", "Delete Menu Items", "Delete Splitters", "Delete All Data", "CANCEL"]
+        resetDropdown.dataSource = ["Reset Spend", "Delete Menu Items", "Delete Leaders", "Delete All Data", "CANCEL"]
         resetDropdown.width = 180
         
         customiseDropDown()
@@ -947,7 +907,7 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 switch index {
                 case 0: title = "Reset Spend?"
                 case 1: title = "Delete Menu Items?"
-                case 2: title = "Delete Splitters?"
+                case 2: title = "Delete Leaders?"
                 case 3: title = "Delete All Data?"
                 default: title = "Nothing to Delete"
                 }
@@ -973,7 +933,6 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self!.present(confirmAlert, animated: true, completion: nil)
 
             } // end if
-            
         } // end action
     } // end func
     
@@ -1008,6 +967,6 @@ class SplitViewController: UIViewController, UITableViewDelegate, UITableViewDat
             print("Family: \(family) Font names: \(names)")
         }
     }
-
-}
+    
+} // END CLASS
 

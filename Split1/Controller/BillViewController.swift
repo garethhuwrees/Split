@@ -46,7 +46,7 @@ class BillViewController: UITableViewController {
         
         tableView.register(UINib(nibName: "QuantityTableCell", bundle: nil) , forCellReuseIdentifier: "quantityTableCell")
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(backTapped))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture))
         swipeLeft.direction = .left
@@ -59,7 +59,6 @@ class BillViewController: UITableViewController {
         self.view.addGestureRecognizer(swipeDown)
         
 
-        
         self.tableView.panGestureRecognizer.maximumNumberOfTouches = 1
     
         loadTables()

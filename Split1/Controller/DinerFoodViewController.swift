@@ -478,7 +478,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Add Splitter", message: "Who else is splitting the bill?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add Leader", message: "Who else is splitting the bill?", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             // Do Nothing
@@ -503,7 +503,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
                     } //end if
                     else {
     
-                        let duplicateAlert = UIAlertController(title: "Duplicate Splitter", message: "Using the same name will be very confusing!", preferredStyle: UIAlertController.Style.alert)
+                        let duplicateAlert = UIAlertController(title: "Two Leaders With The Same Name", message: "This will be very confusing!", preferredStyle: UIAlertController.Style.alert)
     
                         duplicateAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                         self.present(duplicateAlert, animated: true, completion: nil)
@@ -513,7 +513,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
         }))
         
         alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Splitters Name" // Creates initial grey text to be overwritten
+            alertTextField.placeholder = "Leaders Name" // Creates initial grey text to be overwritten
             textField = alertTextField
         } // end closure
         
@@ -525,7 +525,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
        
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Add Menu Item", message: "What food & drink is being ordered", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add Food & Drink", message: "What items are being ordered", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             // Do Nothing
@@ -555,7 +555,7 @@ class DinerFoodViewController: UIViewController, UITableViewDelegate, UITableVie
                     } // end if
                     else {
     
-                        let duplicateAlert = UIAlertController(title: "Duplicate Menu Item", message: "Menu Items names must be different", preferredStyle: UIAlertController.Style.alert)
+                        let duplicateAlert = UIAlertController(title: "Duplicate Entry", message: "Item names must be different", preferredStyle: UIAlertController.Style.alert)
                         duplicateAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                         self.present(duplicateAlert, animated: true, completion: nil)
                     }

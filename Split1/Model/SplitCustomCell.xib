@@ -25,13 +25,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Left Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eue-Zl-uVG">
-                        <rect key="frame" x="20" y="5" width="173.5" height="33.5"/>
+                        <rect key="frame" x="20" y="5" width="180" height="33.5"/>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                         <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Right Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dD-sV-K1i">
-                        <rect key="frame" x="203.5" y="5" width="96.5" height="33.5"/>
+                        <rect key="frame" x="210" y="5" width="90" height="33.5"/>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                     <constraint firstItem="2dD-sV-K1i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Y3v-fZ-g4E"/>
                     <constraint firstAttribute="bottom" secondItem="Eue-Zl-uVG" secondAttribute="bottom" constant="5" id="ck3-8v-3Ac"/>
                     <constraint firstAttribute="bottom" secondItem="2dD-sV-K1i" secondAttribute="bottom" constant="5" id="fpS-gA-eA0"/>
-                    <constraint firstItem="2dD-sV-K1i" firstAttribute="width" secondItem="Eue-Zl-uVG" secondAttribute="width" multiplier="1:1.8" id="s0S-ke-7UA"/>
+                    <constraint firstItem="2dD-sV-K1i" firstAttribute="width" secondItem="Eue-Zl-uVG" secondAttribute="width" multiplier="1:2" id="s0S-ke-7UA"/>
                     <constraint firstItem="2dD-sV-K1i" firstAttribute="leading" secondItem="Eue-Zl-uVG" secondAttribute="trailing" constant="10" id="zic-Sl-jtK"/>
                 </constraints>
             </tableViewCellContentView>

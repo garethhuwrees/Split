@@ -25,19 +25,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PD1-mX-RaT">
-                        <rect key="frame" x="45" y="5" width="87.5" height="33.5"/>
+                        <rect key="frame" x="40" y="5" width="101.5" height="33.5"/>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                         <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIF-g1-myR">
-                        <rect key="frame" x="142.5" y="5" width="35" height="33.5"/>
+                        <rect key="frame" x="151.5" y="5" width="34" height="33.5"/>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                         <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spend" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNR-2E-IUX">
-                        <rect key="frame" x="187.5" y="5" width="87.5" height="33.5"/>
+                        <rect key="frame" x="195.5" y="5" width="84.5" height="33.5"/>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                         <color key="textColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -45,13 +45,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="LNR-2E-IUX" firstAttribute="leading" secondItem="gIF-g1-myR" secondAttribute="trailing" constant="10" id="2Uj-ug-jqM"/>
-                    <constraint firstAttribute="trailing" secondItem="LNR-2E-IUX" secondAttribute="trailing" constant="45" id="9mW-XX-UHz"/>
+                    <constraint firstAttribute="trailing" secondItem="LNR-2E-IUX" secondAttribute="trailing" constant="40" id="9mW-XX-UHz"/>
                     <constraint firstItem="gIF-g1-myR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="QbT-eV-Agq"/>
                     <constraint firstItem="LNR-2E-IUX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="T00-Vw-TTe"/>
-                    <constraint firstItem="PD1-mX-RaT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="45" id="Tqa-Co-zFm"/>
+                    <constraint firstItem="PD1-mX-RaT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="Tqa-Co-zFm"/>
                     <constraint firstItem="gIF-g1-myR" firstAttribute="leading" secondItem="PD1-mX-RaT" secondAttribute="trailing" constant="10" id="VqE-mg-c4L"/>
                     <constraint firstItem="PD1-mX-RaT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="jRj-hy-eEt"/>
-                    <constraint firstItem="gIF-g1-myR" firstAttribute="width" secondItem="PD1-mX-RaT" secondAttribute="width" multiplier="1:2.5" id="ku4-Vw-DQi"/>
+                    <constraint firstItem="gIF-g1-myR" firstAttribute="width" secondItem="PD1-mX-RaT" secondAttribute="width" multiplier="1:3" id="ku4-Vw-DQi"/>
                     <constraint firstAttribute="bottom" secondItem="gIF-g1-myR" secondAttribute="bottom" constant="5" id="nC0-LM-5MP"/>
                     <constraint firstItem="LNR-2E-IUX" firstAttribute="width" secondItem="gIF-g1-myR" secondAttribute="width" multiplier="2.5:1" id="neU-4V-mV1"/>
                     <constraint firstAttribute="bottom" secondItem="LNR-2E-IUX" secondAttribute="bottom" constant="5" id="qbi-Cg-EHe"/>
